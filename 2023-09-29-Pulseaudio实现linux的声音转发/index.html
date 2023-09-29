@@ -13,19 +13,22 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://7cmb.github.io/categories/"/>
+    <link rel="canonical" href="https://7cmb.github.io/2023-09-29-pulseaudio实现linux的声音转发/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://7cmb.github.io/categories/index.html">
+        <meta name="description" content="此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）……..    1、安装pulseaudioWindows版本下载链接  ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pulseaudio实现linux的声音转发">
+<meta property="og:url" content="https://7cmb.github.io/2023-09-29-Pulseaudio%E5%AE%9E%E7%8E%B0linux%E7%9A%84%E5%A3%B0%E9%9F%B3%E8%BD%AC%E5%8F%91/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）……..    1、安装pulseaudioWindows版本下载链接  ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 P">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-27T14:58:54.000Z">
-<meta property="article:modified_time" content="2023-09-27T14:58:54.052Z">
+<meta property="article:published_time" content="2023-09-29T15:08:26.000Z">
+<meta property="article:modified_time" content="2023-09-29T16:24:20.725Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
     
     
@@ -48,7 +51,7 @@
     
     <title>
         
-            分类 -
+            Pulseaudio实现linux的声音转发 -
         
         7cmb&#39;s blog.
     </title>
@@ -273,19 +276,273 @@
             <div class="main-content">
 
                 
-                    <div class="category-list-container">
-	<div >
-		<h1 class="category-header">
-			分类
-		</h1>
-	</div>
-	<div class="category-list-content">
-		<ul class="all-category-list"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/linux/">linux</a><span class="all-category-list-count">2</span><ul class="all-category-list-child"><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/linux/arch/">arch</a><span class="all-category-list-count">1</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/linux/pulseaudio/">pulseaudio</a><span class="all-category-list-count">1</span></li><li class="all-category-list-item"><a class="all-category-list-link" href="/categories/linux/wsl/">wsl</a><span class="all-category-list-count">1</span></li></ul></li></ul>
-	</div>
-	<div class="category-comments">
-		
-	</div>
+                    <div class="post-page-container">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            
+                <h1 class="article-title-regular">Pulseaudio实现linux的声音转发</h1>
+            
+            </div>
+            
+                    
+        
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/official_alice.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">7cmb</span>
+                        
+                            <span class="author-label">a nobody</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-09-29 23:08:26</span>
+        <span class="mobile">2023-09-29 23:08:26</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-09-30 00:24:20</span>
+            <span class="mobile">2023-09-30 00:24:20</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/linux/">linux</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/linux/pulseaudio/">pulseaudio</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
 </div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body">
+            <p>此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）…….. <br></p>
+<br>
+
+<h2 id="1、安装pulseaudio"><a href="#1、安装pulseaudio" class="headerlink" title="1、安装pulseaudio"></a>1、安装pulseaudio</h2><p><a class="link"   target="_blank" rel="noopener" href="https://www.freedesktop.org/wiki/Software/PulseAudio/Ports/Windows/Support/" >Windows版本下载链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 <a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/PulseAudio" >PulseAudio - ArchWiki <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> ，为了控制音量顺带把pulseaudio-alsa和alsa-utils也给装了。</p>
+<h2 id="2、编辑服务端配置文件"><a href="#2、编辑服务端配置文件" class="headerlink" title="2、编辑服务端配置文件"></a>2、编辑服务端配置文件</h2><p>windows的软件为<strong>服务端</strong>，此时linux的软件为<strong>客户端</strong>，注意区分。</p>
+<p>首先编写<strong>服务端</strong>的配置文件，路径在 <code>pulseaudio-1.1/etc/pulse</code>（因为编码问题，所以这是linux的文件格式下的相对路径，正确写法略），找到对应词条，照例更改</p>
+<p><code>daemon.conf</code></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit-idle-time = -1</span><br></pre></td></tr></table></figure></div>
+
+<br>
+
+<br>
+
+<p><code>default.pa</code></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load-module module-native-protocol-tcp auth-ip-acl=客户端机器ip</span><br></pre></td></tr></table></figure></div>
+
+<blockquote>
+<p>注意前面的注释是否删掉</p>
+</blockquote>
+<h2 id="3、编辑客户端配置文件"><a href="#3、编辑客户端配置文件" class="headerlink" title="3、编辑客户端配置文件"></a>3、编辑客户端配置文件</h2><p>然后编写<strong>客户端</strong>配置文件，路径在 <code>/etc/pulse</code> </p>
+<p><code>daemon.conf</code></p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit-idle-time = -1</span><br></pre></td></tr></table></figure></div>
+
+<be>
+
+<br>
+
+<p>最后添加当前环境转发的环境变量，我是xrog环境下的vnc，所以路径是X服务的<code>~/.xprofile</code>,理论上修改<code>/etc/environment</code>也可以</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HOST_IP=&quot;$(ip route | awk &#x27;$1==&quot;default&quot; &#123;print $3&#125;&#x27;)&quot;</span><br><span class="line">export PULSE_SERVER=&quot;tcp:$HOST_IP&quot;</span><br></pre></td></tr></table></figure></div>
+
+<p>此时已经完成转发，如果想要先行测试请在gui的终端下输入以上两端命令，之后打开服务端<code>bin</code>目录下的的<code>pulseaudio.exe</code>后在刚刚输入命令的终端窗口输入<code>speaker-test</code>即可。</p>
+<blockquote>
+<p>注意客户端和服务端必须路由可达，且已防火墙已正确配置</p>
+</blockquote>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>测试通过后就能直接打开服务端的pulseaudio.exe后放在后台，享受声音转发服务了</p>
+<video src='https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3YvcyFBckVNT01Ec2ZXcEdlU19tUzBqNnRHODVtdkE_ZT03em53cGE.jp' type='video/mp4' controls='controls'  width='100%' height='100%'>
+</video>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Pulseaudio实现linux的声音转发</li>
+        <li><strong>作者:</strong> 7cmb</li>
+        <li><strong>创建于
+                :</strong> 2023-09-29 23:08:26</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2023-09-30 00:24:20
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://7cmb.github.io/2023-09-29-Pulseaudio实现linux的声音转发/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+            本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+            
+
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/linux/">#linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                        rel="next"
+                        href="/2023-09-28-%E4%BD%BF%E7%94%A8wsl2%E6%89%93%E9%80%A0arch%E5%85%A8gui%E7%8E%AF%E5%A2%83/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">利用WSL2打造Arch全GUI环境</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+            <div class="comment-container">
+                <div class="comments-container pjax">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-swup-reload-script>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Pulseaudio实现linux的声音转发</div>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85pulseaudio"><span class="nav-text">1、安装pulseaudio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%BC%96%E8%BE%91%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">2、编辑服务端配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%BE%91%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">3、编辑客户端配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%B0%BE"><span class="nav-text">结尾</span></a></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
 
 
                 
@@ -359,6 +616,27 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-side-tools-container">
