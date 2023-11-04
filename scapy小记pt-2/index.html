@@ -13,22 +13,21 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://7cmb.github.io/2023-09-29-pulseaudio实现linux的声音转发/"/>
+    <link rel="canonical" href="https://7cmb.github.io/scapy小记pt-2/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）……..    1、安装pulseaudioWindows版本下载链接 ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 Pu">
+        <meta name="description" content="本文内容来自： Welcome to Scapy’s documentation! &amp;mdash; Scapy 2023.10.20 documentation  GitHub - wizardforcel&#x2F;scapy-docs-zh: :book: [译] Scapy 中文文档  此文章用以记录一点小小的感想  sr()函数补充sr过后需要处理数据，处理数据就要知道此函数返回的数据类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pulseaudio实现linux的声音转发">
-<meta property="og:url" content="https://7cmb.github.io/2023-09-29-Pulseaudio%E5%AE%9E%E7%8E%B0linux%E7%9A%84%E5%A3%B0%E9%9F%B3%E8%BD%AC%E5%8F%91/index.html">
+<meta property="og:title" content="scapy小记pt.2">
+<meta property="og:url" content="https://7cmb.github.io/scapy%E5%B0%8F%E8%AE%B0pt-2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）……..    1、安装pulseaudioWindows版本下载链接 ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 Pu">
+<meta property="og:description" content="本文内容来自： Welcome to Scapy’s documentation! &amp;mdash; Scapy 2023.10.20 documentation  GitHub - wizardforcel&#x2F;scapy-docs-zh: :book: [译] Scapy 中文文档  此文章用以记录一点小小的感想  sr()函数补充sr过后需要处理数据，处理数据就要知道此函数返回的数据类">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-29T15:08:26.000Z">
-<meta property="article:modified_time" content="2023-10-18T09:36:52.373Z">
+<meta property="article:published_time" content="2023-11-04T06:36:19.000Z">
+<meta property="article:modified_time" content="2023-11-04T06:42:17.153Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
     
     
@@ -51,7 +50,7 @@
     
     <title>
         
-            Pulseaudio实现linux的声音转发 -
+            scapy小记pt.2 -
         
         7cmb&#39;s blog.
     </title>
@@ -280,7 +279,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">Pulseaudio实现linux的声音转发</h1>
+                <h1 class="article-title-regular">scapy小记pt.2</h1>
             
             </div>
             
@@ -302,57 +301,20 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-09-29 23:08:26</span>
-        <span class="mobile">2023-09-29 23:08:26</span>
+        <span class="desktop">2023-11-04 14:36:19</span>
+        <span class="mobile">2023-11-04 14:36:19</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-18 17:36:52</span>
-            <span class="mobile">2023-10-18 17:36:52</span>
+            <span class="desktop">2023-11-04 14:42:17</span>
+            <span class="mobile">2023-11-04 14:42:17</span>
             <span class="hover-info">更新</span>
         </span>
     
 
     
-        <span class="article-categories article-meta-item">
-            <i class="fa-regular fa-folders"></i>&nbsp;
-            <ul>
-                
-                
-                    
-                        
-                        <li>
-                            <a href="/categories/linux/">linux</a>&nbsp;
-                        </li>
-                    
-                    
-                
-                    
-                        
-                            <li>></li>
-                        
-                        <li>
-                            <a href="/categories/linux/pulseaudio/">pulseaudio</a>&nbsp;
-                        </li>
-                    
-                    
-                
-            </ul>
-        </span>
-    
-    
-        <span class="article-tags article-meta-item">
-            <i class="fa-regular fa-tags"></i>&nbsp;
-            <ul>
-                
-                    <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
-                    </li>
-                
-            </ul>
-        </span>
     
 
     
@@ -374,43 +336,54 @@
 
 
         <div class="article-content markdown-body">
-            <p>此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）…….. <br></p>
+            <blockquote>
+<p>本文内容来自：</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://scapy.readthedocs.io/en/latest" >Welcome to Scapy’s documentation! &mdash; Scapy 2023.10.20 documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/wizardforcel/scapy-docs-zh" >GitHub - wizardforcel&#x2F;scapy-docs-zh: :book: [译] Scapy 中文文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>此文章用以记录一点小小的感想</p>
+</blockquote>
+<h1 id="sr-函数补充"><a href="#sr-函数补充" class="headerlink" title="sr()函数补充"></a>sr()函数补充</h1><p>sr过后需要处理数据，处理数据就要知道此函数返回的数据类型：</p>
+<p>The “send’n’receive” functions family is the heart of Scapy. They <code>return  a couple of two lists</code>. The first element is a list of couples (packet<br>sent, answer), and the second element is the list of unanswered packets.<br> These two elements are lists, but they are wrapped by an object to<br>present them better, and to provide them with some methods that do most<br>frequently needed actions:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; sr(IP(dst=&quot;192.168.8.1&quot;)/TCP(dport=[21,22,23]))</span><br><span class="line">Received 6 packets, got 3 answers, remaining 0 packets</span><br><span class="line">(&lt;Results: UDP:0 TCP:3 ICMP:0 Other:0&gt;, &lt;Unanswered: UDP:0 TCP:0 ICMP:0 Other:0&gt;)</span><br><span class="line">&gt;&gt;&gt; ans,unans=_</span><br><span class="line">&gt;&gt;&gt; ans.summary()</span><br><span class="line">IP / TCP 192.168.8.14:20 &gt; 192.168.8.1:21 S ==&gt; Ether / IP / TCP 192.168.8.1:21 &gt; 192.168.8.14:20 RA / Padding</span><br><span class="line">IP / TCP 192.168.8.14:20 &gt; 192.168.8.1:22 S ==&gt; Ether / IP / TCP 192.168.8.1:22 &gt; 192.168.8.14:20 RA / Padding</span><br><span class="line">IP / TCP 192.168.8.14:20 &gt; 192.168.8.1:23 S ==&gt; Ether / IP / TCP 192.168.8.1:23 &gt; 192.168.8.14:20 RA / Padding</span><br></pre></td></tr></table></figure></div>
+
+<p>sr()函数是返回一对两个列表，在以上例子分别是ans应答和unans无应答，可见需要两个变量来接受其返回的两个列表。这一对列表的第一个元素（ans）是应答的n对两个元素的列表（又是列表），分别是发送的数据包和对应的应答数据包；而第二个元素则是未应答的数据包列表。以下是应答数据包的结构:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">                list:sr() //tuple</span><br><span class="line">                [0]:&lt;answer&gt;  // scapy.plist.SndRcvList</span><br><span class="line">                [1]:&lt;unanswer&gt;   // scapy.plist.PacketList                 </span><br><span class="line">               </span><br><span class="line">                list:&lt;answer&gt;   // scapy.plist.SndRcvList</span><br><span class="line">                [0]:a couple of two list // scapy.plist.QueryAnswer</span><br><span class="line">                [1]:a couple of two list</span><br><span class="line">                [2]:a couple of two list</span><br><span class="line">                ...</span><br><span class="line">                [n]  :a couple of two list   </span><br><span class="line">                </span><br><span class="line">                list:&lt;answer&gt;[index] // scapy.plist.QueryAnswer</span><br><span class="line">                [0]:pkt sent    //pkt</span><br><span class="line">                [1]:pkt receive    //pkt</span><br><span class="line">                </span><br></pre></td></tr></table></figure></div>
+
+<p>以百度为例，发起半连接以测试:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; test=sr(IP(dst=&quot;baidu.com&quot;)/TCP(flags=&quot;S&quot;,dport=[80,443,666]),timeout=1)</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 3 packets.</span><br><span class="line">**..............</span><br><span class="line">Received 16 packets, got 2 answers, remaining 1 packets</span><br><span class="line">&gt;&gt;&gt; test //sr()别名</span><br><span class="line">(&lt;Results: TCP:2 UDP:0 ICMP:0 Other:0&gt;, &lt;Unanswered: TCP:1 UDP:0 ICMP:0 Other:0&gt;)</span><br><span class="line">&gt;&gt;&gt; test[0] //应答数据包的列表</span><br><span class="line">&lt;Results: TCP:2 UDP:0 ICMP:0 Other:0&gt;</span><br><span class="line">&gt;&gt;&gt; test[0][0] //应答数据包的列表其中一个元素，比较冗长，还可再拆分为一对元素的列表</span><br><span class="line">QueryAnswer(query=&lt;IP  frag=0 proto=tcp dst=39.156.66.10 |&lt;TCP  dport=https flags=S |&gt;&gt;, answer=&lt;IP  version=4 ihl=5 tos=0x4 len=44 id=1 flags= frag=0 ttl=51 proto=tcp chksum=0x5652 src=39.156.66.10 dst=172.16.27.191 |&lt;TCP  sport=https dport=ftp_data seq=4122746057 ack=1 dataofs=6 reserved=0 flags=SA window=8192 chksum=0x35e7 urgptr=0 options=[(&#x27;MSS&#x27;, 536)] |&lt;Padding  load=&#x27;7\\xa7&#x27; |&gt;&gt;&gt;)</span><br><span class="line">&gt;&gt;&gt; test[0][0][0] //以发送的数据包</span><br><span class="line">&lt;IP  frag=0 proto=tcp dst=39.156.66.10 |&lt;TCP  dport=https flags=S |&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; test[0][0][1] //服务器应答的数据包</span><br><span class="line">&lt;IP  version=4 ihl=5 tos=0x4 len=44 id=1 flags= frag=0 ttl=51 proto=tcp chksum=0x5652 src=39.156.66.10 dst=172.16.27.191 |&lt;TCP  sport=https dport=ftp_data seq=4122746057 ack=1 dataofs=6 reserved=0 flags=SA window=8192 chksum=0x35e7 urgptr=0 options=[(&#x27;MSS&#x27;, 536)] |&lt;Padding  load=&#x27;7\\xa7&#x27; |&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></div>
+
 <br>
 
-<h2 id="1、安装pulseaudio"><a href="#1、安装pulseaudio" class="headerlink" title="1、安装pulseaudio"></a>1、安装pulseaudio</h2><p><a target="_blank" rel="noopener" href="https://www.freedesktop.org/wiki/Software/PulseAudio/Ports/Windows/Support/">Windows版本下载链接</a> ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/PulseAudio">PulseAudio - ArchWiki</a> ，为了控制音量顺带把pulseaudio-alsa和alsa-utils也给装了。</p>
-<h2 id="2、编辑服务端配置文件"><a href="#2、编辑服务端配置文件" class="headerlink" title="2、编辑服务端配置文件"></a>2、编辑服务端配置文件</h2><p>windows的软件为<strong>服务端</strong>，此时linux的软件为<strong>客户端</strong>，注意区分。</p>
-<p>首先编写<strong>服务端</strong>的配置文件，路径在 <code>pulseaudio-1.1/etc/pulse</code>（因为编码问题，所以这是linux的文件格式下的相对路径，正确写法略），找到对应词条，照例更改</p>
-<p><code>daemon.conf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit-idle-time = -1</span><br></pre></td></tr></table></figure>
-
 <br>
 
-<br>
+<h1 id="sr-返回对象部分方法的使用"><a href="#sr-返回对象部分方法的使用" class="headerlink" title="sr()返回对象部分方法的使用"></a>sr()返回对象部分方法的使用</h1><p>把sr()返回的对象一个个变成字符串在利用循环语句和控制语句来查找目标数据包效率太低了，同一个行为可以慢两秒（使用scapy提供的方法和自己瞎写的SYN扫描脚本对比），所以我认为要掌握scapy的高效用法，一点学习成本是必要的。</p>
+<h2 id="scapy-plist-SndRcvList-instance-summary-方法"><a href="#scapy-plist-SndRcvList-instance-summary-方法" class="headerlink" title="(scapy.plist.SndRcvList instance).summary()方法"></a>(scapy.plist.SndRcvList instance).summary()方法</h2><p>这个方法的使用，老实说对一个python新手来说比较反直觉，为什么这个方法传递的参数这么奇怪，这玩意到底是怎么传递的……但是人既然这样写了，用就完了，这是用户手册，为每个数据包打印摘要（所以snd和rcv是怎么传递的啊喂）：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Help on method summary in module scapy.plist:</span><br><span class="line"></span><br><span class="line">summary(prn=None, lfilter=None) method of scapy.plist.SndRcvList instance</span><br><span class="line">    prints a summary of each packet</span><br><span class="line"></span><br><span class="line">    :param prn: function to apply to each packet instead of</span><br><span class="line">                lambda x:x.summary()</span><br><span class="line">    :param lfilter: truth function to apply to each packet to decide</span><br><span class="line">                    whether it will be displayed</span><br><span class="line">(END)</span><br></pre></td></tr></table></figure></div>
 
-<p><code>default.pa</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load-module module-native-protocol-tcp auth-ip-acl=客户端机器ip</span><br></pre></td></tr></table></figure>
+<p>这是示例代码：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ans.summary( lambda s,r: r.sprintf(&quot;%TCP.sport% \t %TCP.flags%&quot;) )</span><br><span class="line">440      RA</span><br><span class="line">441      RA</span><br><span class="line">442      RA</span><br><span class="line">https    SA</span><br></pre></td></tr></table></figure></div>
 
 <blockquote>
-<p>注意前面的注释是否删掉</p>
+<p>胡言乱语：</p>
+<p>既然手册写着是为每scapy.plist.SndRcvList实例的每一个数据包打印一份摘要，而且注明了“通过一个简单的循环”，那么是否可以理解为这个实例中的每一个元素先轮流传入这个lambda里，lambda通过两个s，r参数将传入的元素拆为两个IP数据包类型，针对单个数据包进行操作，之后再通过lambda返回的单个参数形成 一个新的scapy.plist.QueryAnswer或者scapy.plist.PacketList集合，最后再通过该实例的summary()方法形成一个新集合的摘要</p>
 </blockquote>
-<h2 id="3、编辑客户端配置文件"><a href="#3、编辑客户端配置文件" class="headerlink" title="3、编辑客户端配置文件"></a>3、编辑客户端配置文件</h2><p>然后编写<strong>客户端</strong>配置文件，路径在 <code>/etc/pulse</code> </p>
-<p><code>daemon.conf</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit-idle-time = -1</span><br></pre></td></tr></table></figure>
+<h2 id="scapy-plist-SndRcvList-instance-nsummary-方法"><a href="#scapy-plist-SndRcvList-instance-nsummary-方法" class="headerlink" title="(scapy.plist.SndRcvList instance).nsummary()方法"></a>(scapy.plist.SndRcvList instance).nsummary()方法</h2><p>同上方法，但是会显示数据包序号：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ans.nsummary(lfilter = lambda s,r: r.sprintf(&quot;%TCP.flags%&quot;) == &quot;SA&quot;)</span><br><span class="line">0003 IP / TCP 192.168.1.100:ftp_data &gt; 192.168.1.1:https S ======&gt; IP / TCP 192.168.1.1:https &gt; 192.168.1.100:ftp_data SA</span><br></pre></td></tr></table></figure></div>
 
-<be>
+<h2 id="scapy-plist-SndRcvList-instance-nsummary-和-scapy-plist-SndRcvList-instance-summary-方法的两个参数"><a href="#scapy-plist-SndRcvList-instance-nsummary-和-scapy-plist-SndRcvList-instance-summary-方法的两个参数" class="headerlink" title="(scapy.plist.SndRcvList instance).nsummary()和(scapy.plist.SndRcvList instance).summary()方法的两个参数"></a>(scapy.plist.SndRcvList instance).nsummary()和(scapy.plist.SndRcvList instance).summary()方法的两个参数</h2><p>这两个方法有两个参数可以传入，一个是prn,另一个则是lfilter,，它们传入的方法都是通过lambda的方式，都具有过滤功能。区别在于prn与其说是过滤，它更像取对应变量的值再输出，也能输出额外内容；而lfilter用于过滤条件，筛选出符合条件的数据包的所有数据：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a=sr(IP(dst=&quot;baidu.com&quot;)/TCP(dport=[80,443,666],flags=&quot;S&quot;),timeout=1)[0]</span><br><span class="line">Begin emission:</span><br><span class="line">Finished sending 3 packets.</span><br><span class="line">**.............</span><br><span class="line">Received 15 packets, got 2 answers, remaining 1 packets</span><br><span class="line">&gt;&gt;&gt; a.summary(lambda s,r : r.sprintf(&quot;%TCP.flags%&quot;)==&quot;SA&quot;)</span><br><span class="line">True</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; a.summary(lfilter=lambda s,r : r.sprintf(&quot;%TCP.flags%&quot;)==&quot;SA&quot;)</span><br><span class="line">IP / TCP 192.168.1.36:ftp_data &gt; 110.242.68.66:www_http S ==&gt; IP / TCP 110.242.68.66:www_http &gt; 192.168.1.36:ftp_data SA</span><br><span class="line">IP / TCP 192.168.1.36:ftp_data &gt; 110.242.68.66:https S ==&gt; IP / TCP 110.242.68.66:https &gt; 192.168.1.36:ftp_data SA</span><br></pre></td></tr></table></figure></div>
 
-<br>
+<p>这两个参数也能混合使用，先用lfilter参数过滤符合条件的数据包，然后再佐以prn参数过滤需要的字符串：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a.summary(lfilter=lambda s,r:r.sprintf(&quot;%TCP.sport%&quot;)==&quot;https&quot;)</span><br><span class="line">IP / TCP 192.168.1.36:ftp_data &gt; 110.242.68.66:https S ==&gt; IP / TCP 110.242.68.66:https &gt; 192.168.1.36:ftp_data SA</span><br><span class="line">&gt;&gt;&gt; a.summary(prn=lambda s,r:r.sprintf(&quot;%IP.dst%&quot;),lfilter=lambda s,r:r.sprintf(&quot;%TCP.sport%&quot;)==&quot;https&quot;)</span><br><span class="line">192.168.1.36</span><br></pre></td></tr></table></figure></div>
 
-<p>最后添加当前环境转发的环境变量，我是xrog环境下的vnc，所以路径是X服务的<code>~/.xprofile</code>,理论上修改<code>/etc/environment</code>也可以</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HOST_IP=&quot;$(ip route | awk &#x27;$1==&quot;default&quot; &#123;print $3&#125;&#x27;)&quot;</span><br><span class="line">export PULSE_SERVER=&quot;tcp:$HOST_IP&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="scapy-plist-SndRcvList-instance-filter-方法的使用"><a href="#scapy-plist-SndRcvList-instance-filter-方法的使用" class="headerlink" title="(scapy.plist.SndRcvList instance).filter()方法的使用"></a>(scapy.plist.SndRcvList instance).filter()方法的使用</h2><p>此方法用以过滤lambda函数传入的条件后，返回数据包列表：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a.filter(lambda s,r:TCP in r and r[TCP].flags&amp;2)</span><br><span class="line">&lt;filtered Results: TCP:2 UDP:0 ICMP:0 Other:0&gt;</span><br></pre></td></tr></table></figure></div>
 
-<p>此时已经完成转发，如果想要先行测试请在gui的终端下输入以上两端命令，之后打开服务端<code>bin</code>目录下的的<code>pulseaudio.exe</code>后在刚刚输入命令的终端窗口输入<code>speaker-test</code>即可。</p>
 <blockquote>
-<p>注意客户端和服务端必须路由可达，且已防火墙已正确配置</p>
+<p><code>flags&amp;2</code>代表的是flags位“S”的Hex值，如果换成<code>&amp;18</code>将是“SA”的Hex值，wireshark抓包也能确定</p>
 </blockquote>
-<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>测试通过后就能直接打开服务端的pulseaudio.exe后放在后台，享受声音转发服务了</p>
-<video src='https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3YvcyFBckVNT01Ec2ZXcEdlU19tUzBqNnRHODVtdkE_ZT03em53cGE.jp' type='video/mp4' controls='controls'  width='100%' height='100%'>
-</video>
+<p>可以通过filter返回的新数据包列表重新制表，这个表代表首先过滤本机接收的应答数据包中发送标志位为”S”的数据包后，再在制表的方法中过滤这些数据包发送人的端口及地址，并自动为相应的端口标记”🪝”标记：</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a.filter(lambda s,r:TCP in r and r[TCP].flags&amp;2).make_table(lambda s,r:(s.dst,s.dport,&#x27;🪝&#x27;))</span><br><span class="line">    110.242.68.66</span><br><span class="line">80  🪝</span><br><span class="line">443 🪝</span><br></pre></td></tr></table></figure></div>
 
         </div>
 
@@ -418,18 +391,18 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> Pulseaudio实现linux的声音转发</li>
+        <li><strong>标题:</strong> scapy小记pt.2</li>
         <li><strong>作者:</strong> 7cmb</li>
         <li><strong>创建于
-                :</strong> 2023-09-29 23:08:26</li>
+                :</strong> 2023-11-04 14:36:19</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-10-18 17:36:52
+                    :</strong> 2023-11-04 14:42:17
             </li>
         
         <li>
-            <strong>链接:</strong> https://7cmb.github.io/2023-09-29-Pulseaudio实现linux的声音转发/
+            <strong>链接:</strong> https://7cmb.github.io/scapy小记pt-2/
         </li>
         <li>
             <strong>
@@ -447,43 +420,20 @@
         
 
         
-            <ul class="post-tags-box">
-                
-                    <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
-                    </li>
-                
-            </ul>
-        
 
         
 
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/2023-09-30-Multisim%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">Multisim计算机组成原理课程设计</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/2023-09-28-%E4%BD%BF%E7%94%A8wsl2%E6%89%93%E9%80%A0arch%E5%85%A8gui%E7%8E%AF%E5%A2%83/"
+                        href="/scapy%E5%B0%8F%E8%AE%B0/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">利用WSL2打造Arch全GUI环境</span>
+                                <span class="post-nav-title-item">scapy小记</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -504,8 +454,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">Pulseaudio实现linux的声音转发</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85pulseaudio"><span class="nav-text">1、安装pulseaudio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%BC%96%E8%BE%91%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">2、编辑服务端配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%BE%91%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">3、编辑客户端配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%B0%BE"><span class="nav-text">结尾</span></a></li></ol>
+        <div class="page-title">scapy小记pt.2</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sr-%E5%87%BD%E6%95%B0%E8%A1%A5%E5%85%85"><span class="nav-text">sr()函数补充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sr-%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E9%83%A8%E5%88%86%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">sr()返回对象部分方法的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#scapy-plist-SndRcvList-instance-summary-%E6%96%B9%E6%B3%95"><span class="nav-text">(scapy.plist.SndRcvList instance).summary()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scapy-plist-SndRcvList-instance-nsummary-%E6%96%B9%E6%B3%95"><span class="nav-text">(scapy.plist.SndRcvList instance).nsummary()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scapy-plist-SndRcvList-instance-nsummary-%E5%92%8C-scapy-plist-SndRcvList-instance-summary-%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-text">(scapy.plist.SndRcvList instance).nsummary()和(scapy.plist.SndRcvList instance).summary()方法的两个参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scapy-plist-SndRcvList-instance-filter-%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">(scapy.plist.SndRcvList instance).filter()方法的使用</span></a></li></ol></li></ol>
 
     </div>
 </div>
