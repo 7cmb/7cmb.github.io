@@ -11,7 +11,7 @@ categories:
 ---
 
 > 本文内容来自：
->
+> 
 > [Welcome to Scapy’s documentation! &mdash; Scapy 2023.10.20 documentation](https://scapy.readthedocs.io/en/latest)
 > 
 > [GitHub - wizardforcel/scapy-docs-zh: :book: [译] Scapy 中文文档](https://github.com/wizardforcel/scapy-docs-zh)
@@ -119,7 +119,7 @@ Ether / IP / TCP / HTTP / 'GET' '/s?z=people&c=3' 'HTTP/1.1'
 
 太难看了，贴张图片:
 
-<img src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21126&authkey=%21AKwVXhMY-VOKc4Y&width=2736&height=801" width="2736" height="801" />
+<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdmZ2NDMEdTZUNVZzN2dTQ_ZT1ESTFnTE8.png" alt="" >
 
 可见本来应该为field应该为Raw的数据可以解析出来了，并且可以通过字典类型访问，pkt["key"].field:
 
@@ -163,6 +163,6 @@ pip install cryptography
 
 分析:
 
-<img title="" src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21127&authkey=%21ADMFkjHOX4WF298&width=2736&height=1781" alt="">
+<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdmMUxycDZmVDg1Zmpyckk_ZT1zZjFUbHo.png" alt="">
 
 至此，一个简单的分析完成
