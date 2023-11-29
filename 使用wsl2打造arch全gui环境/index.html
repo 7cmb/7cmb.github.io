@@ -18,27 +18,27 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod 上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
+        <meta name="description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用WSL2打造Arch全GUI环境">
 <meta property="og:url" content="https://7cmb.github.io/%E4%BD%BF%E7%94%A8wsl2%E6%89%93%E9%80%A0arch%E5%85%A8gui%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod 上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
+<meta property="og:description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1CeGhLalc.jpg">
-<meta property="og:image" content="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdidWVlblpIZVluaDJiYWs_ZT1JTUUyRHQ.jpg">
-<meta property="og:image" content="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdiN1RJN0h0ZER0NlcwRmM_ZT12dkVieGY.jpg">
-<meta property="og:image" content="https://1drv.ms/i/s!ArEMOMDsfWpGcJ6l0G_z_pE0RHs?e=DOIX7q">
-<meta property="og:image" content="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkbGlUcjZqSnR6djlVNms_ZT1VVzFiMEE.jpg">
-<meta property="og:image" content="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkMnlISi1tWVE1Y29WdjA_ZT1rS0JHM2o.jpg">
+<meta property="og:image" content="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21113&authkey=%21ABArN5SxpHZEbMc&width=1953&height=408">
+<meta property="og:image" content="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21110&authkey=%21ACxQ0_GQhkoybk8&width=3465&height=1596">
+<meta property="og:image" content="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21111&authkey=%21AOmn_oqukjPqfiM&width=3465&height=1596">
+<meta property="og:image" content="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21112&authkey=%21AHwhi0nX2XD8pEs&width=3840&height=2040">
+<meta property="og:image" content="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21118&authkey=%21AGuEcuN9uP5VMmw&width=2670&height=1905">
+<meta property="og:image" content="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21119&authkey=%21APdERf-TzgC3sss&width=2565&height=1530">
 <meta property="article:published_time" content="2023-09-28T14:50:12.000Z">
-<meta property="article:modified_time" content="2023-10-18T09:36:52.373Z">
+<meta property="article:modified_time" content="2023-11-29T08:29:39.253Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="wsl">
 <meta property="article:tag" content="arch">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1CeGhLalc.jpg">
+<meta name="twitter:image" content="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21113&authkey=%21ABArN5SxpHZEbMc&width=1953&height=408">
     
     
         <!-- Google tag (gtag.js) -->
@@ -318,8 +318,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-10-18 17:36:52</span>
-            <span class="mobile">2023-10-18 17:36:52</span>
+            <span class="desktop">2023-11-29 16:29:39</span>
+            <span class="mobile">2023-11-29 16:29:39</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -398,74 +398,94 @@
 
 
         <div class="article-content markdown-body">
-            <p>此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 <strong><a target="_blank" rel="noopener" href="https://github.com/nullpo-head/wsl-distrod">nullpo-head &#x2F; wsl-distrod</a></strong> 上所支持的发行版。</p>
+            <p>此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 <strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/nullpo-head/wsl-distrod" >nullpo-head &#x2F; wsl-distrod <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong> 上所支持的发行版。</p>
 <h1 id="1、先决条件"><a href="#1、先决条件" class="headerlink" title="1、先决条件"></a>1、先决条件</h1><p>系统已开启hyper-v虚拟机</p>
-<p>Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual#step-3---enable-virtual-machine-feature">旧版 WSL 的手动安装步骤 | Microsoft Learn</a>)。</p>
+<p>Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](<a class="link"   target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual#step-3---enable-virtual-machine-feature" >旧版 WSL 的手动安装步骤 | Microsoft Learn <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)。</p>
 <blockquote>
 <p>ps: Windows 10好像仅限专业版</p>
 </blockquote>
 <h1 id="2、安装-WSL2-命令（以windows-10为例）"><a href="#2、安装-WSL2-命令（以windows-10为例）" class="headerlink" title="2、安装 WSL2 命令（以windows 10为例）"></a>2、安装 WSL2 命令（以windows 10为例）</h1><p>使用管理员权限打开 powershell 以启用“适用于 Linux 的 Windows 子系统”可选功能</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:Microsoft<span class="literal">-Windows-Subsystem-Linux</span> /all /norestart</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:Microsoft<span class="literal">-Windows-Subsystem-Linux</span> /all /norestart</span><br></pre></td></tr></table></figure></div>
 
 <br>
 <br>
 
 <p>启用虚拟机功能</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:VirtualMachinePlatform /all /norestart</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:VirtualMachinePlatform /all /norestart</span><br></pre></td></tr></table></figure></div>
 
 <p>之后重启设备以完成系统对wsl2的更新</p>
 <br>
 <br>
 
 <p>在官网链接上下载wsl2内核更新包并安装（wsl和wsl2原理不同，所以需要下载内核，具体可自行查找资料）</p>
-<p><a target="_blank" rel="noopener" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">内核更新包</a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" >内核更新包 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <blockquote>
-<p>wsl与wsl2差别的官网资料： <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/compare-versions#wsl-in-the-microsoft-store">比较 WSL 版本 | Microsoft Learn</a></p>
+<p>wsl与wsl2差别的官网资料： <a class="link"   target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/compare-versions#wsl-in-the-microsoft-store" >比较 WSL 版本 | Microsoft Learn <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </blockquote>
 <br>
 <br>
 
 <p>将wsl2设为默认运行版本</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--set-default-version</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--set-default-version</span> <span class="number">2</span></span><br></pre></td></tr></table></figure></div>
 
 <p>自此，系统对wsl2的支持就已经完成，接下来便是安装发行版。</p>
 <h1 id="3、安装带有systemd的linux发行版（以debian为例）"><a href="#3、安装带有systemd的linux发行版（以debian为例）" class="headerlink" title="3、安装带有systemd的linux发行版（以debian为例）"></a>3、安装带有systemd的linux发行版（以debian为例）</h1><p>刚好需要一个debian用以学习，写博客顺便搭了…..此步骤什么发行版都一样</p>
-<p>打开以下链接下载你所需要的最新release后解压顺带找到 <a target="_blank" rel="noopener" href="https://images.linuxcontainers.org/images/">这里</a> 以下载你所需要的发行版</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/nullpo-head/wsl-distrod">nullpo-head &#x2F; wsl-distrod</a></p>
+<p>打开以下链接下载你所需要的最新release后解压顺带找到 <a class="link"   target="_blank" rel="noopener" href="https://images.linuxcontainers.org/images/" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 以下载你所需要的发行版</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/nullpo-head/wsl-distrod" >nullpo-head &#x2F; wsl-distrod <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <br>
 <br>
 
 <p>找到 <strong>distrod_wsl_launcher.exe</strong> 并运行</p>
-<img title="" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1CeGhLalc.jpg" alt="index_of_files">
+<img  title="" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21113&authkey=%21ABArN5SxpHZEbMc&width=1953&height=408"
+                      alt="index_of_files"
+                >
 
 <p>运行后将出现以下界面</p>
-<img title="distrods_eg" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdidWVlblpIZVluaDJiYWs_ZT1JTUUyRHQ.jpg" alt="">
+<img  title="distrods_eg" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21110&authkey=%21ACxQ0_GQhkoybk8&width=3465&height=1596"
+                      alt=""
+                >
 
 <p>此时选择 <em><strong>[1]</strong></em> 则使用本地文件，选择 <em><strong>[2]</strong></em> 则使用指定连接以下载对应发行版，一般选 <em><strong>[2]</strong></em> 就行，笔者因为网络问题故选 <em><strong>[1]</strong></em> 以下示例为使用本地文件的操作</p>
 <br>
 <br>
 
 <p>输入文件路径，摁shift加右键即可选择复制路径，之后删除引号</p>
-<img title="distrods_input" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdiN1RJN0h0ZER0NlcwRmM_ZT12dkVieGY.jpg" alt="">
+<img  title="distrods_input" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21111&authkey=%21AOmn_oqukjPqfiM&width=3465&height=1596"
+                      alt=""
+                >
 
 <blockquote>
 <p>系统包选择rootfs,内核已经安装所以不需要的完整系统</p>
 </blockquote>
 <p>此时系统wsl2发行版已安装，接着设置此发行版用户名及密码</p>
-<img title="distrods_complete" src="https://1drv.ms/i/s!ArEMOMDsfWpGcJ6l0G_z_pE0RHs?e=DOIX7q" alt="">
+<img  title="distrods_complete" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21112&authkey=%21AHwhi0nX2XD8pEs&width=3840&height=2040"
+                      alt=""
+                >
 
 <br>
 <br>
 
 <p>为了保障开机自启你的wsl2虚拟机，还需要一点工作，在 <strong>虚拟机的bash</strong> 内输入（此步报错请尝试重启设备后重试）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/distrod/bin/distrod <span class="built_in">enable</span> --start-on-windows-boot</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/distrod/bin/distrod <span class="built_in">enable</span> --start-on-windows-boot</span><br></pre></td></tr></table></figure></div>
 
 <p>接下来输入你的root密码后win10将会弹窗让你输入微软账户密码，照例输上，自此，你的wsl2 distrods with systemd就能开机自启了。</p>
 <br>
 <br>
 
 <p>最后一步就是打开虚拟机的端口转发服务，以ssh服务端口22为例，你需要在虚拟机的bash输入（copy的注释我就留着了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 22 | sudo <span class="built_in">tee</span> /opt/distrod/conf/tcp4_ports  <span class="comment"># update the portproxy.service&#x27;s configuration</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> --now portproxy.service  <span class="comment"># enable and start it</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 22 | sudo <span class="built_in">tee</span> /opt/distrod/conf/tcp4_ports  <span class="comment"># update the portproxy.service&#x27;s configuration</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> --now portproxy.service  <span class="comment"># enable and start it</span></span><br></pre></td></tr></table></figure></div>
 
 <blockquote>
 <p>根据官网的信息，该服务在win11上会有问题，具体表现在该服务不会随着windows开机自启，并表示将来会修复</p>
@@ -475,62 +495,70 @@
 <br>
 
 <p>此时无图形界面的wsl2的发行版已经安装完毕，接下来安装软件和图形界面的步骤就自由发挥了，假设你不想安装完整的图形界面，wsl2自带wslg，能直接开启对应软件的图形服务，如果你想拥有一个完整的图形界面，请自行安装对应软件，一千个人就有一千个不同的图形界面，此步忽略。</p>
-<h1 id="4、以-DWM-为图形界面，部署vnc服务"><a href="#4、以-DWM-为图形界面，部署vnc服务" class="headerlink" title="4、以 DWM 为图形界面，部署vnc服务"></a>4、以 <a target="_blank" rel="noopener" href="https://dwm.suckless.org/">DWM</a> 为图形界面，部署vnc服务</h1><p>假设到此，你的图形界面已经安装好了，是时候部署你的linux桌面了，理论上来说除了vnc还能用xdrp和xserver，但是xdrp过于卡顿，Xserver因为笔者的图形界面原因不便使用，故选择vnc作为图形界面的中转。</p>
+<h1 id="4、以-DWM-为图形界面，部署vnc服务"><a href="#4、以-DWM-为图形界面，部署vnc服务" class="headerlink" title="4、以 DWM 为图形界面，部署vnc服务"></a>4、以 <a class="link"   target="_blank" rel="noopener" href="https://dwm.suckless.org/" >DWM <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 为图形界面，部署vnc服务</h1><p>假设到此，你的图形界面已经安装好了，是时候部署你的linux桌面了，理论上来说除了vnc还能用xdrp和xserver，但是xdrp过于卡顿，Xserver因为笔者的图形界面原因不便使用，故选择vnc作为图形界面的中转。</p>
 <p>安装vnc服务端</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S tigervnc</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S tigervnc</span><br></pre></td></tr></table></figure></div>
 
 <br>
 <br>
 
 <p>安装完成后为当前用户设置密码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncpasswd</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncpasswd</span><br></pre></td></tr></table></figure></div>
 
-
-
-<h2 id="修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）"><a href="#修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）" class="headerlink" title="修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）"></a>修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）</h2><p>首先确认自己的系统有什么桌面环境 <code>ls /usr/share/xsessions</code> 记录下输出结果，例如我的是（自行编辑则参考 <a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Desktop_entries">Desktop entries</a>）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ <span class="built_in">ls</span> /usr/share/xsessions</span><br><span class="line">dwm.desktop</span><br></pre></td></tr></table></figure>
+<h2 id="修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）"><a href="#修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）" class="headerlink" title="修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）"></a>修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）</h2><p>首先确认自己的系统有什么桌面环境 <code>ls /usr/share/xsessions</code> 记录下输出结果，例如我的是（自行编辑则参考 <a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Desktop_entries" >Desktop entries <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>）</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ <span class="built_in">ls</span> /usr/share/xsessions</span><br><span class="line">dwm.desktop</span><br></pre></td></tr></table></figure></div>
 
 <br>
 <br>
 
 <p>之后修改本地用户配置文件，路径在 <code>~/.vnc/config</code> </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># session=gnome    //桌面</span></span><br><span class="line"><span class="comment"># securitytypes=vncauth,tlsvnc</span></span><br><span class="line"><span class="comment"># geometry=2000x1200    //分辨率</span></span><br><span class="line"><span class="comment"># localhost    //一定一定记得要删掉这行</span></span><br><span class="line"><span class="comment"># alwaysshared    //多用户</span></span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># session=gnome    //桌面</span></span><br><span class="line"><span class="comment"># securitytypes=vncauth,tlsvnc</span></span><br><span class="line"><span class="comment"># geometry=2000x1200    //分辨率</span></span><br><span class="line"><span class="comment"># localhost    //一定一定记得要删掉这行</span></span><br><span class="line"><span class="comment"># alwaysshared    //多用户</span></span><br></pre></td></tr></table></figure></div>
 
 <p>这是默认配置，session请参考上一步的结果，我的图形界面为dwm则修改为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line">session=dwm</span><br><span class="line">geometry=2560x1440</span><br><span class="line">alwaysshared</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line">session=dwm</span><br><span class="line">geometry=2560x1440</span><br><span class="line">alwaysshared</span><br></pre></td></tr></table></figure></div>
 
 <br>
 <br>
 
 <p>接下来修改系统配置，路径在 <code>/etc/tigervnc/vncserver-config-defaults</code> ，系统配置会和本地用户配置一起读取，不进行配置将导致奇怪问题</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># session=gnome</span></span><br><span class="line"><span class="comment"># securitytypes=vncauth,tlsvnc</span></span><br><span class="line"><span class="comment"># geometry=2000x1200</span></span><br><span class="line"><span class="comment"># localhost</span></span><br><span class="line"><span class="comment"># alwaysshared</span></span><br><span class="line"><span class="comment"># $(ip addr |grep inet|grep eth0|awk -F &#x27;[/]&#x27; &#x27;&#123;print $1&#125;&#x27;|awk &#x27;&#123;print $2&#125;&#x27;)</span></span><br><span class="line"></span><br><span class="line">session=dwm</span><br><span class="line">geometry=2560x1440</span><br><span class="line">alwaysshared</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># session=gnome</span></span><br><span class="line"><span class="comment"># securitytypes=vncauth,tlsvnc</span></span><br><span class="line"><span class="comment"># geometry=2000x1200</span></span><br><span class="line"><span class="comment"># localhost</span></span><br><span class="line"><span class="comment"># alwaysshared</span></span><br><span class="line"><span class="comment"># $(ip addr |grep inet|grep eth0|awk -F &#x27;[/]&#x27; &#x27;&#123;print $1&#125;&#x27;|awk &#x27;&#123;print $2&#125;&#x27;)</span></span><br><span class="line"></span><br><span class="line">session=dwm</span><br><span class="line">geometry=2560x1440</span><br><span class="line">alwaysshared</span><br></pre></td></tr></table></figure></div>
 
 <br>
 <br>
 
 <p>然后在同目录下检查 <code>vncserver-config-mandatory</code> 确保没有localhost参数</p>
 <p>接着编辑同目录下 <code>vncserver.users</code> 将用户和端口进行绑定</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> TigerVNC User assignment</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This file assigns users to specific VNC display numbers.</span></span><br><span class="line"><span class="comment"># The syntax is &lt;display&gt;=&lt;username&gt;. E.g.:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># :2=andrew</span></span><br><span class="line"><span class="comment"># :3=lisa</span></span><br><span class="line">  :1=alicemargandroid</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> TigerVNC User assignment</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This file assigns users to specific VNC display numbers.</span></span><br><span class="line"><span class="comment"># The syntax is &lt;display&gt;=&lt;username&gt;. E.g.:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># :2=andrew</span></span><br><span class="line"><span class="comment"># :3=lisa</span></span><br><span class="line">  :1=alicemargandroid</span><br></pre></td></tr></table></figure></div>
 
 <p>这个例子表示第八行表示5900+1端口绑定用户为alicemargandroid</p>
 <br>
 <br>
 
 <p>最后编辑的文件是 <code>/etc/X11/Xwrapper.config</code> ，修改为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">allowed_users=anybody</span><br><span class="line">needs_root_rights=no</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">allowed_users=anybody</span><br><span class="line">needs_root_rights=no</span><br></pre></td></tr></table></figure></div>
 
 <p>自此，vnc配置文件修改完成</p>
 <p>接着启动服务即可愉快连接</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> vncserver@:1</span><br><span class="line">sudo systemctl start vncserver@:1</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> vncserver@:1</span><br><span class="line">sudo systemctl start vncserver@:1</span><br></pre></td></tr></table></figure></div>
 
 <p>直接使用loopback:5900+X连接</p>
-<img title="vnc1" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkbGlUcjZqSnR6djlVNms_ZT1VVzFiMEE.jpg" alt="">
+<img  title="vnc1" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21118&authkey=%21AGuEcuN9uP5VMmw&width=2670&height=1905"
+                      alt=""
+                >
 
-<img title="vnc2" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkMnlISi1tWVE1Y29WdjA_ZT1rS0JHM2o.jpg" alt="">
+<img  title="vnc2" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21119&authkey=%21APdERf-TzgC3sss&width=2565&height=1530"
+                      alt=""
+                >
 
 <p>这时你就会发现即使正确配置了fcitx输入法也可能在某些场景无法唤出，这时就又要修改配置文件了</p>
 <h1 id="5、修改-xprofile-确保输入法正常运行"><a href="#5、修改-xprofile-确保输入法正常运行" class="headerlink" title="5、修改 ~/.xprofile 确保输入法正常运行"></a>5、修改 <code>~/.xprofile</code> 确保输入法正常运行</h1><p>在 <code>~/.xprofile</code> 中添加如下几行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> INPUT_METHOD=fcitx5</span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx5</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx5</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=@im=fcitx5</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> INPUT_METHOD=fcitx5</span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx5</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx5</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=@im=fcitx5</span><br></pre></td></tr></table></figure></div>
 
 <p>自此，全gui环境配置完成</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这时你会发现俺声音服务呢，这个只需要配置个简单的声音转发，这个坑晚点填。</p>
@@ -548,7 +576,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-10-18 17:36:52
+                    :</strong> 2023-11-29 16:29:39
             </li>
         
         <li>
@@ -636,7 +664,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">利用WSL2打造Arch全GUI环境</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-text">1、先决条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85-WSL2-%E5%91%BD%E4%BB%A4%EF%BC%88%E4%BB%A5windows-10%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-text">2、安装 WSL2 命令（以windows 10为例）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85%E5%B8%A6%E6%9C%89systemd%E7%9A%84linux%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%88%E4%BB%A5debian%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-text">3、安装带有systemd的linux发行版（以debian为例）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E4%BB%A5-DWM-%E4%B8%BA%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%EF%BC%8C%E9%83%A8%E7%BD%B2vnc%E6%9C%8D%E5%8A%A1"><span class="nav-text">4、以 DWM 为图形界面，部署vnc服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E6%AD%A4%E6%AD%A5%E5%B0%A4%E4%B8%BA%E9%87%8D%E8%A6%81%EF%BC%8C%E5%BD%93%E6%97%B6%E6%8E%92%E6%9F%A5%E4%BA%86%E5%8D%8A%E5%A4%A9%E9%97%AE%E9%A2%98%E6%9C%80%E5%90%8E%E5%8F%91%E7%8E%B0%E8%87%AA%E5%B7%B1%E6%98%AF%E5%82%BB%E9%80%BC%EF%BC%89"><span class="nav-text">修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81%E4%BF%AE%E6%94%B9-xprofile-%E7%A1%AE%E4%BF%9D%E8%BE%93%E5%85%A5%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C"><span class="nav-text">5、修改 ~&#x2F;.xprofile 确保输入法正常运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-text">结语</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-text">1、先决条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85-WSL2-%E5%91%BD%E4%BB%A4%EF%BC%88%E4%BB%A5windows-10%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-text">2、安装 WSL2 命令（以windows 10为例）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85%E5%B8%A6%E6%9C%89systemd%E7%9A%84linux%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%88%E4%BB%A5debian%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-text">3、安装带有systemd的linux发行版（以debian为例）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E4%BB%A5-DWM-%E4%B8%BA%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%EF%BC%8C%E9%83%A8%E7%BD%B2vnc%E6%9C%8D%E5%8A%A1"><span class="nav-text">4、以 DWM  为图形界面，部署vnc服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E6%AD%A4%E6%AD%A5%E5%B0%A4%E4%B8%BA%E9%87%8D%E8%A6%81%EF%BC%8C%E5%BD%93%E6%97%B6%E6%8E%92%E6%9F%A5%E4%BA%86%E5%8D%8A%E5%A4%A9%E9%97%AE%E9%A2%98%E6%9C%80%E5%90%8E%E5%8F%91%E7%8E%B0%E8%87%AA%E5%B7%B1%E6%98%AF%E5%82%BB%E9%80%BC%EF%BC%89"><span class="nav-text">修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81%E4%BF%AE%E6%94%B9-xprofile-%E7%A1%AE%E4%BF%9D%E8%BE%93%E5%85%A5%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C"><span class="nav-text">5、修改 ~&#x2F;.xprofile 确保输入法正常运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-text">结语</span></a></li></ol>
 
     </div>
 </div>
