@@ -20,8 +20,6 @@ Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）�
 
 > ps: Windows 10好像仅限专业版
 
-
-
 # 2、安装 WSL2 命令（以windows 10为例）
 
 使用管理员权限打开 powershell 以启用“适用于 Linux 的 Windows 子系统”可选功能
@@ -61,8 +59,6 @@ wsl --set-default-version 2
 
 自此，系统对wsl2的支持就已经完成，接下来便是安装发行版。
 
-
-
 # 3、安装带有systemd的linux发行版（以debian为例）
 
 刚好需要一个debian用以学习，写博客顺便搭了.....此步骤什么发行版都一样
@@ -76,11 +72,11 @@ wsl --set-default-version 2
 
 找到 **distrod_wsl_launcher.exe** 并运行
 
-<img title="" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1CeGhLalc.jpg" alt="index_of_files">
+<img title="" src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21113&authkey=%21ABArN5SxpHZEbMc&width=1953&height=408" alt="index_of_files">
 
 运行后将出现以下界面
 
-<img title="distrods_eg" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdidWVlblpIZVluaDJiYWs_ZT1JTUUyRHQ.jpg" alt="">
+<img title="distrods_eg" src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21110&authkey=%21ACxQ0_GQhkoybk8&width=3465&height=1596" alt="">
 
 此时选择 ***[1]*** 则使用本地文件，选择 ***[2]*** 则使用指定连接以下载对应发行版，一般选 ***[2]*** 就行，笔者因为网络问题故选 ***[1]*** 以下示例为使用本地文件的操作
 
@@ -89,13 +85,13 @@ wsl --set-default-version 2
 
 输入文件路径，摁shift加右键即可选择复制路径，之后删除引号
 
-<img title="distrods_input" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdiN1RJN0h0ZER0NlcwRmM_ZT12dkVieGY.jpg" alt="">
+<img title="distrods_input" src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21111&authkey=%21AOmn_oqukjPqfiM&width=3465&height=1596" alt="">
 
 > 系统包选择rootfs,内核已经安装所以不需要的完整系统
 
 此时系统wsl2发行版已安装，接着设置此发行版用户名及密码
 
-<img title="distrods_complete" src="https://1drv.ms/i/s!ArEMOMDsfWpGcJ6l0G_z_pE0RHs?e=DOIX7q" alt="">
+<img title="distrods_complete" src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21112&authkey=%21AHwhi0nX2XD8pEs&width=3840&height=2040" alt="">
 
 <br>
 <br>
@@ -127,8 +123,6 @@ sudo systemctl enable --now portproxy.service  # enable and start it
 
 此时无图形界面的wsl2的发行版已经安装完毕，接下来安装软件和图形界面的步骤就自由发挥了，假设你不想安装完整的图形界面，wsl2自带wslg，能直接开启对应软件的图形服务，如果你想拥有一个完整的图形界面，请自行安装对应软件，一千个人就有一千个不同的图形界面，此步忽略。
 
-
-
 # 4、以 [DWM](https://dwm.suckless.org/) 为图形界面，部署vnc服务
 
 假设到此，你的图形界面已经安装好了，是时候部署你的linux桌面了，理论上来说除了vnc还能用xdrp和xserver，但是xdrp过于卡顿，Xserver因为笔者的图形界面原因不便使用，故选择vnc作为图形界面的中转。
@@ -147,8 +141,6 @@ sudo pacman -S tigervnc
 ```bash
 vncpasswd
 ```
-
-
 
 ## 修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）
 
@@ -272,13 +264,11 @@ sudo systemctl start vncserver@:1
 
 直接使用loopback:5900+X连接
 
-<img title="vnc1" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkbGlUcjZqSnR6djlVNms_ZT1VVzFiMEE.jpg" alt="">
+<img title="vnc1" src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21118&authkey=%21AGuEcuN9uP5VMmw&width=2670&height=1905" alt="">
 
-<img title="vnc2" src="https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkMnlISi1tWVE1Y29WdjA_ZT1rS0JHM2o.jpg" alt="">
+<img title="vnc2" src="https://onedrive.live.com/embed?resid=466A7DECC0380CB1%21119&authkey=%21APdERf-TzgC3sss&width=2565&height=1530" alt="">
 
 这时你就会发现即使正确配置了fcitx输入法也可能在某些场景无法唤出，这时就又要修改配置文件了
-
-
 
 # 5、修改 `~/.xprofile` 确保输入法正常运行
 
