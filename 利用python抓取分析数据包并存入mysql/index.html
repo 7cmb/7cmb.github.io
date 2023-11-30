@@ -13,22 +13,24 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://7cmb.github.io/pulseaudio实现linux的声音转发/"/>
+    <link rel="canonical" href="https://7cmb.github.io/利用python抓取分析数据包并存入mysql/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）……..    1、安装pulseaudioWindows版本下载链接  ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 P">
+        <meta name="description" content="1、先决条件本机配置好python及mysql运行环境，并且安装好python相关模块scapy pymysql  2、抓包及分析抓包功能使用的是scapy中的sniff()函数，使用方法已经记录在前篇: scapy小记pt.4-嗅探 ，本文一定程度上算后篇 3、建立数据库及表登陆数据库后，建立并指定相关数据库后，建立一张表，提前规划好数据格式 12345678910111213141516171">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pulseaudio实现linux的声音转发">
-<meta property="og:url" content="https://7cmb.github.io/Pulseaudio%E5%AE%9E%E7%8E%B0linux%E7%9A%84%E5%A3%B0%E9%9F%B3%E8%BD%AC%E5%8F%91/index.html">
+<meta property="og:title" content="利用python抓取分析数据包并存入mysql">
+<meta property="og:url" content="https://7cmb.github.io/%E5%88%A9%E7%94%A8python%E6%8A%93%E5%8F%96%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE%E5%8C%85%E5%B9%B6%E5%AD%98%E5%85%A5mysql/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）……..    1、安装pulseaudioWindows版本下载链接  ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 P">
+<meta property="og:description" content="1、先决条件本机配置好python及mysql运行环境，并且安装好python相关模块scapy pymysql  2、抓包及分析抓包功能使用的是scapy中的sniff()函数，使用方法已经记录在前篇: scapy小记pt.4-嗅探 ，本文一定程度上算后篇 3、建立数据库及表登陆数据库后，建立并指定相关数据库后，建立一张表，提前规划好数据格式 12345678910111213141516171">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-29T15:08:26.000Z">
-<meta property="article:modified_time" content="2023-11-30T09:03:36.475Z">
+<meta property="article:published_time" content="2023-11-30T09:06:36.000Z">
+<meta property="article:modified_time" content="2023-11-30T09:39:45.078Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="linux">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="scapy">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
     
     
@@ -51,7 +53,7 @@
     
     <title>
         
-            Pulseaudio实现linux的声音转发 -
+            利用python抓取分析数据包并存入mysql -
         
         7cmb&#39;s blog.
     </title>
@@ -280,7 +282,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">Pulseaudio实现linux的声音转发</h1>
+                <h1 class="article-title-regular">利用python抓取分析数据包并存入mysql</h1>
             
             </div>
             
@@ -302,15 +304,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-09-29 23:08:26</span>
-        <span class="mobile">2023-09-29 23:08:26</span>
+        <span class="desktop">2023-11-30 17:06:36</span>
+        <span class="mobile">2023-11-30 17:06:36</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-11-30 17:03:36</span>
-            <span class="mobile">2023-11-30 17:03:36</span>
+            <span class="desktop">2023-11-30 17:39:45</span>
+            <span class="mobile">2023-11-30 17:39:45</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -324,7 +326,7 @@
                     
                         
                         <li>
-                            <a href="/categories/linux/">linux</a>&nbsp;
+                            <a href="/categories/python/">python</a>&nbsp;
                         </li>
                     
                     
@@ -334,7 +336,27 @@
                             <li>></li>
                         
                         <li>
-                            <a href="/categories/linux/pulseaudio/">pulseaudio</a>&nbsp;
+                            <a href="/categories/python/scapy/">scapy</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/network/">network</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/network/scapy/">scapy</a>&nbsp;
                         </li>
                     
                     
@@ -348,7 +370,15 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/linux/">linux</a>&nbsp;
+                        <a href="/tags/network/">network</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/scapy/">scapy</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/python/">python</a>&nbsp;
                     </li>
                 
             </ul>
@@ -374,43 +404,59 @@
 
 
         <div class="article-content markdown-body">
-            <p>此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）…….. <br></p>
+            <h1 id="1、先决条件"><a href="#1、先决条件" class="headerlink" title="1、先决条件"></a>1、先决条件</h1><p>本机配置好python及mysql运行环境，并且安装好python相关模块<code>scapy</code> <code>pymysql</code> </p>
+<h1 id="2、抓包及分析"><a href="#2、抓包及分析" class="headerlink" title="2、抓包及分析"></a>2、抓包及分析</h1><p>抓包功能使用的是scapy中的sniff()函数，使用方法已经记录在前篇: <a class="link"   target="_blank" rel="noopener" href="https://7cmb.com/scapy%E5%B0%8F%E8%AE%B0pt-4/" >scapy小记pt.4-嗅探 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，本文一定程度上算后篇</p>
+<h1 id="3、建立数据库及表"><a href="#3、建立数据库及表" class="headerlink" title="3、建立数据库及表"></a>3、建立数据库及表</h1><p>登陆数据库后，建立并指定相关数据库后，建立一张表，提前规划好数据格式</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE testsql;</span><br><span class="line"></span><br><span class="line">USE testsql;</span><br><span class="line"></span><br><span class="line">CREATE TABLE `sniffTable` (</span><br><span class="line"></span><br><span class="line">`index` int unsigned AUTO_INCREMENT,</span><br><span class="line"></span><br><span class="line">`pktType` char(5),</span><br><span class="line"></span><br><span class="line">`capTime` datetime,</span><br><span class="line"></span><br><span class="line">`srcIP` char(16),</span><br><span class="line"></span><br><span class="line">`dstIP` char(16),</span><br><span class="line"></span><br><span class="line">`domain` varchar(128),</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(`index`)</span><br><span class="line"></span><br><span class="line">)DEFAULT CHARSET=utf8mb4;</span><br></pre></td></tr></table></figure></div>
+
+<table>
+<thead>
+<tr>
+<th align="center">name</th>
+<th align="center">dataType</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">index</td>
+<td align="center">u_int()   AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td align="center">pktType</td>
+<td align="center">char(5)</td>
+</tr>
+<tr>
+<td align="center">capTime</td>
+<td align="center">datetime</td>
+</tr>
+<tr>
+<td align="center">srcIP</td>
+<td align="center">char(16)</td>
+</tr>
+<tr>
+<td align="center">dstIP</td>
+<td align="center">char(16)</td>
+</tr>
+<tr>
+<td align="center">domain</td>
+<td align="center">varchar(128)</td>
+</tr>
+</tbody></table>
+<h1 id="4、整体代码"><a href="#4、整体代码" class="headerlink" title="4、整体代码"></a>4、整体代码</h1><p>database.py</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">import pymysql.cursors</span><br><span class="line">import sys</span><br><span class="line">class linkSql:</span><br><span class="line">    flagConnected=False</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.__conn=None</span><br><span class="line">        conf=&#123;</span><br><span class="line">            &quot;host&quot;:&quot;localhost&quot;,</span><br><span class="line">            &quot;user&quot;:&quot;root&quot;,</span><br><span class="line">            &quot;database&quot;:&quot;testsql&quot;,</span><br><span class="line">            &quot;password&quot;:&quot;yourPassWord&quot;,</span><br><span class="line">            &quot;charset&quot;:&quot;utf8mb4&quot;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for i in [&quot;host&quot;,&quot;user&quot;,&quot;database&quot;,&quot;password&quot;,&quot;password&quot;,&quot;charset&quot;]:</span><br><span class="line">            if i not in conf.keys():</span><br><span class="line">                exit(&quot;MISSING ARGUMENT \&quot;database.linkSql.conf[%s]\&quot;&quot;%(i))</span><br><span class="line"></span><br><span class="line">        try:</span><br><span class="line">            self.__conn=pymysql.connect(</span><br><span class="line">                host=conf[&quot;host&quot;],</span><br><span class="line">                user=conf[&quot;user&quot;],</span><br><span class="line">                database=conf[&quot;database&quot;],</span><br><span class="line">                password=conf[&quot;password&quot;],</span><br><span class="line">                charset=conf[&quot;charset&quot;],</span><br><span class="line">                cursorclass=pymysql.cursors.DictCursor</span><br><span class="line">            )</span><br><span class="line">            self.cursors=self.__conn.cursor()</span><br><span class="line">            self.flagConnected=True</span><br><span class="line">            print(&quot;database \&quot;%s\&quot; conneted&quot;%(conf[&quot;database&quot;]))</span><br><span class="line">        except:</span><br><span class="line">            sys.exit(&quot;failed to conneted \&quot;%s\&quot;&quot;%(conf[&quot;database&quot;]))</span><br><span class="line"></span><br><span class="line">    # table为 数据库内的表名 type:字符串；        dataList为 包含所有数据列表的列表 type:list</span><br><span class="line">    def assembleSqlText(self,table,dataList):</span><br><span class="line">        sqlHead=&quot;INSERT INTO &quot; + table + &quot; (pktType,capTime,srcIP,dstIP,`domain`) VALUES (&quot;</span><br><span class="line">        sqlTail=&quot;),(&quot;</span><br><span class="line">        workingStr=sqlHead</span><br><span class="line">        for i in dataList:</span><br><span class="line">            #print(i)</span><br><span class="line">            for j in i:</span><br><span class="line">                workingStr=workingStr + &quot;\&quot;&quot; + j + &quot;\&quot;&quot; + &quot;,&quot;</span><br><span class="line">            workingStr=workingStr[:-1]</span><br><span class="line">            workingStr+=sqlTail</span><br><span class="line">        fullSqlText=workingStr[:-2]</span><br><span class="line">        return fullSqlText</span><br><span class="line">    def exec(self,sqlCmd):</span><br><span class="line">        self.cursors.execute(sqlCmd)</span><br><span class="line">        self.__conn.commit()</span><br><span class="line"></span><br><span class="line">    # 销毁对象时关闭数据库连接</span><br><span class="line">    def __del__(self):</span><br><span class="line">        try:</span><br><span class="line">            self.__conn.close()</span><br><span class="line">        except pymysql.Error as e:</span><br><span class="line">            pass</span><br><span class="line"></span><br><span class="line">    # 关闭数据库连接</span><br><span class="line">    def close(self):</span><br><span class="line">        self.__del__()</span><br></pre></td></tr></table></figure></div>
+
+<br>
 <br>
 
-<h2 id="1、安装pulseaudio"><a href="#1、安装pulseaudio" class="headerlink" title="1、安装pulseaudio"></a>1、安装pulseaudio</h2><p><a class="link"   target="_blank" rel="noopener" href="https://www.freedesktop.org/wiki/Software/PulseAudio/Ports/Windows/Support/" >Windows版本下载链接 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> ，下载完随便找个地解压就行了。linux照例，相信安装过arch的老哥应该不会对陌生 <a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/PulseAudio" >PulseAudio - ArchWiki <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> ，为了控制音量顺带把pulseaudio-alsa和alsa-utils也给装了。</p>
-<h2 id="2、编辑服务端配置文件"><a href="#2、编辑服务端配置文件" class="headerlink" title="2、编辑服务端配置文件"></a>2、编辑服务端配置文件</h2><p>windows的软件为<strong>服务端</strong>，此时linux的软件为<strong>客户端</strong>，注意区分。</p>
-<p>首先编写<strong>服务端</strong>的配置文件，路径在 <code>pulseaudio-1.1/etc/pulse</code>（因为编码问题，所以这是linux的文件格式下的相对路径，正确写法略），找到对应词条，照例更改</p>
-<p><code>daemon.conf</code></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit-idle-time = -1</span><br></pre></td></tr></table></figure></div>
+<p>sniffResults.py</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">from scapy.all import *</span><br><span class="line">from scapy.layers.http import *</span><br><span class="line">import time</span><br><span class="line">load_layer(&quot;tls&quot;)</span><br><span class="line">scapy.config.Conf.sniff_promisc=True         # 网卡工作模式设置为promisc，如果该主机网卡为局域网转发接口，理论上能截取经过的数据包</span><br><span class="line"></span><br><span class="line"># 嗅探函数，得到目标数据包</span><br><span class="line"></span><br><span class="line">def getDataList():</span><br><span class="line">    dataList=[]</span><br><span class="line">    def sniffMain():</span><br><span class="line">        argv_bpf = &quot;tcp dst port 80 or 443&quot;  # 伯克利包过滤器，如果需要监听别的web端口，即使加载了http模块，http fields也将被raw</span><br><span class="line">                                             # 取代，但是raw里的内容将被自动解析为人类可读的bytes类型</span><br><span class="line">        plist = sniff(filter=argv_bpf,</span><br><span class="line">                      lfilter=lambda x: ((x.haslayer(TLS_Ext_ServerName) or x.haslayer(HTTPRequest)) == True))</span><br><span class="line">        return plist</span><br><span class="line"></span><br><span class="line">    # 分析函数，返回一个分析数据后得到的dataList        dataList为 包含所有数据列表的列表 type:list</span><br><span class="line">    def analyzeMain(plist):</span><br><span class="line">        # analyze tlsPkt, fetch the fields, and push them into the dataList</span><br><span class="line">        tlsPList = plist.filter(lambda x: ((x.haslayer(TLS_Ext_ServerName) == True)))</span><br><span class="line">        for i in tlsPList:</span><br><span class="line">            tempTime = time.localtime(int(i.time))</span><br><span class="line">            pktTime = time.strftime(&quot;%Y%m%d%H%M%S&quot;, tempTime)</span><br><span class="line">            domain = i[TLS_Ext_ServerName].servernames[0].servername.decode()</span><br><span class="line">            row=[&quot;TLS&quot;,pktTime,i[IP].src,i[IP].dst,domain]  # queue of the row MUST BE [pktType,capTime,srcIP,dstIP,`domain`]</span><br><span class="line">            dataList.append(row)</span><br><span class="line"></span><br><span class="line">        # analyze httpPkt, fetch the fields, and push them into the dataList</span><br><span class="line">        httpPList = plist.filter(lambda x: ((x.haslayer(HTTPRequest) == True)))</span><br><span class="line">        for i in httpPList:</span><br><span class="line">            tempTime = time.localtime(int(i.time))</span><br><span class="line">            pktTime = time.strftime(&quot;%Y%m%d%H%M%S&quot;, tempTime)</span><br><span class="line">            domain = i[HTTPRequest].Host.decode()</span><br><span class="line">            row = [&quot;HTTP&quot;, pktTime, i[IP].src, i[IP].dst,domain]  # queue of the row MUST BE [pktType,capTime,srcIP,dstIP,`domain`]</span><br><span class="line">            dataList.append(row)</span><br><span class="line">    analyzeMain(sniffMain())</span><br><span class="line">    return dataList</span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line"># for testing</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    dateList=getDataList()</span><br><span class="line">    for i in dateList:</span><br><span class="line">        print(i)</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure></div>
 
 <br>
-
 <br>
 
-<p><code>default.pa</code></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load-module module-native-protocol-tcp auth-ip-acl=客户端机器ip</span><br></pre></td></tr></table></figure></div>
+<p>main.py</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import database</span><br><span class="line">import sniffResults</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    print(&quot;中断程序以获取结果，并将结果存往数据库&quot;)</span><br><span class="line">    sqlObj=database.linkSql()</span><br><span class="line">    dataList=sniffResults.getDataList()</span><br><span class="line">    sqlObj.exec(&quot;SELECT MAX(`index`) FROM sniffTable&quot;)</span><br><span class="line">    lastRecordIndex=sqlObj.cursors.fetchone()[&quot;MAX(`index`)&quot;]   # store the lasest index in the table</span><br><span class="line"></span><br><span class="line">    # insert the row of dataList in table</span><br><span class="line">    commandInsert=sqlObj.assembleSqlText(&quot;sniffTable&quot;,dataList)</span><br><span class="line">    #print(commandInsert)</span><br><span class="line">    sqlObj.exec(commandInsert)</span><br><span class="line"></span><br><span class="line">    # show the added results</span><br><span class="line">    commandSearchNew=&quot;SELECT * FROM sniffTable WHERE `index`&gt; &quot; + str(lastRecordIndex)</span><br><span class="line">    #print (commandSearchNew)</span><br><span class="line">    sqlObj.exec(commandSearchNew)</span><br><span class="line">    print(&quot;NEW RECORDS:&quot;)</span><br><span class="line">    for i in sqlObj.cursors.fetchall():</span><br><span class="line">        print (i[&quot;index&quot;],&quot;\t&quot;,i[&quot;pktType&quot;],&quot;\t&quot;,i[&quot;capTime&quot;],&quot;\t&quot;,i[&quot;srcIP&quot;],&quot;---&gt;&quot;,i[&quot;dstIP&quot;],&quot;doamin:&quot;,i[&quot;domain&quot;])</span><br></pre></td></tr></table></figure></div>
 
-<blockquote>
-<p>注意前面的注释是否删掉</p>
-</blockquote>
-<h2 id="3、编辑客户端配置文件"><a href="#3、编辑客户端配置文件" class="headerlink" title="3、编辑客户端配置文件"></a>3、编辑客户端配置文件</h2><p>然后编写<strong>客户端</strong>配置文件，路径在 <code>/etc/pulse</code> </p>
-<p><code>daemon.conf</code></p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit-idle-time = -1</span><br></pre></td></tr></table></figure></div>
-
-<be>
-
-<br>
-
-<p>最后添加当前环境转发的环境变量，我是xrog环境下的vnc，所以路径是X服务的<code>~/.xprofile</code>,理论上修改<code>/etc/environment</code>也可以</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HOST_IP=&quot;$(ip route | awk &#x27;$1==&quot;default&quot; &#123;print $3&#125;&#x27;)&quot;</span><br><span class="line">export PULSE_SERVER=&quot;tcp:$HOST_IP&quot;</span><br></pre></td></tr></table></figure></div>
-
-<p>此时已经完成转发，如果想要先行测试请在gui的终端下输入以上两端命令，之后打开服务端<code>bin</code>目录下的的<code>pulseaudio.exe</code>后在刚刚输入命令的终端窗口输入<code>speaker-test</code>即可。</p>
-<blockquote>
-<p>注意客户端和服务端必须路由可达，且已防火墙已正确配置</p>
-</blockquote>
-<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>测试通过后就能直接打开服务端的pulseaudio.exe后放在后台，享受声音转发服务了</p>
-<video src='https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3YvcyFBckVNT01Ec2ZXcEdlU19tUzBqNnRHODVtdkE_ZT1xZ3RQMWY.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'>
-</video>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a class="link"   target="_blank" rel="noopener" href="https://www.vuar.cn/index.php/archives/117/" >使用python抓包并分析后存入数据库，或直接分析tcpdump和wireshark抓到的包，并存入数据库 - 花柒博客-原创分享 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 
         </div>
 
@@ -418,18 +464,18 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> Pulseaudio实现linux的声音转发</li>
+        <li><strong>标题:</strong> 利用python抓取分析数据包并存入mysql</li>
         <li><strong>作者:</strong> 7cmb</li>
         <li><strong>创建于
-                :</strong> 2023-09-29 23:08:26</li>
+                :</strong> 2023-11-30 17:06:36</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-11-30 17:03:36
+                    :</strong> 2023-11-30 17:39:45
             </li>
         
         <li>
-            <strong>链接:</strong> https://7cmb.github.io/Pulseaudio实现linux的声音转发/
+            <strong>链接:</strong> https://7cmb.github.io/利用python抓取分析数据包并存入mysql/
         </li>
         <li>
             <strong>
@@ -450,7 +496,15 @@
             <ul class="post-tags-box">
                 
                     <li class="tag-item">
-                        <a href="/tags/linux/">#linux</a>&nbsp;
+                        <a href="/tags/network/">#network</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/scapy/">#scapy</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/python/">#python</a>&nbsp;
                     </li>
                 
             </ul>
@@ -461,29 +515,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/Multisim%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">Multisim计算机组成原理课程设计</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/%E4%BD%BF%E7%94%A8wsl2%E6%89%93%E9%80%A0arch%E5%85%A8gui%E7%8E%AF%E5%A2%83/"
+                        href="/scapy%E5%B0%8F%E8%AE%B0pt-4/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">利用WSL2打造Arch全GUI环境</span>
+                                <span class="post-nav-title-item">scapy小记pt.4-嗅探</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -504,8 +543,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">Pulseaudio实现linux的声音转发</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85pulseaudio"><span class="nav-text">1、安装pulseaudio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%BC%96%E8%BE%91%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">2、编辑服务端配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%BE%91%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">3、编辑客户端配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E5%B0%BE"><span class="nav-text">结尾</span></a></li></ol>
+        <div class="page-title">利用python抓取分析数据包并存入mysql</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-text">1、先决条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E6%8A%93%E5%8C%85%E5%8F%8A%E5%88%86%E6%9E%90"><span class="nav-text">2、抓包及分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8A%E8%A1%A8"><span class="nav-text">3、建立数据库及表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E6%95%B4%E4%BD%93%E4%BB%A3%E7%A0%81"><span class="nav-text">4、整体代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol>
 
     </div>
 </div>
