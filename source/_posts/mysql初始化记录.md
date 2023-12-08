@@ -51,7 +51,7 @@ bin/mysqld --initialize --user=mysql
 bin/mysqld --initialize-insecure --user=mysql
 ```
 
-`--initialize`和`--initialize-insecure`决定了初始化后，**mysql的root账户**是否会带有一个随机生成的密码，如果是 --initialize-insecure 则没有随机密码。`--user=mysql`决定了初始化data目录及文件在系统中的用户归属权，以root用户执行此命令注意带上这句参数。相反的，你可以以mysql用户登陆系统，并不用这句参数以初始化data目录。
+`--initialize`和`--initialize-insecure`决定了初始化后，**mysql的root账户**是否会带有一个随机生成的密码，如果是 `--initialize-insecure` 则没有随机密码。`--user=mysql`决定了初始化data目录及文件在系统中的用户归属权，以root用户执行此命令注意带上这句参数。相反的，你可以以mysql用户登陆系统，并不用这句参数以初始化data目录。
 
 - 对于Windows用户，命令二选一:
   bin\mysqld --initialize --console
@@ -70,8 +70,11 @@ bin/mysqld --initialize --user=mysql \
   --basedir=/opt/mysql/mysql \
   --datadir=/opt/mysql/mysql/data 
 ```
+
 > 对于`basedir`，我的理解是mysql二进制文件目录`bin/`和其他程序组件所在地，对Windows来说这个目录意义好像更大，Linux一般都直接在`/usr`里找了。下文所说的`my.cnf`/`my.ini`的Windows全局路径就有可能和这个目录相关
+
 <br>
+
 除了添加参数，也可指定一个配置文件，当初始化目录时读取此配置文件来指定以上文件夹安装的路径，例如有一个`/opt/mysql/mysql/etc/my.cnf`内容是:
 
 ```ini
@@ -100,6 +103,7 @@ bin/mysqld --defaults-file=/opt/mysql/mysql/etc/my.cnf \
 ```sql
 ALTER USER 'root'@'localhost' IDENTIFIED [WHIT auth_plugin] BY 'yourPassword'
 ```
+
 <br>
 
 关于时区表，得手动配置；
@@ -119,7 +123,7 @@ bin/mysql_ssl_rsa_setup
 
 官方文档:[docForMysql8.0](https://dev.mysql.com/doc/refman/8.0/en/mysql-ssl-rsa-setup.html)
 
-> 对于mysql8.0.34来说，这个模块已经~~~~爆金币~~~~过时，详见: [MySQL :: MySQL 8.0 Reference Manual :: 6.3.3.1 Creating SSL and RSA Certificates and Keys using MySQL](https://dev.mysql.com/doc/refman/8.0/en/creating-ssl-rsa-files-using-mysql.html) 笔者用的就是此版本且未安装该模块情况。实测dbeaver第一次链接数据库需要开启allowPublicKeyRetrieval选项，否则会报错
+> 对于mysql8.0.34来说，这个模块已经<s>爆金币</s>过时，详见: [MySQL :: MySQL 8.0 Reference Manual :: 6.3.3.1 Creating SSL and RSA Certificates and Keys using MySQL](https://dev.mysql.com/doc/refman/8.0/en/creating-ssl-rsa-files-using-mysql.html) 笔者用的就是此版本且未安装该模块情况。实测dbeaver第一次链接数据库需要开启allowPublicKeyRetrieval选项，否则会报错
 
 # 3、mysql_secure_installation 方法
 

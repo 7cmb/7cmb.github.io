@@ -8,7 +8,7 @@ categories:
  - [document, mysql]
 ---
 
-首先从mysql8.04版本开始，mysql更改了默认身份插件从 mysql_native_password​  改为 caching_sha2_password​ 。老客户端可能会出问题。~~~~但是这不是距离现在挺久了吗~~~~
+首先从mysql8.04版本开始，mysql更改了默认身份插件从 mysql_native_password​  改为 caching_sha2_password​ 。老客户端可能会出问题。<s>但是这不是距离现在挺久了吗</s>
 
 但是以上和本文正题没关
 
