@@ -2,10 +2,12 @@
 title: scapy小记pt.4-嗅探
 date: 2023-11-29 19:28:42
 tags:
+ - document
  - network
  - scapy 
  - python
 categories:
+ - [document, scapy]
  - [python, scapy]
  - [network, scapy]
 ---
