@@ -40,6 +40,10 @@ CREATE USER 'dummy'@'localhost';
 
 在这个例子里，用户名为finley的两个账号都是superuser，拥有能做所有事情的权限。`'finley'@'hostlocal'`是一个本地账户，仅限在本地机器链接；`'finley'@'%.example.com'`是一个远程账户，其中符号`%`类似于反掩码，匹配该域名的子域，如只有`%`，它将匹配本机的任何地址
 
+<br>
+
+<br>
+
 如果user table有**匿名帐户**就要特别注意，如需创建一个远程账户，必须有一个与其用户名对应的本地账户。如上述用户名为finley的账户，一共两个。以上述用户为例，如果只有远程账户finley，那么当finley在本地登录数据库时将会被认为是匿名帐户而不是finley，原因是匿名帐户的host值更为具体而在用户表的排序中更靠前。因此创建远程账户时为了保险，需要为其额外创建一个本地账户
 
 `CREATE USER 'dummy'@'localhost'`账户没有任何权限，但是不推荐这样做
@@ -103,6 +107,10 @@ mysql> INSTALL COMPONENT 'file://component_validate_password';
 
 > **使用 `INSTALL`语句需要有`INSERT`权限**，因为它注册过程需要添加一行语句到上述系统表中
 
+<br>
+
+<br>
+
 安装过后就可以对与这个组件相关的系统变量进行配置，无论是写在[option file](https://dev.mysql.com/doc/refman/8.0/en/option-files.html)当中还是用`SET`语句。**当然，因为这是个全局系统变量，使用`SET`语句配置需要用户有[`SYSTEM_VARIABLES_ADMIN`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html)这个权限**。以下是默认配置也是可供option_file使用的选项:
 
 ```ini
@@ -121,6 +129,10 @@ validate_password.check_user_name=1
 | `0` or `LOW`    | Length                                                                            |
 | `1` or `MEDIUM` | Length; numeric, lowercase/uppercase, and special characters                      |
 | `2` or `STRONG` | Length; numeric, lowercase/uppercase, and special characters; dictionary<br> file |
+
+<br>
+
+<br>
 
 如需检查当前组件的相关变量情况:
 
@@ -142,6 +154,10 @@ mysql> SHOW GRANTS FOR 'admin'@'localhost';
 ```
 
 **此命令需要登录用户对`mysql`具有`SELECT`权限**
+
+<br>
+
+<br>
 
 检查用户属性可用以下命令:
 

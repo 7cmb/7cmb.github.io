@@ -54,26 +54,24 @@ bin/mysqld --initialize-insecure --user=mysql
 `--initialize`和`--initialize-insecure`决定了初始化后，**mysql的root账户**是否会带有一个随机生成的密码，如果是 --initialize-insecure 则没有随机密码。`--user=mysql`决定了初始化data目录及文件在系统中的用户归属权，以root用户执行此命令注意带上这句参数。相反的，你可以以mysql用户登陆系统，并不用这句参数以初始化data目录。
 
 - 对于Windows用户，命令二选一:
-
-- ```
   bin\mysqld --initialize --console
   bin\mysqld --initialize-insecure --console
-  ```
-  
-  > 碎碎念:我选择gui
 
-对于初始化data目录，还能带有更多参数。比如mysql无法识别正确的安装目录和数据目录，那么你要指定mysql的安装目录(basedir)和数据目录(datadir)
+> 碎碎念:我选择gui
 
-> 对于`basedir`，我的理解是mysql二进制文件目录`bin/`和其他程序组件所在地，对Windows来说这个目录意义好像更大，Linux一般都直接在`/usr`里找了。下文所说的`my.cnf`/`my.ini`的Windows全局路径就有可能和这个目录相关
+<br>
 
-例子如下:
+<br>
+
+对于初始化data目录，还能带有更多参数。比如mysql无法识别正确的安装目录和数据目录，那么你要指定mysql的安装目录(basedir)和数据目录(datadir),例子如下:
 
 ```
 bin/mysqld --initialize --user=mysql \
   --basedir=/opt/mysql/mysql \
   --datadir=/opt/mysql/mysql/data 
 ```
-
+> 对于`basedir`，我的理解是mysql二进制文件目录`bin/`和其他程序组件所在地，对Windows来说这个目录意义好像更大，Linux一般都直接在`/usr`里找了。下文所说的`my.cnf`/`my.ini`的Windows全局路径就有可能和这个目录相关
+<br>
 除了添加参数，也可指定一个配置文件，当初始化目录时读取此配置文件来指定以上文件夹安装的路径，例如有一个`/opt/mysql/mysql/etc/my.cnf`内容是:
 
 ```ini
@@ -102,8 +100,10 @@ bin/mysqld --defaults-file=/opt/mysql/mysql/etc/my.cnf \
 ```sql
 ALTER USER 'root'@'localhost' IDENTIFIED [WHIT auth_plugin] BY 'yourPassword'
 ```
+<br>
 
 关于时区表，得手动配置；
+<br>
 
 [`init_file`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_init_file)系统变量可以指定一个文件存放sql语句，mysql启动时执行；
 
