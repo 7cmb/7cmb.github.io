@@ -16,7 +16,7 @@ categories:
 
 # 1、对初始化的概述
 
-对于安装mysql后的初始化，大概有两种方法，一种是照着文档`MySQL Installation Guide`一步一步来，另外一种则是依靠官方脚本`mysql_secure_installation`。此外的方法笔者就不清楚了
+对于安装mysql后的初始化，大概有两种方法，一种是照着文档`MySQL Installation Guide`一步一步来，另外一种则是依靠官方程序`mysql_secure_installation`。此外的方法笔者就不清楚了
 
 # 2、MySQL Installation Guide 方法
 
@@ -71,7 +71,7 @@ bin/mysqld --initialize --user=mysql \
   --datadir=/opt/mysql/mysql/data 
 ```
 
-> 对于`basedir`，我的理解是mysql二进制文件目录`bin/`和其他程序组件所在地，对Windows来说这个目录意义好像更大，Linux一般都直接在`/usr`里找了。下文所说的`my.cnf`/`my.ini`的Windows全局路径就有可能和这个目录相关
+> 对于`basedir`，我的理解是mysql二进制文件目录`bin/`和其他程序组件所在地，对Windows来说这个目录意义好像更大，Linux一般都直接在`/usr`里找了。下文所说的`my.cnf`/`my.ini`的Windows全局路径就和这个目录相关
 
 <br>
 

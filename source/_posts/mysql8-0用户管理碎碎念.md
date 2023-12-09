@@ -111,7 +111,7 @@ mysql> INSTALL COMPONENT 'file://component_validate_password';
 
 <br>
 
-安装过后就可以对与这个组件相关的系统变量进行配置，无论是写在[option file](https://dev.mysql.com/doc/refman/8.0/en/option-files.html)当中还是用`SET`语句。**当然，因为这是个全局系统变量，使用`SET`语句配置需要用户有[`SYSTEM_VARIABLES_ADMIN`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html)这个权限**。以下是默认配置也是可供option_file使用的选项:
+安装过后就可以对与这个组件相关的系统变量进行配置，无论是写在[option file](https://dev.mysql.com/doc/refman/8.0/en/option-files.html)当中还是用`SET`语句。**当然，因为这是个系统变量，使用`SET`语句配置需要用户有[`SYSTEM_VARIABLES_ADMIN`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html)这个权限**。以下是默认配置也是可供option_file使用的选项:
 
 ```ini
 validate_password.policy=1
