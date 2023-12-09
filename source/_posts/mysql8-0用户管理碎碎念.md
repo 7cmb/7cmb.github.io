@@ -2,10 +2,10 @@
 title: mysql8.0用户管理碎碎念
 date: 2023-12-09 01:35:20
 tags: 
- - document
+ - documentation
  - mysql 
 categories:
- - [document, mysql]
+ - [documentation, mysql]
 ---
 
 首先从mysql8.04版本开始，mysql更改了默认身份插件从 mysql_native_password​  改为 caching_sha2_password​ 。老客户端可能会出问题。<s>但是这不是距离现在挺久了吗</s>

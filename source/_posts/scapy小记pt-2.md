@@ -2,12 +2,12 @@
 title: scapy小记pt.2
 date: 2023-11-04 14:36:19
 tags:
- - document
+ - documentation
  - network
  - scapy 
  - python
 categories:
- - [document, scaoy]
+ - [documentation, scaoy]
  - [python, scapy]
  - [network, scapy]
 ---

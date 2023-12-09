@@ -2,10 +2,10 @@
 title: mysql初始化记录
 date: 2023-12-09 01:34:49
 tags: 
- - document
+ - documentation
  - mysql 
 categories:
- - [document, mysql]
+ - [documentation, mysql]
 ---
 
 每次在各种平台中安装mysql时总是会遇上问题，特别是初始化的时候....遇到问题的时候，中文资料的时效性和广度简直是一言难尽。不读一遍官方文档不是说不能安装，只是即使安装完也就很不爽，全世界的解决方案都不太一样....特别是对于初始化的处理。无奈只好读一遍官方文档以解答自己对安装过程中一些问题的疑惑

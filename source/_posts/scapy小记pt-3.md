@@ -2,12 +2,12 @@
 title: scapy小记pt.3-路由追踪
 date: 2023-11-29 19:28:37
 tags:
- - document
+ - documentation
  - network
  - scapy 
  - python
 categories:
- - [document, scapy]
+ - [documentation, scapy]
  - [python, scapy]
  - [network, scapy]
 ---
