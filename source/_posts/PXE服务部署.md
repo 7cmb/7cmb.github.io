@@ -21,13 +21,15 @@ pxe和ipxe使用前必须有一台支持pxe配置选项的dhcp服务器和一台
 
 > wireshark分析看不到相关选项的字段，只能找到next-to-server和filename这两个参数
 
-对于pxe和ipxe来说，引导程序和一个临时操作系统是必要的，这个引导程序和临时操作系统一共分为三个部分:`pxelinux.0` \ `EFI文件`、`vmlinuz`、`initrd.img`。`pxelinux.0` \ `EFI文件`是启动这个临时操作系统的引导程序，内核`vmlinuz`和临时文件系统`initrd.img`组成一个临时操作系统。引导程序和相关配置文件先通过tftp服务器下载，完成后引导程序通过配置文件设定的方式启动，当选定选项时再通过tftp服务器下载内核和临时文件系统(如果使用pxelinux或grub的话，选项通过`pxelinux.cfg/default`或`grub.cfg`指定)
+对于pxe和ipxe来说，引导程序和一个临时操作系统是必要的，这个引导程序和临时操作系统一共分为三个部分:`pxelinux.0` \ `EFI文件`、`vmlinuz`、`initrd.img`。
+
+`pxelinux.0` \ `EFI文件`是启动这个临时操作系统的引导程序，内核`vmlinuz`和临时文件系统`initrd.img`组成一个临时操作系统。引导程序和相关配置文件先通过tftp服务器下载，完成后引导程序通过配置文件设定的方式启动，当选定选项时再通过tftp服务器下载内核和临时文件系统(如果使用pxelinux或grub的话，选项通过`pxelinux.cfg/default`或`grub.cfg`指定)
 
 这个临时操作系统承担了找到一个操作系统并下载、加载的任务。结束这个阶段将正式进入系统安装的环节
 
 ## 结论
 
-所以在本个过程中，需要用到的服务组件有:dhcp服务器、tftp服务器、引导程序、临时操作系统(`vmlinuz`和`initrd.img`)和一个带有`.treeinfo`的解压后的操作系统镜像的驱动器(使用镜像站的链接也可以，只要是一个解压后的镜像)
+所以在本个过程中，需要用到的服务组件有:dhcp服务器、tftp服务器、引导程序、临时操作系统(`vmlinuz`和`initrd.img`)和一个符合pxe启动格式的系统文件
 
 此处为了方便将搭建一个all in one的pxe系统，这些组件可以分开协同运作，环境:
 
@@ -40,7 +42,7 @@ pxe和ipxe使用前必须有一台支持pxe配置选项的dhcp服务器和一台
 dhcp服务:dhcp-server
 tftp服务:tftp-server
 引导程序:syslinux    #pxelinux是syslinux的程序之一
-带有`.treeinfo`的解压后的操作系统镜像的驱动器:httpd(apache)
+符合pxe启动格式的系统文件:放置于httpd(apache)服务器中
 ```
 
 # 二、实践
@@ -289,7 +291,7 @@ menuentry 'Install AlmaLinux 9.3' --class fedora --class gnu-linux --class gnu -
 
 ## 6、vbox部署的坑
 
-- 配置完httpd服务和防火墙设置后没有立即生效，需要重启虚拟机
+- 配置完httpd服务和防火墙设置后重启服务没有立即生效，需要重启虚拟机
 
 - 客户机的内存应该调大一点，网上说的2g不够，此次实验客户机为4g内存
 
