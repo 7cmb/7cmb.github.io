@@ -26,7 +26,7 @@
 <meta property="og:description" content="参考: 配置和管理网络 Red Hat Enterprise Linux 9 | Red Hat Customer Portal  第 22 章 配置 NetworkManager DHCP 设置 Red Hat Enterprise Linux 9 | Red Hat Customer Portal   最近因为一些作业，有必要使用fedora系发行版。目前在象牙塔里教学的大多是cent os">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-24T13:49:58.000Z">
-<meta property="article:modified_time" content="2023-12-24T14:09:12.343Z">
+<meta property="article:modified_time" content="2023-12-25T08:05:15.033Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="almalinux">
@@ -314,8 +314,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-24 22:09:12</span>
-            <span class="mobile">2023-12-24 22:09:12</span>
+            <span class="desktop">2023-12-25 16:05:15</span>
+            <span class="mobile">2023-12-25 16:05:15</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -453,7 +453,7 @@
 <blockquote>
 <p>此配置文件的路径仅代表net-tools被弃用后的格式</p>
 </blockquote>
-<h1 id="2、更改网卡的当前配置文件并激活"><a href="#2、更改网卡的当前配置文件并激活" class="headerlink" title="2、更改网卡的当前配置文件并激活"></a>2、更改网卡的当前配置文件并激活</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>更改配置文件一样有两种方法，一种是通过命令方式，一种是写入配置温家宝例如我要为我的<code>enp0s8</code>网卡添加一个ip <code>192.168.56.51\24</code> :</p>
+<h1 id="2、更改网卡的当前配置文件并激活"><a href="#2、更改网卡的当前配置文件并激活" class="headerlink" title="2、更改网卡的当前配置文件并激活"></a>2、更改网卡的当前配置文件并激活</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>更改配置文件一样有两种方法，一种是通过命令方式，一般使用<code>nmcli connection modify</code>，一种是写入配置例如我要为我的<code>enp0s8</code>网卡添加一个ip <code>192.168.56.51/24</code> :</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 记得加上掩码的前缀</span><br><span class="line">nmcli connection modify enp0s8 +ipv4.addresses 192.168.56.51/24</span><br></pre></td></tr></table></figure></div>
 
 <p>查看网卡配置文件是否被更改:</p>
@@ -483,7 +483,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-24 22:09:12
+                    :</strong> 2023-12-25 16:05:15
             </li>
         
         <li>

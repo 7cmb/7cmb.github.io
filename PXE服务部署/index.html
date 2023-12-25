@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUVN0X055bWNtX05BdmV6P2U9Q2VTbTNM.jpg">
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUVlFa0ZEVHBCRkQ3Q0JsP2U9UDFaWDQ4.jpg">
 <meta property="article:published_time" content="2023-12-24T13:50:34.000Z">
-<meta property="article:modified_time" content="2023-12-24T14:07:25.143Z">
+<meta property="article:modified_time" content="2023-12-25T08:10:57.570Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="pxe">
@@ -314,8 +314,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-24 22:07:25</span>
-            <span class="mobile">2023-12-24 22:07:25</span>
+            <span class="desktop">2023-12-25 16:10:57</span>
+            <span class="mobile">2023-12-25 16:10:57</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -483,7 +483,7 @@
 
 <p>自此，pxe和ipxe配置完成</p>
 <blockquote>
-<p>grub.cfg还有更简短的写法，比如红帽则例子<a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/performing_a_standard_rhel_9_installation/assembly_preparing-for-your-installation_installing-rhel#configuring-a-tftp-server-for-uefi-based-clients_preparing-for-a-network-install" >Chapter 2. Preparing for your RHEL installation Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，也能用而且没什么区别</p>
+<p>grub.cfg还有更简短的写法，比如红帽的例子<a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/performing_a_standard_rhel_9_installation/assembly_preparing-for-your-installation_installing-rhel#configuring-a-tftp-server-for-uefi-based-clients_preparing-for-a-network-install" >Chapter 2. Preparing for your RHEL installation Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，也能用而且没什么区别</p>
 <p>inst.repo和inst.stage2选项的区别可以参考:</p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html-single/boot_options_for_rhel_installer/index#installation-source-boot-options_kickstart-and-advanced-boot-options" >RHEL 安装程序的引导选项 Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://anaconda-installer.readthedocs.io/en/latest/boot-options.html" >Anaconda Boot Options &#8212; Anaconda 40.15 documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -492,9 +492,13 @@
 <h2 id="6、vbox部署的坑"><a href="#6、vbox部署的坑" class="headerlink" title="6、vbox部署的坑"></a>6、vbox部署的坑</h2><ul>
 <li><p>配置完httpd服务和防火墙设置后没有立即生效，需要重启虚拟机</p>
 </li>
-<li><p>客户机的内存应该调大一点，晚上说的2g不够，此次实验客户机为4g内存</p>
+<li><p>客户机的内存应该调大一点，网上说的2g不够，此次实验客户机为4g内存</p>
 </li>
 <li><p>客户机应该调整更多显存，否则大概率到安装界面后只有一个鼠标</p>
+</li>
+<li><p>防火墙设置要永久生效需要添加<code>--permanent</code>参数</p>
+</li>
+<li><p>efi启动问题很多，无法吐槽</p>
 </li>
 </ul>
 <h1 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h1><p>pxe结束。为了偷懒，下一步就是kickstart</p>
@@ -512,7 +516,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-24 22:07:25
+                    :</strong> 2023-12-25 16:10:57
             </li>
         
         <li>
