@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUVN0X055bWNtX05BdmV6P2U9Q2VTbTNM.jpg">
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUVlFa0ZEVHBCRkQ3Q0JsP2U9UDFaWDQ4.jpg">
 <meta property="article:published_time" content="2023-12-24T13:50:34.000Z">
-<meta property="article:modified_time" content="2023-12-25T09:50:27.147Z">
+<meta property="article:modified_time" content="2023-12-25T10:03:04.704Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="pxe">
@@ -314,8 +314,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-25 17:50:27</span>
-            <span class="mobile">2023-12-25 17:50:27</span>
+            <span class="desktop">2023-12-25 18:03:04</span>
+            <span class="mobile">2023-12-25 18:03:04</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -390,7 +390,7 @@
 <p>wireshark分析看不到相关选项的字段，只能找到next-to-server和filename这两个参数</p>
 </blockquote>
 <p>对于pxe和ipxe来说，引导程序和一个临时操作系统是必要的，这个引导程序和临时操作系统一共分为三个部分:<code>pxelinux.0</code> \ <code>EFI文件</code>、<code>vmlinuz</code>、<code>initrd.img</code>。</p>
-<p><code>pxelinux.0</code> \ <code>EFI文件</code>是启动这个临时操作系统的引导程序，内核<code>vmlinuz</code>和临时文件系统<code>initrd.img</code>组成一个临时操作系统。引导程序和相关配置文件先通过tftp服务器下载，完成后引导程序通过配置文件设定的方式启动，当选定选项时再通过tftp服务器下载内核和临时文件系统(如果使用pxelinux或grub的话，选项通过<code>pxelinux.cfg/default</code>或<code>grub.cfg</code>指定)</p>
+<p><code>pxelinux.0</code> \ <code>EFI文件</code>是启动这个临时操作系统的引导程序，内核<code>vmlinuz</code>和临时文件系统<code>initrd.img</code>组成一个临时操作系统。引导程序和相关配置文件先通过tftp服务器下载，完成后引导程序通过配置文件设定的方式启动，当选定选项时再通过tftp服务器下载内核和临时文件系统。这个临时操作系统根据引导程序配置文件指定的inst.repo或inst.stage2找到系统路径，再进行下载和加载。最后进入系统安装界面</p>
 <p>这个临时操作系统承担了找到一个操作系统并下载、加载的任务。结束这个阶段将正式进入系统安装的环节</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>所以在本个过程中，需要用到的服务组件有:dhcp服务器、tftp服务器、引导程序、临时操作系统(<code>vmlinuz</code>和<code>initrd.img</code>)和一个符合pxe启动格式的系统文件</p>
 <p>此处为了方便将搭建一个all in one的pxe系统，这些组件可以分开协同运作，环境:</p>
@@ -517,7 +517,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-25 17:50:27
+                    :</strong> 2023-12-25 18:03:04
             </li>
         
         <li>
