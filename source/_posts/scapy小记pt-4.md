@@ -136,7 +136,7 @@ b'www.people.com.cn'
 
 ### tls
 
-在tls加密的数据包之中，可以在tcp三次握手后，进行tls四次握手过程中的第一次握手`Client Hello`数据包中探测`SNI`信息，因为历史原因，这个字段不会加密(现在可以了，即`ESNI`,但还是能碰运气)。这个field将指向即将访问的主机名。在使用tls模块之前，要用pip安装另一个模块详见官方api文档[scapy.layers.tls package — Scapy 2.5.0 documentation](https://scapy.readthedocs.io/en/latest/api/scapy.layers.tls.html#module-scapy.layers.tls):
+在tls加密的数据包之中，可以在tcp三次握手后，进行tls四次握手过程中的第一次握手`Client Hello`数据包中探测`SNI`信息，因为历史原因，这个字段不会加密(现在可以了，即`ESNI`)。这个field将指向即将访问的主机名。在使用tls模块之前，要用pip安装另一个模块详见官方api文档[scapy.layers.tls package — Scapy 2.5.0 documentation](https://scapy.readthedocs.io/en/latest/api/scapy.layers.tls.html#module-scapy.layers.tls):
 
 ```
 #也可用系统自带的包管理安装

@@ -125,7 +125,7 @@ sudo systemctl enable --now portproxy.service  # enable and start it
 
 # 4、以 [DWM](https://dwm.suckless.org/) 为图形界面，部署vnc服务
 
-假设到此，你的图形界面已经安装好了，是时候部署你的linux桌面了，理论上来说除了vnc还能用xdrp和xserver，但是xdrp过于卡顿，Xserver因为笔者的图形界面原因不便使用，故选择vnc作为图形界面的中转。
+假设到此，你的图形界面已经安装好了，是时候部署你的linux桌面了，理论上来说除了vnc还能用xdrp和xserver，但是xdrp过于卡顿，xserver因为笔者的图形界面原因不便使用，故选择vnc作为图形界面的中转。
 
 安装vnc服务端
 

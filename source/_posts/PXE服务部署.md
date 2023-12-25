@@ -277,7 +277,7 @@ menuentry 'Install AlmaLinux 9.3' --class fedora --class gnu-linux --class gnu -
 
 自此，pxe和ipxe配置完成
 
-> grub.cfg还有更简短的写法，比如红帽则例子[Chapter 2. Preparing for your RHEL installation Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/performing_a_standard_rhel_9_installation/assembly_preparing-for-your-installation_installing-rhel#configuring-a-tftp-server-for-uefi-based-clients_preparing-for-a-network-install)，也能用而且没什么区别
+> grub.cfg还有更简短的写法，比如红帽的例子[Chapter 2. Preparing for your RHEL installation Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/performing_a_standard_rhel_9_installation/assembly_preparing-for-your-installation_installing-rhel#configuring-a-tftp-server-for-uefi-based-clients_preparing-for-a-network-install)，也能用而且没什么区别
 > 
 > inst.repo和inst.stage2选项的区别可以参考:
 > 
@@ -291,9 +291,13 @@ menuentry 'Install AlmaLinux 9.3' --class fedora --class gnu-linux --class gnu -
 
 - 配置完httpd服务和防火墙设置后没有立即生效，需要重启虚拟机
 
-- 客户机的内存应该调大一点，晚上说的2g不够，此次实验客户机为4g内存
+- 客户机的内存应该调大一点，网上说的2g不够，此次实验客户机为4g内存
 
 - 客户机应该调整更多显存，否则大概率到安装界面后只有一个鼠标
+
+- 防火墙设置要永久生效需要添加`--permanent`参数
+
+- efi启动问题很多，无法吐槽
 
 # 三、总结
 
