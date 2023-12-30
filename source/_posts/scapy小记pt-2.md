@@ -31,7 +31,7 @@ sent, answer), and the second element is the list of unanswered packets.
 present them better, and to provide them with some methods that do most 
 frequently needed actions:
 
-```
+```python
 >>> sr(IP(dst="192.168.8.1")/TCP(dport=[21,22,23]))
 Received 6 packets, got 3 answers, remaining 0 packets
 (<Results: UDP:0 TCP:3 ICMP:0 Other:0>, <Unanswered: UDP:0 TCP:0 ICMP:0 Other:0>)
@@ -44,7 +44,7 @@ IP / TCP 192.168.8.14:20 > 192.168.8.1:23 S ==> Ether / IP / TCP 192.168.8.1:23 
 
 sr()函数是返回一对两个列表，在以上例子分别是ans应答和unans无应答，可见需要两个变量来接受其返回的两个列表。这一对列表的第一个元素（ans）是应答的n对两个元素的列表（又是列表），分别是发送的数据包和对应的应答数据包；而第二个元素则是未应答的数据包列表。以下是应答数据包的结构:
 
-```
+```python
                 list:sr() //tuple
                 [0]:<answer>  // scapy.plist.SndRcvList
                 [1]:<unanswer>   // scapy.plist.PacketList                 
@@ -64,7 +64,7 @@ sr()函数是返回一对两个列表，在以上例子分别是ans应答和unan
 
 以百度为例，发起半连接以测试:
 
-```
+```python
 >>> test=sr(IP(dst="baidu.com")/TCP(flags="S",dport=[80,443,666]),timeout=1)
 Begin emission:
 Finished sending 3 packets.
@@ -109,7 +109,7 @@ summary(prn=None, lfilter=None) method of scapy.plist.SndRcvList instance
 
 这是示例代码：
 
-```
+```python
 ans.summary( lambda s,r: r.sprintf("%TCP.sport% \t %TCP.flags%") )
 440      RA
 441      RA
@@ -125,7 +125,7 @@ https    SA
 
 同上方法，但是会显示数据包序号：
 
-```
+```python
 ans.nsummary(lfilter = lambda s,r: r.sprintf("%TCP.flags%") == "SA")
 0003 IP / TCP 192.168.1.100:ftp_data > 192.168.1.1:https S ======> IP / TCP 192.168.1.1:https > 192.168.1.100:ftp_data SA
 ```
@@ -134,7 +134,7 @@ ans.nsummary(lfilter = lambda s,r: r.sprintf("%TCP.flags%") == "SA")
 
 这两个方法有两个参数可以传入，一个是prn,另一个则是lfilter,，它们传入的方法都是通过lambda的方式，都具有过滤功能。区别在于prn与其说是过滤，它更像取对应变量的值再输出，也能输出额外内容；而lfilter用于过滤条件，筛选出符合条件的数据包的所有数据：
 
-```
+```python
 >>> a=sr(IP(dst="baidu.com")/TCP(dport=[80,443,666],flags="S"),timeout=1)[0]
 Begin emission:
 Finished sending 3 packets.
@@ -150,7 +150,7 @@ IP / TCP 192.168.1.36:ftp_data > 110.242.68.66:https S ==> IP / TCP 110.242.68.6
 
 这两个参数也能混合使用，先用lfilter参数过滤符合条件的数据包，然后再佐以prn参数过滤需要的字符串：
 
-```
+```python
 >>> a.summary(lfilter=lambda s,r:r.sprintf("%TCP.sport%")=="https")
 IP / TCP 192.168.1.36:ftp_data > 110.242.68.66:https S ==> IP / TCP 110.242.68.66:https > 192.168.1.36:ftp_data SA
 >>> a.summary(prn=lambda s,r:r.sprintf("%IP.dst%"),lfilter=lambda s,r:r.sprintf("%TCP.sport%")=="https")
@@ -161,7 +161,7 @@ IP / TCP 192.168.1.36:ftp_data > 110.242.68.66:https S ==> IP / TCP 110.242.68.6
 
 此方法用以过滤lambda函数传入的条件后，返回数据包列表：
 
-```
+```python
 >>> a.filter(lambda s,r:TCP in r and r[TCP].flags&2)
 <filtered Results: TCP:2 UDP:0 ICMP:0 Other:0>
 ```

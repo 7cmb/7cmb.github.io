@@ -55,7 +55,7 @@ exit-idle-time = -1
 
 最后添加当前环境转发的环境变量，我是xrog环境下的vnc，所以路径是X服务的`~/.xprofile`,理论上修改`/etc/environment`也可以
 
-```
+```bash
 export HOST_IP="$(ip route | awk '$1=="default" {print $3}')"
 export PULSE_SERVER="tcp:$HOST_IP"
 ```

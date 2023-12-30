@@ -22,7 +22,7 @@ categories:
 
 这种方法还是比较繁琐的，首先系统需要有`用户组:mysql`和`用户:mysql`(当然用其他用户组和用户名替代也可以，现有的也行，本人没实践过)，没有请创建用户及组，不同发行版的语法可能有不同，请注意
 
-```
+```bash
 $> groupadd mysql
 $> useradd -r -g mysql -s /bin/false mysql
 ```
@@ -31,13 +31,13 @@ $> useradd -r -g mysql -s /bin/false mysql
 
 首先转移到mysql安装的所在目录，创建一个目录`mysql-files`这个目录由mysql系统变量[`secure_file_priv`](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_secure_file_priv) 指定，用以导入导出操作
 
-```
+```bash
 mkdir mysql-files
 ```
 
 修改该文件夹权限，secure_file_priv需要指定的文件夹创建完成
 
-```
+```bash
 chown mysql:mysql mysql-files
 chmod 750 mysql-files
 ```
@@ -46,7 +46,7 @@ chmod 750 mysql-files
 
 这一步就是初始化mysql的data目录，有两种方式:
 
-```
+```bash
 bin/mysqld --initialize --user=mysql
 bin/mysqld --initialize-insecure --user=mysql
 ```
@@ -65,7 +65,7 @@ bin/mysqld --initialize-insecure --user=mysql
 
 对于初始化data目录，还能带有更多参数。比如mysql无法识别正确的安装目录和数据目录，那么你要指定mysql的安装目录(basedir)和数据目录(datadir),例子如下:
 
-```
+```bash
 bin/mysqld --initialize --user=mysql \
   --basedir=/opt/mysql/mysql \
   --datadir=/opt/mysql/mysql/data 
@@ -115,7 +115,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED [WHIT auth_plugin] BY 'yourPassword'
 
 此文件用于自动配置支持加密连接，直接运行二进制文件安装:
 
-```
+```bash
 bin/mysql_ssl_rsa_setup
 ```
 

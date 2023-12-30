@@ -51,20 +51,20 @@ tftp服务:tftp-server
 
 安装`apache`、`dhcp-server`、`tftp-server`、`syslinux`:
 
-```
+```bash
 dnf install httpd dhcp-server tftp-server syslinux
 ```
 
 下载需要安装的镜像并挂载:
 
-```
+```bash
 mkdir -p /mnt/cdrom
 mount -t iso9660 AlmaLinux9ISO/AlmaLinux-9.3-x86_64-minimal.iso /mnt/cdrom -o ro,loop
 ```
 
 查看挂载点:
 
-```
+```bash
 ls -a /mnt/cdrom/
 .  ..  .discinfo  .treeinfo  EFI  EULA  LICENSE  Minimal  RPM-GPG-KEY-AlmaLinux-9  TRANS.TBL  extra_files.json  images  isolinux  media.repo
 ```
@@ -77,14 +77,14 @@ ls -a /mnt/cdrom/
 
 准备bios下的引导程序pxelinux:
 
-```
+```bash
 mkdir -p /var/lib/tftpboot/pxelinux.cfg
 cp /usr/share/syslinux/{pxelinux.0,menu.c32,vesamenu.c32,ldlinux.c32,libcom32.c32,libutil.c32} /var/lib/tftpboot/
 ```
 
 准备uefi启动下的引导程序grub:
 
-```
+```bash
 # EFI文件只有执行权限还不够，需要有读取权限
 cp -rp /mnt/cdrom/EFI /var/lib/tftpboot/
 chmod -R 755 /var/lib/tftpboot/EFI
@@ -92,7 +92,7 @@ chmod -R 755 /var/lib/tftpboot/EFI
 
 开启并设置自启动tftp服务:
 
-```
+```bash
 systemctl enable --now tftp
 ```
 
@@ -102,7 +102,7 @@ systemctl enable --now tftp
 
 为防火墙添加规则:
 
-```
+```bash
 firewall-cmd --add-service=tftp
 ```
 
@@ -138,13 +138,13 @@ subnet 192.168.56.0 netmask 255.255.255.0 {
 
 开启并设置自启动dhcp服务:
 
-```
+```bash
 systemctl enable --now dhcpd
 ```
 
 为防火墙添加规则:
 
-```
+```bash
 firewall-cmd --add-service=dhcp
 ```
 

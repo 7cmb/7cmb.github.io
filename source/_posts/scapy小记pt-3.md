@@ -23,7 +23,7 @@ categories:
 
 本机默认路由
 
-```
+```bash
 ➜  ~ ip route
 default via 192.168.10.254 dev wlan0 proto dhcp src 192.168.10.148 metric 3003
 172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown
@@ -34,7 +34,7 @@ default via 192.168.10.254 dev wlan0 proto dhcp src 192.168.10.148 metric 3003
 
 对百度进行路由追踪:
 
-```
+```python
 >>>  a,u=sr(IP(dst="baidu.com",ttl=(1,30),id=RandShort())/TCP(flags="S"),timeout=2)
 Begin emission:
 Finished sending 30 packets.
@@ -65,7 +65,7 @@ Received 20 packets, got 16 answers, remaining 14 packets
 
 查看第一跳的请求及应答包:
 
-```
+```python
 >>> IP(raw(a[0][0])) //请求
 <IP  version=4 ihl=5 tos=0x0 len=40 id=59707 flags= frag=0 ttl=1 proto=tcp chksum=0x5224 src=192.168.10.148 dst=110.242.68.66 |<TCP  sport=ftp_data dport=www_http seq=0 ack=0 dataofs=5 reserved=0 flags=S window=8192 chksum=0x110e urgptr=0 |>>
 >>> a[0][1] //应答

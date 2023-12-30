@@ -64,7 +64,7 @@ ForwardX11Trusted yes
 
 安装x转发必要包及`xsel`、`xclip`:
 
-```
+```bash
 # 红帽为例
 sudo dnf install xorg-x11-xauth xorg-x11-fonts-\* xorg-x11-utils dbus-x11 xsel xclip
 ```
@@ -77,7 +77,7 @@ X11Forwarding yes
 
 然后编辑nvim配置文件，对于个人配置 `~/.config/nvim/init.vim`,对于全局配置`$VIM/sysinit.vim`:
 
-```
+```vim
 # 添加这一行
 set clipboard+=unnamedplus
 ```

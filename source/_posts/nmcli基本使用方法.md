@@ -29,7 +29,7 @@ categories:
 
 一般来说对网卡进行简单的配置，比较常见的的参数就是`connection`:
 
-```
+```bash
 $ nmcli -h
 Usage: nmcli [OPTIONS] OBJECT { COMMAND | help }
 
@@ -64,7 +64,7 @@ OBJECT
 
 例如要查看当前网卡的配置文件可以:
 
-```
+```bash
  nmcli connection show
 NAME    UUID                                  TYPE      DEVICE
 enp0s3  a3aaeb51-2a34-3ace-b48f-3d99c7f87415  ethernet  enp0s3
@@ -79,7 +79,7 @@ nmcli connection show enp0s8
 
 另一种方法读取配置文件则是直接查看配置目录`/etc/NetworkManager/system-connections/`，同样查看enp0s3配置文件情况:
 
-```
+```bash
 cat /etc/NetworkManager/system-connections/enp0s8.nmconnection
 [connection]
 id=enp0s8
@@ -104,7 +104,7 @@ method=auto
 [proxy]
 ```
 
-以上配置一样不代表当前网卡状态，可能他并没有被激活
+以上配置一样不代表当前网卡状态，可能修改配置后它并没有被激活
 
 > 此配置文件的路径仅代表net-tools被弃用后的格式
 
@@ -112,16 +112,16 @@ method=auto
 
 ## 配置
 
-更改配置文件一样有两种方法，一种是通过命令方式，一般使用`nmcli connection modify`，一种是写入配置例如我要为我的`enp0s8`网卡添加一个ip `192.168.56.51/24` :
+更改配置文件一样有两种方法，一种是通过命令方式，一般使用`nmcli connection modify`，一种是写入配置文件例如我要为我的`enp0s8`网卡添加一个ip `192.168.56.51/24` :
 
-```
+```bash
 # 记得加上掩码的前缀
 nmcli connection modify enp0s8 +ipv4.addresses 192.168.56.51/24
 ```
 
 查看网卡配置文件是否被更改:
 
-```
+```bash
 cat /etc/NetworkManager/system-connections/enp0s8.nmconnection
 [connection]
 id=enp0s8
@@ -158,18 +158,20 @@ method=auto
        valid_lft forever preferred_lft forever
 ```
 
+> 直接编辑配置文件而不用命令的话需要重启NetworkManager服务再激活配置，否则配置并不会生效
+
 ## 激活
 
 激活配置文件使用这句命令:
 
-```
+```bash
 nmcli connection up enp0s8
 Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/5)
 ```
 
 查看网卡状态:
 
-```
+```bash
 3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
     link/ether 08:00:27:6d:6c:09 brd ff:ff:ff:ff:ff:ff
     inet 192.168.56.50/24 brd 192.168.56.255 scope global noprefixroute enp0s8

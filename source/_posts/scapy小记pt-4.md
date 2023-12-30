@@ -93,7 +93,7 @@ sniff(*args, **kwargs)
 
 这个模块载入有两种方法:
 
-```
+```python
 #1、仅限交互模式，及控制台下使用
 load_layer("http")
 #2、怎么用都行
@@ -102,7 +102,7 @@ from scapy.layers.http import *
 
 这是官方api参考文档[scapy.layers.http &mdash; Scapy 2.5.0 documentation](https://scapy.readthedocs.io/en/latest/api/scapy.layers.http.html)，在执行了以上两段代码之一后，就能对http文本进行分析:
 
-```
+```python
 >>> load_layer("http") #tls模块提前加载过了，只加载http模块无法运行下面一行代码
 >>> plist=sniff(filter="tcp dst port 80 or 443", lfilter=lambda x:((x.haslayer(TLS_Ext_ServerName) or x.haslayer(HTTPRequest))==True),count=10,prn=lambda x:x.summary())
 Ether / IP / TCP / TLS 172.16.27.191:36870 > 36.158.231.204:443 / TLS / TLS Handshake - Client Hello
@@ -125,7 +125,7 @@ Ether / IP / TCP / HTTP / 'GET' '/s?z=people&c=3' 'HTTP/1.1'
 
 可见本来应该为field应该为Raw的数据可以解析出来了，并且可以通过字典类型访问，pkt["key"].field:
 
-```
+```python
 >>> plist[1][HTTPRequest].Host
 b'www.people.com.cn'
 >>> plist[1][HTTPRequest].Host.decode()
@@ -138,7 +138,7 @@ b'www.people.com.cn'
 
 在tls加密的数据包之中，可以在tcp三次握手后，进行tls四次握手过程中的第一次握手`Client Hello`数据包中探测`SNI`信息，因为历史原因，这个字段不会加密(现在可以了，即`ESNI`)。这个field将指向即将访问的主机名。在使用tls模块之前，要用pip安装另一个模块详见官方api文档[scapy.layers.tls package — Scapy 2.5.0 documentation](https://scapy.readthedocs.io/en/latest/api/scapy.layers.tls.html#module-scapy.layers.tls):
 
-```
+```bash
 #也可用系统自带的包管理安装
 pip install cryptography
 ```

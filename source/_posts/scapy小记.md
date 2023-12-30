@@ -22,7 +22,7 @@ categories:
 
 # 1、[构造数据包](https://scapy.readthedocs.io/en/latest/usage.html#first-steps)
 
-```
+```python
 raw(IP())
 'E\x00\x00\x14\x00\x01\x00\x00@\x00|\xe7\x7f\x00\x00\x01\x7f\x00\x00\x01'
 
@@ -61,7 +61,7 @@ We see that a dissected packet has all its fields filled. That’s because
  I consider that each field has its value imposed by the original 
 string.If this is too verbose, the method hide_defaults() will delete every field that has the same value as the default:
 
-```
+```python
 c.hide_defaults()
 
 c
@@ -80,7 +80,7 @@ c
 
 这是测试代码：
 
-```
+```python
 >>> a=Ether()/IP()
 >>> a
 <Ether  type=IPv4 |<IP  |>>
@@ -105,7 +105,7 @@ x00\x01'
 
 对于数据包的值，我猜是通过字典的方法存储的（不通过字典访问将修改object默认方法的最外层字段），可以通过如下例子修改:
 
-```
+```python
 >>> a
 <Ether  dst=00:00:00:00:00:00 src=00:00:00:00:00:00 type=IPv4 |<IP  ihl=5 len=20 chksum=0x7ce7 src=127.0.0.1 dst=127.0.0.1 |>>
 >>> a[IP].dst='192.168.1.10'
@@ -128,7 +128,7 @@ x00\x01'
 
 [管理 GitHub Pages 站点的自定义域 - GitHub 文档](https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain) 这是github的文档，用以对照以下代码最后一行的ip
 
-```
+```python
 >>> a=IP(dst="www.slashdot.org/30")
 >>> [i for i in a]
 [<IP  dst=216.105.38.12 |>, <IP  dst=216.105.38.13 |>, <IP  dst=216.105.38.14 |>, <IP  dst=216.105.38.15 |>]
@@ -147,7 +147,7 @@ x00\x01'
 
 对于只发的数据包，一种函数使send()一种是sendp()。send()作用于第三层，只需指定三层的参数，对于下层数据将自动处理；sendp()则需手动指定二层数据，需要指定网卡，以及二层协议。以下是官方文档示例:
 
-```
+```python
 send(IP(dst="1.2.3.4")/ICMP())
 .
 Sent 1 packets.
@@ -178,7 +178,7 @@ Sent 1 packets.
 
 对于收发数据包一般使用sr()函数，此函数将发送目标数据包并返回一对数据包及其应答，包括无应答包。sr1()函数是一种变体，将发送目标数据包并只返回一个接收方用以应答的数据包。srp()是用以二层的收发函数。无应答时，当超时一个空数据包将被分配以取代超时信息。
 
-```
+```python
 >>> p=sr1(IP(dst="www.slashdot.org")/ICMP()/"XXXXXXXXXXX")
 Begin emission:
 ...Finished to send 1 packets.
@@ -228,7 +228,7 @@ options   = ''
 
 发送和接收函数族是scapy中的核心部分。它们返回一对两个列表。第一个就是发送的数据包及其应答组成的列表，第二个是无应答数据包组成的列表。为了更好地呈现它们，它们被封装成一个对象，并且提供了一些便于操作的方法：
 
-```
+```python
 >>> sr(IP(dst="192.168.8.1")/TCP(dport=[21,22,23]))
 Received 6 packets, got 3 answers, remaining 0 packets
 (<Results: UDP:0 TCP:3 ICMP:0 Other:0>, <Unanswered: UDP:0 TCP:0 ICMP:0 Other:0>)
@@ -243,13 +243,13 @@ IP / TCP 192.168.8.14:20 > 192.168.8.1:23 S ==> Ether / IP / TCP 192.168.8.1:23 
 
 以下是一个经典的SYN扫描初始化案例:
 
-```
+```python
 sr1(IP(dst="72.14.207.99")/TCP(dport=80,flags="S"))
 ```
 
 以上代码执行后将向谷歌发送一个SYN包并在接受一个应答后结束：
 
-```
+```python
 Begin emission:
 .Finished to send 1 packets.
 *
@@ -265,13 +265,13 @@ flags=SA window=8190 chksum=0xcdc7 urgptr=0 options=[('MSS', 536)] |
 
 使用其他标志位扫描一下系统的440到443端口：
 
-```
+```python
 >>> sr(IP(dst="192.168.1.1")/TCP(sport=666,dport=(440,443),flags="S"))
 ```
 
 或者
 
-```
+```python
 >>> sr(IP(dst="192.168.1.1")/TCP(sport=RandShort(),dport=[440,441,442,443],flags="S"))
 ```
 

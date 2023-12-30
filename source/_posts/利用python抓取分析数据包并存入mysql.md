@@ -22,7 +22,7 @@ categories:
 
 登陆数据库后，建立并指定相关数据库后，建立一张表，提前规划好数据格式
 
-```
+```sql
 CREATE DATABASE testsql;
 
 USE testsql;
@@ -59,7 +59,7 @@ PRIMARY KEY(`index`)
 
 database.py
 
-```
+```python
 import pymysql.cursors
 import sys
 class linkSql:
@@ -127,7 +127,7 @@ class linkSql:
 
 sniffResults.py
 
-```
+```python
 from scapy.all import *
 from scapy.layers.http import *
 import time
