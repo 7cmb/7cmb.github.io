@@ -26,7 +26,7 @@
 <meta property="og:description" content="在DE环境下使用ssh复制到系统剪辑版十分方便，在WM却十分蛋疼…..ssh下使用终端下的文本编辑器不搞定复制问题可以说是痛不欲生了 在neovim中有多种解决系统剪辑版的方案，可以用:help provider-clipboard查看解决官方提供的方法。本文将使用xsel和xclip解决这个问题 一、思路nvim不直接连接系统剪辑板，首先需要安装xsel和xclip之后在nvim配置文件加入se">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-27T06:13:12.000Z">
-<meta property="article:modified_time" content="2023-12-27T07:49:09.557Z">
+<meta property="article:modified_time" content="2023-12-30T05:48:28.057Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="nvim">
@@ -311,8 +311,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-27 15:49:09</span>
-            <span class="mobile">2023-12-27 15:49:09</span>
+            <span class="desktop">2023-12-30 13:48:28</span>
+            <span class="mobile">2023-12-30 13:48:28</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -415,13 +415,13 @@
 <p>不配置ssh客户端而改为用xhsot添加指定远程主机到控制列表里也行</p>
 </blockquote>
 <h2 id="ssh服务端"><a href="#ssh服务端" class="headerlink" title="ssh服务端"></a>ssh服务端</h2><p>安装x转发必要包及<code>xsel</code>、<code>xclip</code>:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 红帽为例</span><br><span class="line">sudo dnf install xorg-x11-xauth xorg-x11-fonts-\* xorg-x11-utils dbus-x11 xsel xclip</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 红帽为例</span></span><br><span class="line">sudo dnf install xorg-x11-xauth xorg-x11-fonts-\* xorg-x11-utils dbus-x11 xsel xclip</span><br></pre></td></tr></table></figure></div>
 
 <p>添加此行到<code>/etc/ssh/sshd_config</code>:</p>
 <div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X11Forwarding yes</span><br></pre></td></tr></table></figure></div>
 
 <p>然后编辑nvim配置文件，对于个人配置 <code>~/.config/nvim/init.vim</code>,对于全局配置<code>$VIM/sysinit.vim</code>:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 添加这一行</span><br><span class="line">set clipboard+=unnamedplus</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 添加这一行</span><br><span class="line"><span class="keyword">set</span> clipboard+=unnamedplus</span><br></pre></td></tr></table></figure></div>
 
 <p>自此，ssh客户端可使用远程nvim复制到本地剪辑板</p>
 
@@ -438,7 +438,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-27 15:49:09
+                    :</strong> 2023-12-30 13:48:28
             </li>
         
         <li>

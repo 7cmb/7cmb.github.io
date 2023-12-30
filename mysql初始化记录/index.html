@@ -26,7 +26,7 @@
 <meta property="og:description" content="每次在各种平台中安装mysql时总是会遇上问题，特别是初始化的时候….遇到问题的时候，中文资料的时效性和广度简直是一言难尽。不读一遍官方文档不是说不能安装，只是即使安装完也就很不爽，全世界的解决方案都不太一样….特别是对于初始化的处理。无奈只好读一遍官方文档以解答自己对安装过程中一些问题的疑惑  仅对mysql80负责，时效性很重要 本文内容来源: MySQL :: MySQL Installat">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-08T17:34:49.000Z">
-<meta property="article:modified_time" content="2023-12-12T07:53:07.457Z">
+<meta property="article:modified_time" content="2023-12-30T05:48:28.057Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="documentation">
 <meta property="article:tag" content="mysql">
@@ -310,8 +310,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-12 15:53:07</span>
-            <span class="mobile">2023-12-12 15:53:07</span>
+            <span class="desktop">2023-12-30 13:48:28</span>
+            <span class="mobile">2023-12-30 13:48:28</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -386,16 +386,16 @@
 </blockquote>
 <h1 id="1、对初始化的概述"><a href="#1、对初始化的概述" class="headerlink" title="1、对初始化的概述"></a>1、对初始化的概述</h1><p>对于安装mysql后的初始化，大概有两种方法，一种是照着文档<code>MySQL Installation Guide</code>一步一步来，另外一种则是依靠官方程序<code>mysql_secure_installation</code>。此外的方法笔者就不清楚了</p>
 <h1 id="2、MySQL-Installation-Guide-方法"><a href="#2、MySQL-Installation-Guide-方法" class="headerlink" title="2、MySQL Installation Guide 方法"></a>2、MySQL Installation Guide 方法</h1><p>这种方法还是比较繁琐的，首先系统需要有<code>用户组:mysql</code>和<code>用户:mysql</code>(当然用其他用户组和用户名替代也可以，现有的也行，本人没实践过)，没有请创建用户及组，不同发行版的语法可能有不同，请注意</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&gt; groupadd mysql</span><br><span class="line">$&gt; useradd -r -g mysql -s /bin/false mysql</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&gt; groupadd mysql</span><br><span class="line">$&gt; useradd -r -g mysql -s /bin/false mysql</span><br></pre></td></tr></table></figure></div>
 
 <h2 id="Step1-创建一个导入导出目录-非必须"><a href="#Step1-创建一个导入导出目录-非必须" class="headerlink" title="Step1-创建一个导入导出目录(非必须)"></a>Step1-创建一个导入导出目录(非必须)</h2><p>首先转移到mysql安装的所在目录，创建一个目录<code>mysql-files</code>这个目录由mysql系统变量<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_secure_file_priv"><code>secure_file_priv</code></a> 指定，用以导入导出操作</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir mysql-files</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> mysql-files</span><br></pre></td></tr></table></figure></div>
 
 <p>修改该文件夹权限，secure_file_priv需要指定的文件夹创建完成</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql mysql-files</span><br><span class="line">chmod 750 mysql-files</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> mysql:mysql mysql-files</span><br><span class="line"><span class="built_in">chmod</span> 750 mysql-files</span><br></pre></td></tr></table></figure></div>
 
 <h2 id="Step2-初始化data目录"><a href="#Step2-初始化data目录" class="headerlink" title="Step2-初始化data目录"></a>Step2-初始化data目录</h2><p>这一步就是初始化mysql的data目录，有两种方式:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bin/mysqld --initialize --user=mysql</span><br><span class="line">bin/mysqld --initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bin/mysqld --initialize --user=mysql</span><br><span class="line">bin/mysqld --initialize-insecure --user=mysql</span><br></pre></td></tr></table></figure></div>
 
 <p><code>--initialize</code>和<code>--initialize-insecure</code>决定了初始化后，<strong>mysql的root账户</strong>是否会带有一个随机生成的密码，如果是 <code>--initialize-insecure</code> 则没有随机密码。<code>--user=mysql</code>决定了初始化data目录及文件在系统中的用户归属权，以root用户执行此命令注意带上这句参数。相反的，你可以以mysql用户登陆系统，并不用这句参数以初始化data目录。</p>
 <ul>
@@ -409,7 +409,7 @@
 <br>
 
 <p>对于初始化data目录，还能带有更多参数。比如mysql无法识别正确的安装目录和数据目录，那么你要指定mysql的安装目录(basedir)和数据目录(datadir),例子如下:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin/mysqld --initialize --user=mysql \</span><br><span class="line">  --basedir=/opt/mysql/mysql \</span><br><span class="line">  --datadir=/opt/mysql/mysql/data </span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bin/mysqld --initialize --user=mysql \</span><br><span class="line">  --basedir=/opt/mysql/mysql \</span><br><span class="line">  --datadir=/opt/mysql/mysql/data </span><br></pre></td></tr></table></figure></div>
 
 <blockquote>
 <p>对于<code>basedir</code>，我的理解是mysql二进制文件目录<code>bin/</code>和其他程序组件所在地，对Windows来说这个目录意义好像更大，Linux一般都直接在<code>/usr</code>里找了。下文所说的<code>my.cnf</code>&#x2F;<code>my.ini</code>的Windows全局路径就和这个目录相关</p>
@@ -439,7 +439,7 @@
 <p>关于时区表，得手动配置；<br><br></p>
 <p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_init_file"><code>init_file</code></a>系统变量可以指定一个文件存放sql语句，mysql启动时执行；</p>
 <h2 id="Step4-自动安装非对称加密（非必要）"><a href="#Step4-自动安装非对称加密（非必要）" class="headerlink" title="Step4-自动安装非对称加密（非必要）"></a>Step4-自动安装非对称加密（非必要）</h2><p>此文件用于自动配置支持加密连接，直接运行二进制文件安装:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/mysql_ssl_rsa_setup</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/mysql_ssl_rsa_setup</span><br></pre></td></tr></table></figure></div>
 
 <p>安装后链接默认加密，除非指定用户为<code>REQUIRE NONE</code></p>
 <p>官方文档:<a class="link"   target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysql-ssl-rsa-setup.html" >docForMysql8.0 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -461,7 +461,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-12 15:53:07
+                    :</strong> 2023-12-30 13:48:28
             </li>
         
         <li>
