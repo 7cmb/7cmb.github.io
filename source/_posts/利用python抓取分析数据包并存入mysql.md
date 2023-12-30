@@ -183,7 +183,7 @@ if __name__ == "__main__":
 
 main.py
 
-```
+```python
 import database
 import sniffResults
 
