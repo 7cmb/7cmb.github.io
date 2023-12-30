@@ -96,7 +96,7 @@ bin/mysqld --defaults-file=/opt/mysql/mysql/etc/my.cnf \
 > 
 > - 另外，对于server，即使mysql运行时指定了`--defaults-file`的参数,mysql仍然会读取另外一个在datadir的配置文件`mysqld-auto.cnf`
 
-## Step-3小问题
+## Step3-小问题
 
 对于`--initialize-insecure`建议第一件事就是加密码:
 
