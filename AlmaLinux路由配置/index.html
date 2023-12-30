@@ -13,25 +13,29 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://7cmb.github.io/ssh下使用nvim复制到系统剪辑板/"/>
+    <link rel="canonical" href="https://7cmb.github.io/almalinux路由配置/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="在DE环境下使用ssh复制到系统剪辑版十分方便，在WM却十分蛋疼…..ssh下使用终端下的文本编辑器不搞定复制问题可以说是痛不欲生了 在neovim中有多种解决系统剪辑版的方案，可以用:help provider-clipboard查看解决官方提供的方法。本文将使用xsel和xclip解决这个问题 一、思路nvim不直接连接系统剪辑板，首先需要安装xsel和xclip之后在nvim配置文件加入se">
+        <meta name="description" content="前言此文章搁置了一段时间，只因为少写了一条静态路由…如果实验环境为全套专业设备的话应该很快就能排查出障碍。傻瓜设备总是会让人觉得某些功能是理所当然，导致排障时会直接忽略….. 本片文章记录配置一台almalinux主机作为软路由。配置的机器为AlmaLinux Router，如以下拓扑所示。其为虚拟网络提供基本网络服务，pxe环境等等 实验环境: 123456路由:almalinux9客户机:al">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ssh下使用nvim复制到系统剪辑板">
-<meta property="og:url" content="https://7cmb.github.io/ssh%E4%B8%8B%E4%BD%BF%E7%94%A8nvim%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%BE%91%E6%9D%BF/index.html">
+<meta property="og:title" content="AlmaLinux路由配置">
+<meta property="og:url" content="https://7cmb.github.io/AlmaLinux%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在DE环境下使用ssh复制到系统剪辑版十分方便，在WM却十分蛋疼…..ssh下使用终端下的文本编辑器不搞定复制问题可以说是痛不欲生了 在neovim中有多种解决系统剪辑版的方案，可以用:help provider-clipboard查看解决官方提供的方法。本文将使用xsel和xclip解决这个问题 一、思路nvim不直接连接系统剪辑板，首先需要安装xsel和xclip之后在nvim配置文件加入se">
+<meta property="og:description" content="前言此文章搁置了一段时间，只因为少写了一条静态路由…如果实验环境为全套专业设备的话应该很快就能排查出障碍。傻瓜设备总是会让人觉得某些功能是理所当然，导致排障时会直接忽略….. 本片文章记录配置一台almalinux主机作为软路由。配置的机器为AlmaLinux Router，如以下拓扑所示。其为虚拟网络提供基本网络服务，pxe环境等等 实验环境: 123456路由:almalinux9客户机:al">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-27T06:13:12.000Z">
-<meta property="article:modified_time" content="2023-12-30T05:48:28.057Z">
+<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUWdDdHU4Tm9RMTNmWFJYP2U9U0hzR25G.png">
+<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUW1KdHd1VFRSVzNvNFN6P2U9eHluVm0y.png">
+<meta property="article:published_time" content="2023-12-30T20:21:31.000Z">
+<meta property="article:modified_time" content="2023-12-30T20:24:33.323Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
-<meta property="article:tag" content="nvim">
-<meta property="article:tag" content="ssh">
+<meta property="article:tag" content="almalinux">
+<meta property="article:tag" content="centos">
+<meta property="article:tag" content="network">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUWdDdHU4Tm9RMTNmWFJYP2U9U0hzR25G.png">
     
     
         <!-- Google tag (gtag.js) -->
@@ -53,7 +57,7 @@
     
     <title>
         
-            ssh下使用nvim复制到系统剪辑板 -
+            AlmaLinux路由配置 -
         
         7cmb&#39;s blog.
     </title>
@@ -282,7 +286,7 @@
 
         <div class="article-title">
             
-                <h1 class="article-title-regular">ssh下使用nvim复制到系统剪辑板</h1>
+                <h1 class="article-title-regular">AlmaLinux路由配置</h1>
             
             </div>
             
@@ -304,15 +308,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-12-27 14:13:12</span>
-        <span class="mobile">2023-12-27 14:13:12</span>
+        <span class="desktop">2023-12-31 04:21:31</span>
+        <span class="mobile">2023-12-31 04:21:31</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-30 13:48:28</span>
-            <span class="mobile">2023-12-30 13:48:28</span>
+            <span class="desktop">2023-12-31 04:24:33</span>
+            <span class="mobile">2023-12-31 04:24:33</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -336,14 +340,14 @@
                             <li>></li>
                         
                         <li>
-                            <a href="/categories/linux/nvim/">nvim</a>&nbsp;
+                            <a href="/categories/linux/nmcli/">nmcli</a>&nbsp;
                         </li>
                     
                     
                 
                     
                         <li>
-                            | <a href="/categories/linux/ssh/">ssh</a>&nbsp;
+                            | <a href="/categories/linux/firewalld/">firewalld</a>&nbsp;
                         </li>
                     
                     
@@ -361,11 +365,15 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/nvim/">nvim</a>&nbsp;
+                        | <a href="/tags/almalinux/">almalinux</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/ssh/">ssh</a>&nbsp;
+                        | <a href="/tags/centos/">centos</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/network/">network</a>&nbsp;
                     </li>
                 
             </ul>
@@ -391,39 +399,71 @@
 
 
         <div class="article-content markdown-body">
-            <p>在DE环境下使用ssh复制到系统剪辑版十分方便，在WM却十分蛋疼…..ssh下使用终端下的文本编辑器不搞定复制问题可以说是痛不欲生了</p>
-<p>在neovim中有多种解决系统剪辑版的方案，可以用<code>:help provider-clipboard</code>查看解决官方提供的方法。本文将使用<code>xsel</code>和<code>xclip</code>解决这个问题</p>
-<h1 id="一、思路"><a href="#一、思路" class="headerlink" title="一、思路"></a>一、思路</h1><p>nvim不直接连接系统剪辑板，首先需要安装<code>xsel</code>和<code>xclip</code>之后在nvim配置文件加入<code>set clipboard+=unnamedplus</code>这一行以配置完成<strong>nvim连接本地系统剪辑版</strong></p>
-<p><code>xsel</code>和<code>xclip</code>是运行在x服务上的软件，在x服务器上显然是可以使用的。ssh服务器提供x转发，所以可以在远程服务器上使用这两款软件，再利用x转发到本地x服务器以获取远程服务器上nvim复制的内容到本地剪辑板</p>
-<p>但是事情并没有这么简单，即使开启ssh的x转发，本地x服务器能使用远程服务器的x软件了，但是远程nvim的内容还是死活复制不上。经过一轮搜索，发现其中还有一个叫<code>xhost</code>的x服务使用的认证软件</p>
-<p><code>xhost</code>是一个适用于单用户环境的为x服务器提供隐私控制和安全措施的软件。他有一个表来控制使用x服务器的客户端，以使得本地软件更安全。也就是说x转发过程中，除了ssh认证以外，x服务器本身也有一个认证</p>
-<p>而ssh客户端配置中有一个叫<code>ForwardX11Trusted</code>的选项，对应参数<code>-Y</code>。指定这个参数将信任远程x客户端，即远程客户端将不再通过x服务器的认证</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>此文章搁置了一段时间，只因为少写了一条静态路由…如果实验环境为全套专业设备的话应该很快就能排查出障碍。傻瓜设备总是会让人觉得某些功能是理所当然，导致排障时会直接忽略…..</p>
+<p>本片文章记录配置一台almalinux主机作为软路由。配置的机器为<code>AlmaLinux Router</code>，如以下拓扑所示。其为虚拟网络提供基本网络服务，pxe环境等等</p>
+<p>实验环境:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">路由:almalinux9</span><br><span class="line">客户机:almalinux9</span><br><span class="line">环境:vbox虚拟网络 家宽</span><br><span class="line">宿主:windows10</span><br><span class="line">默认用户:root</span><br><span class="line">工具:firewalld networkmanager</span><br></pre></td></tr></table></figure></div>
+
+<p>拓扑:</p>
+<img  title="" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUWdDdHU4Tm9RMTNmWFJYP2U9U0hzR25G.png"
+                      alt=""
+                >
+
+<p>目的:</p>
+<ul>
+<li><p>为虚拟网路划分一个广播域，方便后续实验</p>
+</li>
+<li><p>暂时不nat不伪装，方便调试虚拟网络里的机器</p>
+</li>
+<li><p>虚拟网络正常上网</p>
+</li>
+</ul>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="Step1-开启内核ipv4转发"><a href="#Step1-开启内核ipv4转发" class="headerlink" title="Step1-开启内核ipv4转发"></a>Step1-开启内核ipv4转发</h2><p>根据<code>sysctl</code>的文档，修改以下任意文件以写入配置:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">FILES</span><br><span class="line">       /proc/sys</span><br><span class="line">       /etc/sysctl.d/*.conf</span><br><span class="line">       /run/sysctl.d/*.conf</span><br><span class="line">       /usr/local/lib/sysctl.d/*.conf</span><br><span class="line">       /usr/lib/sysctl.d/*.conf</span><br><span class="line">       /lib/sysctl.d/*.conf</span><br><span class="line">       /etc/sysctl.conf</span><br></pre></td></tr></table></figure></div>
+
+<p>添加以下配置于指定文件并激活:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;net.ipv4.ip_forward=1&quot;</span> &gt; /etc/sysctl.d/95-IPv4-forwarding.conf</span><br><span class="line">sysctl -p /etc/sysctl.d/95-IPv4-forwarding.conf</span><br></pre></td></tr></table></figure></div>
+
+<p>验证配置是否生效:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@routerAlmaLinux baka]<span class="comment"># cat /proc/sys/net/ipv4/ip_forward</span></span><br><span class="line">1    <span class="comment"># &quot;1&quot;代表已开启否则为&quot;0&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Step2-将指定接口配置到firewalld预设的区域"><a href="#Step2-将指定接口配置到firewalld预设的区域" class="headerlink" title="Step2-将指定接口配置到firewalld预设的区域"></a>Step2-将指定接口配置到firewalld预设的区域</h2><p>执行此步骤前确保控制内核网络框架<code>netfilter</code> 的工具只有<code>firewalld</code></p>
+<p> <code>iptables</code>、<code>firewalld</code>、<code>nftables</code>都是内核网络框架<code>netfilter</code>用户空间的工具。<br>在rhel9中<code>iptables</code>工具使用 <code>nf_tables</code> 内核 API 而不是 <code>legacy</code> 后端。<code>nf_tables</code> API 提供了向后兼容性，以便使用 <code>iptables</code> 命令的脚本仍可在 Red Hat Enterprise Linux 上工作。对于新的防火墙脚本，红帽建议使用 <code>nftables</code>。</p>
 <blockquote>
-<p>参考:</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/619083/ssh-is-better-to-use-x-or-y" >x11 - ssh, is better to use -X or -Y? - Unix &amp; Linux Stack Exchange <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/177557/what-does-this-xhost-command-do">x11 - What does this <code>xhost ...</code> command do? - Unix &amp; Linux Stack Exchange</a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinuxcn.org/wiki/Xhost" >Xhost - Arch Linux 中文维基 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>碎碎念:firewalld可比四表五链简单多了<br>另外，对于iptables和nftables，之前一直疑惑SNAT放在prerouting链貌似可行，为什么一定要放在postrouting链呢。直到参考了<a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/280114/why-does-snat-happen-in-postrouting-chain-and-dnat-in-prerouting-chain" >iptables - Why does SNAT happen in POSTROUTING chain and DNAT in PREROUTING chain? - Unix &amp; Linux Stack Exchange <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后，发现自己一直忽视了插在需要nat的那张本地网卡</p>
 </blockquote>
-<h1 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h1><h2 id="ssh客服端"><a href="#ssh客服端" class="headerlink" title="ssh客服端"></a>ssh客服端</h2><p>添加以下配置到ssh客户端配置文件以跳过x认证</p>
-<p>对于全局配置<code>/etc/ssh/ssh_conf</code>:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 星号替换为需要配置的主机名或者ip，这是通配符</span><br><span class="line">Host *</span><br><span class="line">   ForwardAgent no</span><br><span class="line">   ForwardX11 yes</span><br><span class="line">   ForwardX11Trusted yes</span><br></pre></td></tr></table></figure></div>
+<p>此步骤能使用的工具有<code>nmcli</code>和<code>firewall-cmd</code>，根据<a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/manually-assigning-a-zone-to-a-network-connection-in-a-connection-profile-file_working-with-firewalld-zones" >2.5. 在连接配置文件文件中手动将区分配给网络连接 Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，使用<code>nmcli</code>效率更高</p>
+<h3 id="nmcli修改接口区域到trusted"><a href="#nmcli修改接口区域到trusted" class="headerlink" title="nmcli修改接口区域到trusted"></a>nmcli修改接口区域到trusted</h3><p>首先查看接口信息:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@routerAlmaLinux baka]<span class="comment"># ip a</span></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether 08:00:27:85:94:9e brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.1.50/24 brd 192.168.1.255 scope global noprefixroute enp0s3</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::a00:27ff:fe85:949e/64 scope <span class="built_in">link</span> noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: enp0s8: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether 08:00:27:6d:6c:09 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.56.50/24 brd 192.168.56.255 scope global noprefixroute enp0s8</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::a00:27ff:fe6d:6c09/64 scope <span class="built_in">link</span> noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure></div>
 
-<p>对于个人配置<code>~/.ssh/config</code>:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ForwardAgent no</span><br><span class="line">ForwardX11 yes</span><br><span class="line">ForwardX11Trusted yes</span><br></pre></td></tr></table></figure></div>
+<p>需要配置的接口为enp0s3和enp0s8，分别将他们配置到firewalld预设的<code>trusted</code>区域。此区域默认允许一切连接，而同一个区域内转发默认是允许的</p>
+<p>配置命令:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设要使用的NetworkManager的配置文件还是默认名称</span></span><br><span class="line">nmcli connection modify enp0s3 connection.zone trusted</span><br><span class="line">nmcli connection modify enp0s8 connection.zone trusted</span><br><span class="line">nmcli connection up enp0s3</span><br><span class="line">nmcli connection up enp0s8</span><br></pre></td></tr></table></figure></div>
 
-<blockquote>
-<p>不配置ssh客户端而改为用xhsot添加指定远程主机到控制列表里也行</p>
-</blockquote>
-<h2 id="ssh服务端"><a href="#ssh服务端" class="headerlink" title="ssh服务端"></a>ssh服务端</h2><p>安装x转发必要包及<code>xsel</code>、<code>xclip</code>:</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 红帽为例</span></span><br><span class="line">sudo dnf install xorg-x11-xauth xorg-x11-fonts-\* xorg-x11-utils dbus-x11 xsel xclip</span><br></pre></td></tr></table></figure></div>
+<p>检查配置是否生效:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@routerAlmaLinux baka]<span class="comment"># firewall-cmd --get-active-zones</span></span><br><span class="line">trusted</span><br><span class="line">  interfaces: enp0s3 enp0s8</span><br></pre></td></tr></table></figure></div>
 
-<p>添加此行到<code>/etc/ssh/sshd_config</code>:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X11Forwarding yes</span><br></pre></td></tr></table></figure></div>
+<h3 id="firewall-cmd修改接口到指定区域"><a href="#firewall-cmd修改接口到指定区域" class="headerlink" title="firewall-cmd修改接口到指定区域"></a>firewall-cmd修改接口到指定区域</h3><p><a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/assigning-a-network-interface-to-a-zone_working-with-firewalld-zones" >2.3. 将网络接口分配给区 Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2 id="Step3-配置路由表"><a href="#Step3-配置路由表" class="headerlink" title="Step3-配置路由表"></a>Step3-配置路由表</h2><p><code>AlmaLinux Router</code>路由表:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@routerAlmaLinux baka]<span class="comment"># ip r</span></span><br><span class="line">default via 192.168.1.1 dev enp0s3 proto static metric 100</span><br><span class="line">192.168.1.0/24 dev enp0s3 proto kernel scope <span class="built_in">link</span> src 192.168.1.50 metric 100</span><br><span class="line">192.168.56.0/24 dev enp0s8 proto kernel scope <span class="built_in">link</span> src 192.168.56.50 metric 101</span><br></pre></td></tr></table></figure></div>
 
-<p>然后编辑nvim配置文件，对于个人配置 <code>~/.config/nvim/init.vim</code>,对于全局配置<code>$VIM/sysinit.vim</code>:</p>
-<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 添加这一行</span><br><span class="line"><span class="keyword">set</span> clipboard+=unnamedplus</span><br></pre></td></tr></table></figure></div>
+<p>基本来说只用设置默认网关，使用nmcli或者iproute2配置即可</p>
+<p>为上级网关配置路由表:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 梅林固件web后台直接设定就完事了</span><br><span class="line">NETWORK:192.168.56.0/24 NEXT_HOP:192.168.1.1 FLAGS:UG </span><br></pre></td></tr></table></figure></div>
 
-<p>自此，ssh客户端可使用远程nvim复制到本地剪辑板</p>
+<p>这时虚拟网络已经能和家宽内网双向连通及和互联网正常通信</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在<code>AlmaLinux Router</code>上运行嗅探域名的<a class="link"   target="_blank" rel="noopener" href="https://7cmb.com/%E5%88%A9%E7%94%A8python%E6%8A%93%E5%8F%96%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE%E5%8C%85%E5%B9%B6%E5%AD%98%E5%85%A5mysql/" >scapy脚本(修改版本) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>可以看到访问记录:</p>
+<img  title="" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUW1KdHd1VFRSVzNvNFN6P2U9eHluVm0y.png"
+                      alt=""
+                >
+
+<p> 路由正常</p>
 
         </div>
 
@@ -431,18 +471,18 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> ssh下使用nvim复制到系统剪辑板</li>
+        <li><strong>标题:</strong> AlmaLinux路由配置</li>
         <li><strong>作者:</strong> 7cmb</li>
         <li><strong>创建于
-                :</strong> 2023-12-27 14:13:12</li>
+                :</strong> 2023-12-31 04:21:31</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-30 13:48:28
+                    :</strong> 2023-12-31 04:24:33
             </li>
         
         <li>
-            <strong>链接:</strong> https://7cmb.com/ssh下使用nvim复制到系统剪辑板/
+            <strong>链接:</strong> https://7cmb.com/AlmaLinux路由配置/
         </li>
         <li>
             <strong>
@@ -467,11 +507,15 @@
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/nvim/">#nvim</a>&nbsp;
+                        <a href="/tags/almalinux/">#almalinux</a>&nbsp;
                     </li>
                 
                     <li class="tag-item">
-                        <a href="/tags/ssh/">#ssh</a>&nbsp;
+                        <a href="/tags/centos/">#centos</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/network/">#network</a>&nbsp;
                     </li>
                 
             </ul>
@@ -482,29 +526,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                        rel="prev"
-                        href="/AlmaLinux%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">AlmaLinux路由配置</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                         rel="next"
-                        href="/PXE%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/"
+                        href="/ssh%E4%B8%8B%E4%BD%BF%E7%94%A8nvim%E5%A4%8D%E5%88%B6%E5%88%B0%E7%B3%BB%E7%BB%9F%E5%89%AA%E8%BE%91%E6%9D%BF/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">PXE服务部署</span>
+                                <span class="post-nav-title-item">ssh下使用nvim复制到系统剪辑板</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -525,8 +554,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">ssh下使用nvim复制到系统剪辑板</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%80%9D%E8%B7%AF"><span class="nav-text">一、思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE"><span class="nav-text">二、配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh%E5%AE%A2%E6%9C%8D%E7%AB%AF"><span class="nav-text">ssh客服端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-text">ssh服务端</span></a></li></ol></li></ol>
+        <div class="page-title">AlmaLinux路由配置</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5"><span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step1-%E5%BC%80%E5%90%AF%E5%86%85%E6%A0%B8ipv4%E8%BD%AC%E5%8F%91"><span class="nav-text">Step1-开启内核ipv4转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step2-%E5%B0%86%E6%8C%87%E5%AE%9A%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE%E5%88%B0firewalld%E9%A2%84%E8%AE%BE%E7%9A%84%E5%8C%BA%E5%9F%9F"><span class="nav-text">Step2-将指定接口配置到firewalld预设的区域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nmcli%E4%BF%AE%E6%94%B9%E6%8E%A5%E5%8F%A3%E5%8C%BA%E5%9F%9F%E5%88%B0trusted"><span class="nav-text">nmcli修改接口区域到trusted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#firewall-cmd%E4%BF%AE%E6%94%B9%E6%8E%A5%E5%8F%A3%E5%88%B0%E6%8C%87%E5%AE%9A%E5%8C%BA%E5%9F%9F"><span class="nav-text">firewall-cmd修改接口到指定区域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step3-%E9%85%8D%E7%BD%AE%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-text">Step3-配置路由表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-text">测试</span></a></li></ol>
 
     </div>
 </div>
