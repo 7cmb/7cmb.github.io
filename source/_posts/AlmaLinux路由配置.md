@@ -4,8 +4,6 @@ date: 2023-12-31 04:21:31
 tags:
  - linux
  - network
- - centos
- - almalinux
 categories:
 - [linux, firewalld]
 - [linux, nmcli]

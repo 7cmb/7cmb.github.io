@@ -2,16 +2,11 @@
 title: nmcli基本使用方法
 date: 2023-12-24 21:49:58
 tags:
-- almalinux
-- centos
 - linux
 - network
 - nmcli
-- networkmanager
 categories:
-- [linux, networkmanager]
 - [linux, nmcli]
-- [network, networkmanager]
 
 ---
 
