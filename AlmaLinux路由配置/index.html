@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUXVUREhwNXNBUkRoS1ljP2U9R2JBN29q.png">
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUW1KdHd1VFRSVzNvNFN6P2U9eHluVm0y.png">
 <meta property="article:published_time" content="2023-12-30T20:21:31.000Z">
-<meta property="article:modified_time" content="2023-12-31T04:08:17.413Z">
+<meta property="article:modified_time" content="2023-12-31T04:10:35.450Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="network">
@@ -315,8 +315,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-31 12:08:17</span>
-            <span class="mobile">2023-12-31 12:08:17</span>
+            <span class="desktop">2023-12-31 12:10:35</span>
+            <span class="mobile">2023-12-31 12:10:35</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -447,7 +447,7 @@
 <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@routerAlmaLinux baka]<span class="comment"># firewall-cmd --get-active-zones</span></span><br><span class="line">trusted</span><br><span class="line">  interfaces: enp0s3 enp0s8</span><br></pre></td></tr></table></figure></div>
 
 <h3 id="firewall-cmd修改接口到指定区域"><a href="#firewall-cmd修改接口到指定区域" class="headerlink" title="firewall-cmd修改接口到指定区域"></a>firewall-cmd修改接口到指定区域</h3><p><a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/assigning-a-network-interface-to-a-zone_working-with-firewalld-zones" >2.3. 将网络接口分配给区 Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2 id="Step3-配置路由表"><a href="#Step3-配置路由表" class="headerlink" title="Step3-配置路由表"></a>Step3-配置路由表</h2><p><code>AlmaLinux Router</code>路由表:</p>
+<h2 id="Step3-配置路由表"><a href="#Step3-配置路由表" class="headerlink" title="Step3-配置路由表"></a>Step3-配置路由表</h2><p>查看<code>AlmaLinux Router</code>路由表:</p>
 <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@routerAlmaLinux baka]<span class="comment"># ip r</span></span><br><span class="line">default via 192.168.1.1 dev enp0s3 proto static metric 100</span><br><span class="line">192.168.1.0/24 dev enp0s3 proto kernel scope <span class="built_in">link</span> src 192.168.1.50 metric 100</span><br><span class="line">192.168.56.0/24 dev enp0s8 proto kernel scope <span class="built_in">link</span> src 192.168.56.50 metric 101</span><br></pre></td></tr></table></figure></div>
 
 <p>基本来说只用设置默认网关，使用nmcli或者iproute2配置即可</p>
@@ -478,7 +478,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-31 12:08:17
+                    :</strong> 2023-12-31 12:10:35
             </li>
         
         <li>
