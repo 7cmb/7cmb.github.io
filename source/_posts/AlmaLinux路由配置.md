@@ -135,7 +135,7 @@ trusted
 
 ## Step3-配置路由表
 
-`AlmaLinux Router`路由表:
+查看`AlmaLinux Router`路由表:
 
 ```bash
 [root@routerAlmaLinux baka]# ip r
