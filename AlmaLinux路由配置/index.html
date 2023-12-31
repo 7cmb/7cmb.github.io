@@ -25,17 +25,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言此文章搁置了一段时间，只因为少写了一条静态路由…如果实验环境为全套专业设备的话应该很快就能排查出障碍。傻瓜设备总是会让人觉得某些功能是理所当然，导致排障时会直接忽略….. 本片文章记录配置一台almalinux主机作为软路由。配置的机器为AlmaLinux Router，如以下拓扑所示。其为虚拟网络提供基本网络服务，pxe环境等等 实验环境: 123456路由:almalinux9客户机:al">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUWdDdHU4Tm9RMTNmWFJYP2U9U0hzR25G.png">
+<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUXVUREhwNXNBUkRoS1ljP2U9R2JBN29q.png">
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUW1KdHd1VFRSVzNvNFN6P2U9eHluVm0y.png">
 <meta property="article:published_time" content="2023-12-30T20:21:31.000Z">
-<meta property="article:modified_time" content="2023-12-30T20:24:33.323Z">
+<meta property="article:modified_time" content="2023-12-31T04:08:17.413Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="centos">
 <meta property="article:tag" content="almalinux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUWdDdHU4Tm9RMTNmWFJYP2U9U0hzR25G.png">
+<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUXVUREhwNXNBUkRoS1ljP2U9R2JBN29q.png">
     
     
         <!-- Google tag (gtag.js) -->
@@ -315,8 +315,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-12-31 04:24:33</span>
-            <span class="mobile">2023-12-31 04:24:33</span>
+            <span class="desktop">2023-12-31 12:08:17</span>
+            <span class="mobile">2023-12-31 12:08:17</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -408,7 +408,7 @@
 <img  title="" 
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUWdDdHU4Tm9RMTNmWFJYP2U9U0hzR25G.png"
+                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUXVUREhwNXNBUkRoS1ljP2U9R2JBN29q.png"
                       alt=""
                 >
 
@@ -433,7 +433,7 @@
 <h2 id="Step2-将指定接口配置到firewalld预设的区域"><a href="#Step2-将指定接口配置到firewalld预设的区域" class="headerlink" title="Step2-将指定接口配置到firewalld预设的区域"></a>Step2-将指定接口配置到firewalld预设的区域</h2><p>执行此步骤前确保控制内核网络框架<code>netfilter</code> 的工具只有<code>firewalld</code></p>
 <p> <code>iptables</code>、<code>firewalld</code>、<code>nftables</code>都是内核网络框架<code>netfilter</code>用户空间的工具。<br>在rhel9中<code>iptables</code>工具使用 <code>nf_tables</code> 内核 API 而不是 <code>legacy</code> 后端。<code>nf_tables</code> API 提供了向后兼容性，以便使用 <code>iptables</code> 命令的脚本仍可在 Red Hat Enterprise Linux 上工作。对于新的防火墙脚本，红帽建议使用 <code>nftables</code>。</p>
 <blockquote>
-<p>碎碎念:firewalld可比四表五链简单多了<br>另外，对于iptables和nftables，之前一直疑惑SNAT放在prerouting链貌似可行，为什么一定要放在postrouting链呢。直到参考了<a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/280114/why-does-snat-happen-in-postrouting-chain-and-dnat-in-prerouting-chain" >iptables - Why does SNAT happen in POSTROUTING chain and DNAT in PREROUTING chain? - Unix &amp; Linux Stack Exchange <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后，发现自己一直忽视了插在需要nat的那张本地网卡</p>
+<p>碎碎念:firewalld可比四表五链简单多了<br>另外，对于iptables和nftables，之前一直疑惑为什么SNAT一定要放在postrouting链，明明放在prerouting链貌似可行。直到参考了<a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/280114/why-does-snat-happen-in-postrouting-chain-and-dnat-in-prerouting-chain" >iptables - Why does SNAT happen in POSTROUTING chain and DNAT in PREROUTING chain? - Unix &amp; Linux Stack Exchange <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后，发现自己忽视了插在本地属于nat网段的那张网卡</p>
 </blockquote>
 <p>此步骤能使用的工具有<code>nmcli</code>和<code>firewall-cmd</code>，根据<a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/manually-assigning-a-zone-to-a-network-connection-in-a-connection-profile-file_working-with-firewalld-zones" >2.5. 在连接配置文件文件中手动将区分配给网络连接 Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，使用<code>nmcli</code>效率更高</p>
 <h3 id="nmcli修改接口区域到trusted"><a href="#nmcli修改接口区域到trusted" class="headerlink" title="nmcli修改接口区域到trusted"></a>nmcli修改接口区域到trusted</h3><p>首先查看接口信息:</p>
@@ -452,7 +452,7 @@
 
 <p>基本来说只用设置默认网关，使用nmcli或者iproute2配置即可</p>
 <p>为上级网关配置路由表:</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 梅林固件web后台直接设定就完事了</span><br><span class="line">NETWORK:192.168.56.0/24 NEXT_HOP:192.168.1.1 FLAGS:UG </span><br></pre></td></tr></table></figure></div>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 梅林固件web后台直接设定就完事了</span><br><span class="line">DST:192.168.56.0/24 NEXT_HOP:192.168.1.50 FLAGS:UG </span><br></pre></td></tr></table></figure></div>
 
 <p>这时虚拟网络已经能和家宽内网双向连通及和互联网正常通信</p>
 <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>在<code>AlmaLinux Router</code>上运行嗅探域名的<a class="link"   target="_blank" rel="noopener" href="https://7cmb.com/%E5%88%A9%E7%94%A8python%E6%8A%93%E5%8F%96%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE%E5%8C%85%E5%B9%B6%E5%AD%98%E5%85%A5mysql/" >scapy脚本(修改版本) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>可以看到访问记录:</p>
@@ -478,7 +478,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2023-12-31 04:24:33
+                    :</strong> 2023-12-31 12:08:17
             </li>
         
         <li>
