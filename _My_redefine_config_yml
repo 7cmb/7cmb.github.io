@@ -25,7 +25,7 @@ defaults:
   # Site logo
   logo: 
   # Site avatar
-  avatar: /images/official_alice.jpg
+  avatar: /images/official_alice.webp
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -103,8 +103,8 @@ home_banner:
   style: fixed # static or fixed
   # Home banner image
   image: 
-    light: /images/light_mode.png # light mode
-    dark: /images/dark_mode.png # dark mode
+    light: /images/light_mode.webp # light mode
+    dark: /images/dark_mode.webp # dark mode
   # Home banner title
   title: "\"7cmb\" AKA Seven-colored Magical Baka"
   # Home banner subtitle
