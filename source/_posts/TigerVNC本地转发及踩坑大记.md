@@ -92,7 +92,7 @@ kill -SIGTERM "-$( ps jx | sed -n '/\/home\/baka\/commands\/vnc.sh/p' | awk '{pr
 ```
 
 # 解决flameshot的dbus问题
-之后x0vncserver转发中出现了导致无法使用的情况。因为状况相似，且几乎同时发生，我第一个反应就是flameshot在某种情况下无法捕获到x窗口的变动直到下次重新登录到wm。即使启动wm中用的是`dbus-launcher [wm-session]`，问题也经常复现。具体表现为截图开启后捕获的不是实时画面，而是该bug出现时的那个瞬间，伴随还有rofi本该透明的地方也会定格在那个画面
+之后x0vncserver转发中出现了导致无法使用的情况。因为状况相似，且几乎同时发生，我第一个反应就是flameshot在某种情况下无法捕获到x窗口的变动直到下次重新登录到wm。即使启动wm中用的是`dbus-launch [wm-session]`，问题也经常复现。具体表现为截图开启后捕获的不是实时画面，而是该bug出现时的那个瞬间，伴随还有rofi本该透明的地方也会定格在那个画面
 
 根据flameshot的Troubleshooting，这是dbus没有正确配置导致的。之后顺着文档顺便配置好了dbus上的桌面通知服务器`dunst`
 
