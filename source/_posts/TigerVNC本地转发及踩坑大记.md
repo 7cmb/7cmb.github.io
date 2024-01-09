@@ -12,7 +12,7 @@ categories:
 ---
 
 # 概述
-多电脑协同工作总是困难的，但是做远程却很简单。vnc另开一个桌面相对来说是是性价比很好的方案。但是笔者使用的wm即使在本地不同tty开多个x会话都无法正常工作，抱着试试的心态试试果然不行。遂在archwiki上发现tigervnc的`x0vncserver`[本地转发功能](https://wiki.archlinuxcn.org/wiki/TigerVNC#%E8%BF%90%E8%A1%8C_x0vncserver_%E6%9D%A5%E7%9B%B4%E6%8E%A5%E6%8E%A7%E5%88%B6%E6%9C%AC%E5%9C%B0%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9)，看到这功能我啪一下就跳起来了，这不正合我意吗，就这三下五除二就配好了。没想到这是踩坑的开始.....
+多电脑协同工作总是困难的，但是做远程却很简单。vnc另开一个桌面相对来说是是性价比很好的方案。但是笔者使用的wm即使在本地不同tty开多个x会话都无法正常工作，抱着试试的心态部署了vnc,果然无法正常使用。遂在archwiki上发现tigervnc的`x0vncserver`[本地转发功能](https://wiki.archlinuxcn.org/wiki/TigerVNC#%E8%BF%90%E8%A1%8C_x0vncserver_%E6%9D%A5%E7%9B%B4%E6%8E%A5%E6%8E%A7%E5%88%B6%E6%9C%AC%E5%9C%B0%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9)，看到这功能我啪一下就跳起来了，这不正合我意吗，四舍五入等于开箱即用。没想到这是踩坑的开始.....
 
 <br>
 
@@ -42,13 +42,13 @@ categories:
 >
 >[Battery Powered Linux Mini-HOWTO DPMS](https://tldp.org/HOWTO/Battery-Powered/displaytypes.html)
 
-而经过实践，除非关闭dpms，否则无论dmps将屏幕设置为上述三种节能状态的哪种，将触发lightdm的锁定。但是关闭dpms之后再利用dpms关闭屏幕，dpms又会再次开启。dmps自带定时将屏幕设置为节能状态(类似windows的自动熄屏)的功能，如果此时节能状态打开了，lightdm锁定将再次触发
+而经过实践，除非关闭dpms，否则无论dpms将屏幕设置为上述三种节能状态的哪种，将触发lightdm的锁定。但是关闭dpms之后再利用dpms关闭屏幕，dpms又会再次开启。dpms自带定时将屏幕设置为节能状态(类似windows的自动熄屏)的功能，如果此时节能状态打开了，lightdm锁定将再次触发
 
 当x0vncserver正在运行时，触发lightdm的锁定，vnc客户端将变成黑屏。如果操作物理机激活屏幕试图解锁，将会发现物理机屏幕会黑屏并且左上角有一条下划线快速闪烁而无论任何操作都无法进入登录界面(包括切换tty)
 
 再者考虑到笔者使用的是设备是二合一设备，设置屏幕上述三种节能状态并不是一个保险的选项。即使dpms将屏幕关闭后再关闭dpms，也有例外情况----误触屏幕导致屏幕被点亮。关闭屏幕的手段是dpms，dpms将再次开启，开启了dpms将定时触发节能状态。这时就又可能会导致上面的状态
 
-对此，笔者的解决方法是**放弃**dpms关闭屏幕；相对的是把屏幕亮度调节为最低(效果和关闭是一样的)，再用xset工具控制dmps设置屏幕为永不超时，并且用xet设置lightdm永不自动锁定。这时dmps虽然是开启的，却永远不会自动触发节能状态
+对此，笔者的解决方法是**放弃**dpms关闭屏幕；相对的是把屏幕亮度调节为最低(效果和关闭是一样的)，再用xset工具控制dpms设置屏幕为永不超时，并且用xet设置lightdm永不自动锁定。这时dpms虽然是开启的，却永远不会自动触发节能状态
 
 综上所述，做这一切就是为了把屏幕关闭并且不触发lightdm的锁屏
 
@@ -64,7 +64,7 @@ light -U 100
 # 关闭自动锁屏
 xset s 0 0
 
-# 将节能模式的触发时间改为永不
+# 将节能状态的触发时间改为永不
 xset dpms 0 0 0
 
 # 关闭dpms功能，防止一次"主动"触发节能模式
@@ -107,14 +107,11 @@ kill -SIGTERM "-$( ps jx | sed -n '/\/home\/baka\/commands\/vnc.sh/p' | awk '{pr
 此时兴奋测试后又是失望，问题依旧
 
 # 排查问题
-几番搜索后，无果。遂开始控制变量法。因为最开始是由输入法快速输入后稳定触发此问题的，遂从fcitx5换到了ibus <del>ibus好丑</del> ，后失望而归。关闭输入法后继续搜索查看文档在机缘巧合中发现只要是浮动的窗口只要碰到屏幕的边界都会触发这个问题
+几番搜索后，无果。遂开始控制变量法。因为最开始是由输入法快速输入后稳定触发此问题的，遂从fcitx5换到了ibus <del>ibus好丑</del> ，后失望而归。继续搜索查看文档的时候，在机缘巧合中发现只要是浮动的窗口只要碰到屏幕的边界都会触发这个问题
 机缘巧合beLike:
 <img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUTI1a1BWanVHVHBWZ2Q5P2U9UlloUDV5.png" alt="">
 这时候想起来x11环境下跑的`picom`是别人fork后打包的aur，遂立刻在配置文件中关闭它的自启动并测试。果然，就是它的问题
 # 修改picom
-之后把picom的后端换成了xrender，虽然没问题但是显卡无法硬解。卸载后在aur里找到了日期新鲜的版本立刻换掉，一切问题都迎刃而解
+之后把picom的后端换成了xrender，虽然没问题但是显卡无法硬解。卸载后在aur里找到了日期新鲜的版本，安装后把xrender改回glx一切问题都迎刃而解
 # 结语
 没想到预计二十分钟的能解决的问题搞了这么久，太难受了，在此记录
-
-**TAT**贴一个胜利结算:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUTZ0NnVDN1FxMm8tRHptP2U9VlI3OVhu.png" alt="">
