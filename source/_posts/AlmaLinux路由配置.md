@@ -28,7 +28,7 @@ categories:
 
 拓扑:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUXVUREhwNXNBUkRoS1ljP2U9R2JBN29q.png" alt="">
+<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUk9iU3RSdmRrSUpYWURVP2U9WTVScGw2.png" alt="">
 
 目的:
 
@@ -79,7 +79,7 @@ sysctl -p /etc/sysctl.d/95-IPv4-forwarding.conf
 > 碎碎念:firewalld可比四表五链简单多了 
 > 另外，对于iptables和nftables，之前一直疑惑为什么SNAT一定要放在postrouting链，明明放在prerouting链貌似可行。直到参考了[iptables - Why does SNAT happen in POSTROUTING chain and DNAT in PREROUTING chain? - Unix &amp; Linux Stack Exchange](https://unix.stackexchange.com/questions/280114/why-does-snat-happen-in-postrouting-chain-and-dnat-in-prerouting-chain)之后，发现自己忽视了插在本地属于nat网段的那张网卡
 
-此步骤能使用的工具有`nmcli`和`firewall-cmd`，根据[2.5. 在连接配置文件文件中手动将区分配给网络连接 Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/manually-assigning-a-zone-to-a-network-connection-in-a-connection-profile-file_working-with-firewalld-zones)，使用`nmcli`效率更高
+此步骤能使用的工具有`nmcli`和`firewall-cmd`，根据[2.5. 在连接配置文件文件中手动将区分配给网络连接 Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/manually-assigning-a-zone-to-a-network-connection-in-a-connection-profile-file_working-with-firewalld-zones)，使用`nmcli`效率更高
 
 ### nmcli修改接口区域到trusted
 
@@ -129,7 +129,7 @@ trusted
 
 ### firewall-cmd修改接口到指定区域
 
-[2.3. 将网络接口分配给区 Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/assigning-a-network-interface-to-a-zone_working-with-firewalld-zones)
+[2.3. 将网络接口分配给区 Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/assigning-a-network-interface-to-a-zone_working-with-firewalld-zones)
 
 ## Step3-配置路由表
 

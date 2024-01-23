@@ -42,7 +42,7 @@ categories:
 # 思路
 上述两个参数对应本地主机arp的请求和响应，两个直觉上本应该协同工作的功能却要分开配置（我猜除了配置类似lvs服务外还有是为了静态mac等需要安全的子网考虑）<br>
 
-对于lvs的来说，上述两个参数的使用我的主观意见是为了分割逻辑通信和物理通信方式。逻辑上使用vip进行通信，实际路由交换使用各自的子网地址。vip的mac理论上应该只绑定活动的DR,所以通过禁止RS主机的vip参与实际交换过程来防止子网内各主机争夺vip的mac地址
+对于lvs的来说，上述两个参数的使用我的主观意见是为了分割逻辑通信和物理通信方式。逻辑上使用vip进行通信，实际使用各自的子网地址。vip的mac理论上应该只绑定活动的DR,所以通过禁止RS主机的vip参与实际交换过程来防止子网内各主机争夺vip的mac地址
 > 莫名想到ibgp路由使用loopback通信的技巧。无需物理上建立直连关系，只需要逻辑上能连接便可建立对等体关系
 >
 > 说起路由和arp,想到的还有完全与此文无关的路由技巧-思科机器默认开启的arp代理，能在某些简单拓扑不配置默认网关的的情况下跨广播域通信，代价是路由器需要维护更大的mac表
@@ -53,7 +53,7 @@ categories:
 
 # 实验
  data1-server:`192.168.56.55/24`部署于vbox子网，在以下拓扑的vbox广播域:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUXVUREhwNXNBUkRoS1ljP2U9R2JBN29q.png" alt="">
+<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUk9iU3RSdmRrSUpYWURVP2U9WTVScGw2.png" alt="">
 本次实验将更改AlmaLinuxRouter的arp_ignore参数，并用data1-server对AlmaLinuxRouter发起arping以验证想法
 > 对于如何验证arp_announce，暂时想不到直观的办法，此处忽略
 
