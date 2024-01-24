@@ -7,7 +7,7 @@ tags:
 categories:
  - [ linux, network]
 ---
-最近在看lvs相关的文档，配置过程中，对DR/TUN的HA,LB方案中控制系统行为的内核参数`arp_announce`和`arp_ignore`有一点不解。从前一直把交换过程中arp的源地址想得理所当然，所以对这两个参数需要一点时间来消化，本文记录一点感想
+最近在看lvs相关的文档，配置过程中，对DR/TUN的HA、LB方案中控制系统行为的内核参数`arp_announce`和`arp_ignore`有一点不解。从前一直把交换过程中arp的源地址想得理所当然，所以对这两个参数需要一点时间来消化，本文记录一点感想
 
 >本文参考:
 >
@@ -42,7 +42,9 @@ categories:
 # 思路
 上述两个参数对应本地主机arp的请求和响应，两个直觉上本应该协同工作的功能却要分开配置（我猜除了配置类似lvs服务外还有是为了静态mac等需要安全的子网考虑）<br>
 
-对于lvs的来说，上述两个参数的使用我的主观意见是为了分割逻辑通信和物理通信方式。逻辑上使用vip进行通信，实际使用各自的子网地址。vip的mac理论上应该只绑定活动的DR,所以通过禁止RS主机的vip参与实际交换过程来防止子网内各主机争夺vip的mac地址
+对于lvs的来说，上述两个参数的使用我的主观意见是为了分割逻辑通信和物理通信方式。逻辑上使用vip进行通信，实际使用各自的子网地址。如果使用keepalive为lvs上的DR也配置HA、LB方案，原理上使用的是vrrp协议，因此vip绑定的必须是活动DR的vrrp虚拟mac；即使不使用keepalive,也应该保证vip绑定的mac在DR主机上
+因此通过禁止RS主机上实际通信的网卡响应arp和用vip作为源地址发送arp请求来防止子网内各主机争夺vip的mac地址
+
 > 莫名想到ibgp路由使用loopback通信的技巧。无需物理上建立直连关系，只需要逻辑上能连接便可建立对等体关系
 >
 > 说起路由和arp,想到的还有完全与此文无关的路由技巧-思科机器默认开启的arp代理，能在某些简单拓扑不配置默认网关的的情况下跨广播域通信，代价是路由器需要维护更大的mac表
@@ -55,6 +57,7 @@ categories:
  data1-server:`192.168.56.55/24`部署于vbox子网，在以下拓扑的vbox广播域:
 <img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUk9iU3RSdmRrSUpYWURVP2U9WTVScGw2.png" alt="">
 本次实验将更改AlmaLinuxRouter的arp_ignore参数，并用data1-server对AlmaLinuxRouter发起arping以验证想法
+
 > 对于如何验证arp_announce，暂时想不到直观的办法，此处忽略
 
 当`/proc/sys/net/ipv4/conf/enp0s8/arp_ignore`为1:
