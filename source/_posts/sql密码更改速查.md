@@ -11,7 +11,7 @@ categories:
 
 <br><br>
 
-` ALTER USER root@localhost IDENTIDIED BY 'aNewPasswd';`
+` ALTER USER root@localhost IDENTIFIED BY 'aNewPasswd';`
 
 <br>
 

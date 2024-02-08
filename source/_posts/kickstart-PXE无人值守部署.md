@@ -75,57 +75,51 @@ firstboot --enable
 # Generated using Blivet version 3.6.0
 ignoredisk --only-use=sda
 autopart
+
 # Partition clearing information
 clearpart --none --initlabel
 
 # System timezone
-timezone America/New_York --utc
+timezone Asia/Shanghai --utc
 
-# Root password 
+# Root password
 rootpw --iscrypted $6$VomxZOUxGqhLUZIm$7zKIbs.0ZN6ogrfVatEGJ4BZhDhskRq53OIrQ5bJXlI8u51CVoXEhKb8InQeBXVD1DtBSMxTtv6PYQBOJrUL01
 user --groups=wheel --name=baka --password=$6$FV09VHp5mYBE5XIJ$vxClFpJV.yTgrCEisPSSZQ1kGinMO/1WcONLbOm5Dng1UCb2dahEQ9yU/VkQIdvfBKWiKhUmQKLmKI0B378KD0 --iscrypted --gecos="baka"
 
-# 无互动命令行式安装
+# 无互动安装
 cmdline
 
-# 安装后需要执行的scripts
+# 安装完成后执行chmod下的脚本，即post
 %post --log=/root/ks-post.log --interpreter=/usr/bin/bash
-
-# 换源
 sed   -e 's|^mirrorlist=|#mirrorlist=|g' \
       -e 's|^# baseurl=https://repo.almalinux.org|baseurl=https://mirrors.aliyun.com|g' \
       -i.bak \
       /etc/yum.repos.d/almalinux*.repo
-
-# 安装需要的软件
 dnf install -y epel-release-9-5.el9.noarch 
 dnf upgrade -y
-dnf install -y ranger neovim ranger nginx 
-sudo dnf install xorg-x11-xauth xorg-x11-fonts-\* xorg-x11-utils dbus-x11 xsel xclip xclock
-
-# 配置ssh服务器
+dnf install -y neovim ranger nginx 
+dnf install -y xorg-x11-xauth xorg-x11-fonts-\* xorg-x11-utils dbus-x11 xsel xclip xclock php
 echo "AllowUsers baka" >> /etc/ssh/sshd_config
-sed -e 's/^#\tX11Forwarding no/X11Forwarding yes/g' -i.bak /etc/ssh/sshd_config
 
-# 配置neovim
-echo 1
+# 配置X转发，为neovim的剪辑版做准备
+sed -e 's/^#\tX11Forwarding no/X11Forwarding yes/g' -i.bak /etc/ssh/sshd_config
 if [ ! -f /usr/share/nvim/sysinit.vim ]
-    then
-        touch /root/warnVimConf
-    else
-        cat > /usr/share/nvim/sysinit.vim <<- 'EOF'
-        set number
-        set relativenumber
-        set cursorline
-        syntax enable
-        set smartindent
-        set nocompatible
-        set clipboard+=unnamedplus
-        set hidden
-        EOF
+	then
+		touch /root/warnVimConf
+	else
+		cat > /usr/share/nvim/sysinit.vim <<- 'EOF'
+		set number
+		set relativenumber
+		set cursorline
+		syntax enable
+		set smartindent
+		set nocompatible
+		set clipboard+=unnamedplus
+		set hidden
+		EOF
 fi
 
-# 在客户机上导入跳板机公钥实现免密登陆
+# 写入跳板机公钥，实现跳板机免密登陆
 su baka << EOF
 mkdir -p /home/baka/pubkey
 mkdir -p /home/baka/.ssh
@@ -133,10 +127,16 @@ chmod 700 /home/baka/.ssh
 curl http://192.168.56.50/pubkey/id_rsa.pub -o /home/baka/pubkey/almalinuxRouter.pub
 cat /home/baka/pubkey/almalinuxRouter.pub >> /home/baka/.ssh/authorized_keys
 chmod 600 /home/baka/.ssh/authorized_keys
-rm  /home/baka/pubkey/almalinuxRouter.pub
+rm /home/baka/pubkey/almalinuxRouter.pub
 EOF
 
+# 在本地web服务器下载vbox增强插件到本地并解压
+curl http://192.168.56.50/sr0.tar -o /root/sr0.tar
+tar -xvf /root/sr0.tar
+touch /etc/sudoers.d/baka
+echo -e 'baka\tALL=(ALL)\tNOPASSWD: ALL' >> /etc/sudoers.d/baka
 %end
+
 ```
 
 笔者用的是最小化安装的iso文件，因此软件环境也是最小化环境，至于软件包组和定制软件包定制可以参考手册
@@ -187,7 +187,7 @@ reboot
 在`append`条目中追加`inst.ks`选项并指定参数:
 
 ```bash
-# 查找"append"开头的行，并只显示处理后的结果
+# 用sed命令查找"append"开头的行，并只显示处理后的结果
 [root@routerAlmaLinux ksfile]# sed -n '/^append/p' /var/lib/tftpboot/pxelinux.cfg/default
 append initrd=pxeboot/initrd.img inst.repo=http://192.168.56.50/almalinux/cdrom inst.ks=http://192.168.56.50/ksfile/ks-pxe.cfg
 ```
@@ -196,7 +196,7 @@ append initrd=pxeboot/initrd.img inst.repo=http://192.168.56.50/almalinux/cdrom 
 
 在`/var/lib/tftpboot/EFI/BOOT/grub.cfg`中的内核条目追加`inst.st`选项并指定参数
 
-例如这里第三行:
+位置在这里第三行:
 
 ```bash
 ### BEGIN /etc/grub.d/10_linux ###
@@ -215,5 +215,4 @@ menuentry 'Install AlmaLinux 9.3' --class fedora --class gnu-linux --class gnu -
 ## Step5-安装系统
 
 如果配置了pxeboot和设定了引导程序的启动项此时开机后就可以AFK了
-
-# 
+ 
