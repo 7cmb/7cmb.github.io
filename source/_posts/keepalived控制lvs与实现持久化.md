@@ -2,12 +2,17 @@
 title: keepalived控制lvs与实现持久化
 date: 2024-02-21 22:41:35
 tags:
+ - lvs
+ - linux
+ - keepalived
 categories:
+ - [ linux, lvs]
+ - [ linux, keepalibed]
 ---
 用`keepalived`来控制lvs的行为而不通过`ipvsadm`可以大大简化配置流程。用ipvsadm配置还得通过一些[手段](https://www.cnblogs.com/alexlv/p/14789862.html#:~:text=%2Fetc%2Fsysconfig%2Fipvsadm,4%E3%80%81%E9%80%9A%E8%BF%87%E9%87%8D%E5%AE%9A%E5%90%91%E5%B0%86%E5%BD%93%E5%89%8D%E8%A7%84%E5%88%99%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E7%9A%84%E8%A7%84%E5%88%99%E5%AD%98%E6%94%BE%E4%BD%8D%E7%BD%AE%EF%BC%8C%E5%B0%86%E8%A7%84%E5%88%99%E5%AD%98%E6%94%BE%E5%9C%A8%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%E9%87%8C%EF%BC%8C%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%81%A2%E5%A4%8D%E9%87%8C%E9%9D%A2%E7%9A%84%E8%A7%84%E5%88%99)把配置保留下来。keepalived一站式解决lvs、vrrp，实在是太爽啦(就是有些地方UserGuide和Manual会打架)
 
 
-对于配置keepalived的vrrp实例还是很简单的，就是注意配置文件`/etc/keepalived/keepalive.conf`权限不能为执行，否则会报错<del>(远程配置文件的时候还没有搞定su下x转发的问题)</del>
+对于配置keepalived的vrrp实例还是很简单的，就是注意配置文件`/etc/keepalived/keepalive.conf`权限不能为执行，否则会报错<del>(远程配置文件的时候还没有搞定su下x转发的问题,我踏马直接肌肉记忆777)</del>
 
 
 ## 基本配置
