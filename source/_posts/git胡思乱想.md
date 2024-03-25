@@ -3,9 +3,9 @@ title: git胡思乱想
 date: 2024-03-22 14:35:40
 tags:
  - git
- - 杂谈
+ - 折腾
 categories:
- - [杂谈, git]
+ - [折腾, git]
 ---
 
 因为不怎么研究code,所以git本人来说其实工具的属性十分强的，属于是能用就行。但是在写文章时遇到两个问题，稍微搜索了一下，并顺便记录感想。
@@ -28,12 +28,9 @@ and the repository exists.
 
 > https://stackoverflow.com/questions/17846529/could-not-open-a-connection-to-your-authentication-agent
 > 
-> 
-> 
-> 
 > [bash - Github permission denied: ssh add agent has no identities - Stack Overflow](https://stackoverflow.com/questions/26505980/github-permission-denied-ssh-add-agent-has-no-identities)
 
-需要在哪个shell拉去仓库则在哪个仓库输入:
+在git bash里输入:
 
 ```bash
 eval `ssh-agent -s`

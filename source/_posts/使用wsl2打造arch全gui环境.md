@@ -5,9 +5,11 @@ tags:
  - linux
  - wsl
  - arch
+ - 折腾
 categories:
  - [linux, arch]
  - [linux, wsl]
+ - [linux, 折腾]
 ---
 
 此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 **[nullpo-head / wsl-distrod](https://github.com/nullpo-head/wsl-distrod)** 上所支持的发行版。

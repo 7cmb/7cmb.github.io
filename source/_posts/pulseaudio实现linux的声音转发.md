@@ -3,8 +3,10 @@ title: Pulseaudio实现linux的声音转发
 date: 2023-09-29 23:08:26
 tags:
  - linux
+ - 折腾
 categories:
  - [ linux, pulseaudio]
+ - [ 折腾, linux]
 ---
 
 此文章用以记录wsl2部署vnc后没有音频的解决方法，虽然个人认为我的wsl2环境下没有音频甚至没有完整桌面都无伤大雅，毕竟只是用作写写配置文件和博客，但是本着做事做全套的作风，还是给加上了音频（即使我的gui 2k分辨率下帧率只有几十）........ <br>
