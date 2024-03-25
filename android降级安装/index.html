@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU3hDcmZ4QkhUTXBFS0dxP2U9TXZVdmRQ.jpg">
 <meta property="article:published_time" content="2024-03-25T09:38:36.000Z">
-<meta property="article:modified_time" content="2024-03-25T16:05:14.895Z">
+<meta property="article:modified_time" content="2024-03-25T16:38:51.480Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="android">
 <meta property="article:tag" content="折腾">
@@ -526,8 +526,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-03-26 00:05:14</span>
-            <span class="mobile">2024-03-26 00:05:14</span>
+            <span class="desktop">2024-03-26 00:38:51</span>
+            <span class="mobile">2024-03-26 00:38:51</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -604,7 +604,7 @@
                 >
 
 <p>4G RAM 放在骁龙820的年代还算是中端，这台机子偏偏是835年代的机器。即使放在当年也是画面太美。解锁bl、root、刷上volte、融卡、划SWAP外总算是达到24年日常能用的水平<del>总算不杀后台了</del>，但是还是遭不住某绿色国产超级即时通信软件的折腾。这软件毫不夸张就是个性能杀手</p>
-<p>重装后低版本后发现<code>XX版本过低，无法登录</code>顿时火冒三丈。查阅资料后发现有一个可行方案——高版本登陆后使用adb降级安装app</p>
+<p>重装低版本后发现<code>XX版本过低，无法登录</code>顿时火冒三丈。查阅资料发现有一个可行方案——高版本登陆后使用adb降级安装app</p>
 <blockquote>
 <p>参考:</p>
 <p><a class="link"   target="_blank" rel="noopener" href="https://lmshuai.com/archives/472/" >https://lmshuai.com/archives/472/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -612,7 +612,7 @@
 <p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/100583752" >https://zhuanlan.zhihu.com/p/100583752 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </blockquote>
 <h1 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h1><ul>
-<li><p>设备已root，并安装管理器</p>
+<li><p>设备已root，并安装root管理器</p>
 </li>
 <li><p>shamiko模块(不确定是否硬性条件)</p>
 </li>
@@ -621,7 +621,7 @@
 <li><p>目标设备的selinux需要设置为宽容即permissive</p>
 </li>
 </ul>
-<h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><h2 id="1-开启全局调试模式"><a href="#1-开启全局调试模式" class="headerlink" title="1-开启全局调试模式"></a>1-开启全局调试模式</h2><p>打开adb命令行，如果多台设备请指定选项:</p>
+<h1 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h1><h2 id="1-开启全局调试模式"><a href="#1-开启全局调试模式" class="headerlink" title="1-开启全局调试模式"></a>1-开启全局调试模式</h2><p>打开adb命令行，如果多台设备连接请指定设备:</p>
 <div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\whoami&gt; adb shell</span><br><span class="line">G8142:/ <span class="variable">$</span> su</span><br><span class="line">G8142:/ <span class="comment"># magisk resetprop ro.debuggable 1</span></span><br><span class="line">G8142:/ <span class="comment"># stop;start;</span></span><br></pre></td></tr></table></figure></div>
 
 <p>完成上述操作之后设备将自动重启，进入调试模式</p>
@@ -635,9 +635,9 @@
 <div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">avc:  denied  &#123; read &#125; for  scontext=u:r:system_server:s0 tcontext=u:object_r:sdcardfs:s0 tclass=file permissive=1</span><br><span class="line">Success # 出现则代表安装完成</span><br></pre></td></tr></table></figure></div>
 
 <p>结束，这时打开app查看数据是否还在即可</p>
-<h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><p>绿色国产超级即时通信软件版本记录:</p>
-<p>7.0.15 Android Q及以上 有独立黑暗模式开关</p>
-<p>7.0.17 Android O以上     也能开机黑暗模式</p>
+<h1 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h1><p>某绿色国产超级即时通信软件版本功能记录:</p>
+<p>7.0.15 Android Q及以上有独立黑暗模式开关</p>
+<p>7.0.17 Android O以上能开启黑暗模式</p>
 <p>8.0.0   该版本才能在24年正常使用某些小程序</p>
 <blockquote>
 <p>不升级连核心功能都不让用的东西，先进捏。。。</p>
@@ -656,7 +656,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-03-26 00:05:14
+                    :</strong> 2024-03-26 00:38:51
             </li>
         
         <li>
