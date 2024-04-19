@@ -6,7 +6,7 @@ tags:
 - lvs
 - linux
 - keepalived
-  categories:
+categories:
 - [ linux, lvs]
 - [ linux, keepalibed]
 
