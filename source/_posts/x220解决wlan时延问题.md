@@ -11,9 +11,9 @@ date: 2024-04-22 00:36:49
 
 之前x220跑windows还算勉强能用，除了需要耐心和屏幕瞎眼以外好像也没有太大的缺点。在debian11-xfce上不跑服务仅仅当作浏览器启动器也算体验良好
 
-然而最近重新整备的时候却发现使本机运行debian12的情况下在内网中访问这台机器的无线网卡延时居然游离在1~300ms不等，这在内网算是天文数字了......换了第二张无线网卡，换网络服务后端也不灵，详情在:[关于x220掌托排线更换提问 - 经典ThinkPad专区 - 专门网](https://www.ibmnb.com/thread-2048807-1-1.html)。找不到解决方法后暂时搁置了一段时间
+然而最近重新整备的时候，却发现本机在运行debian12的情况下，使用内网中其他机器访问他的无线网卡时延时居然游离在1~300ms不等，这在内网算是天文数字了......换第二张无线网卡，换网络服务后端问题依旧，详情在:[关于x220掌托排线更换提问 - 经典ThinkPad专区 - 专门网](https://www.ibmnb.com/thread-2048807-1-1.html)。找不到解决方法后暂时搁置了一段时间
 
-后来抱着试一试的心态从debian12-lxqt换了manjaro-cinnamon发现在某种特定配置下无线网卡就能回到一个相对稳定的状态。但我的需求在manjaro上存在某些我无法接受又找不到workaround和solution的问题，而且都用manjaro了我为什么不用他的上游archlinux呢？因此决定在archlinux live cd上再次debug无线网卡延时问题
+后来抱着试一试的心态从debian12-lxqt换了manjaro-cinnamon。遂发现在某种特定配置下无线网卡就能到达一个相对正常的状态。但manjaro上存在某些我无法接受又找不到workaround和solution的问题，而且都用manjaro了我为什么不用他的上游archlinux呢？因此决定在archlinux live cd上再次debug无线网卡延时问题
 
 > 参考:
 > 
@@ -29,7 +29,7 @@ date: 2024-04-22 00:36:49
 
 ## 1 - 排查后端
 
-首先检查无线服务的后端。archlinux的livecd默认运行iwd；而manjaro-cinnamon的无线服务后端为wpa_supplicant，可以为NetworkManager控制。我的manjaro不存在这个问题，当然一把梭wpa_supplicant+NetworkManager了。这时踢到第一个铁板——把iwd服务停掉了无线网卡驱动出问题了，`ip l`不识别我的无线网卡了。无奈，再度google发现[Reddit - Dive into anything](https://www.reddit.com/r/archlinux/comments/tbnyq4/iwd_device_wlan0_not_found_no_station_on_device/):
+首先检查无线服务的后端。archlinux的livecd无线服务后端默认是iwd；而manjaro-cinnamon的无线服务后端为wpa_supplicant，使用NetworkManager作为前端控制。我的manjaro不存在这个问题，当然一把梭wpa_supplicant+NetworkManager。这时踢到第一个铁板——把iwd服务停掉后无线网卡，`ip l`找不到我的无线网卡了。无奈，再度google发现解决方案[Reddit - Dive into anything](https://www.reddit.com/r/archlinux/comments/tbnyq4/iwd_device_wlan0_not_found_no_station_on_device/):
 
 ```bash
 rmmod iwlmvm
@@ -52,7 +52,7 @@ modprobe iwlmvm
 
 ## 3 - 问题源头
 
-继续查阅资料发现了一点端倪[Fixing Intel Wi-Fi 6 AX200 latency and ping spikes in Linux &#8211; The Z-Issue](https://z-issue.com/wp/fixing-intel-wi-fi-6-ax200-latency-and-ping-spikes-in-linux/)。这篇博文跟我的情况几乎一模一样，尝试了同样的解决方法就可以了`iw wlan0 set power_save off`
+继续查阅资料发现了一点端倪[Fixing Intel Wi-Fi 6 AX200 latency and ping spikes in Linux &#8211; The Z-Issue](https://z-issue.com/wp/fixing-intel-wi-fi-6-ax200-latency-and-ping-spikes-in-linux/)。这篇博文描述的情况跟我几乎一模一样，尝试了同样的解决方法`iw wlan0 set power_save off`问题解决
 
 关于这个配置的持久化可以参考这里[wifi - Make "iw wlan0 set power_save off" permanent - Raspberry Pi Stack Exchange](https://raspberrypi.stackexchange.com/questions/96606/make-iw-wlan0-set-power-save-off-permanent)
 
