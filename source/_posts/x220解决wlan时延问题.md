@@ -29,7 +29,7 @@ date: 2024-04-22 00:36:49
 
 ## 1 - 排查后端
 
-首先检查无线服务的后端。archlinux的livecd无线服务后端默认是iwd；而manjaro-cinnamon的无线服务后端为wpa_supplicant，使用NetworkManager作为前端控制。我的manjaro不存在这个问题，当然一把梭wpa_supplicant+NetworkManager。这时踢到第一个铁板——把iwd服务停掉后无线网卡，`ip l`找不到我的无线网卡了。无奈，再度google发现解决方案[Reddit - Dive into anything](https://www.reddit.com/r/archlinux/comments/tbnyq4/iwd_device_wlan0_not_found_no_station_on_device/):
+首先检查无线服务的后端。archlinux的livecd无线服务后端默认是iwd；而manjaro-cinnamon的无线服务后端为wpa_supplicant，使用NetworkManager作为前端控制。我的manjaro不存在这个问题，当然一把梭wpa_supplicant+NetworkManager。这时踢到第一个铁板——把iwd服务停掉后无线网卡掉设备了。无奈，google发现解决方案[Reddit - Dive into anything](https://www.reddit.com/r/archlinux/comments/tbnyq4/iwd_device_wlan0_not_found_no_station_on_device/):
 
 ```bash
 rmmod iwlmvm
