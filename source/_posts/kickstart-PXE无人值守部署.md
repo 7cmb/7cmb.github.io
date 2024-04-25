@@ -12,7 +12,7 @@ categories:
 
 本文记录了kickstart(下文简称ks)配合pxe实现无人值守部署almalinux以及完成对新设备的基本配置，使用环境为vbox虚拟机
 
-本文一定程度属于[PXE服务部署](https://7cmb.com/PXE%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/)的后篇，这两篇文章记录了在局域网内无人值守情况下完成装机，配置的自动化
+本文一定程度属于[PXE服务部署](https://7cmb.com/pxe%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2/)的后篇，这两篇文章记录了在局域网内无人值守情况下完成装机，配置的自动化
 
 > 参考:
 > 
@@ -104,19 +104,19 @@ echo "AllowUsers baka" >> /etc/ssh/sshd_config
 # 配置X转发，为neovim的剪辑版做准备
 sed -e 's/^#\tX11Forwarding no/X11Forwarding yes/g' -i.bak /etc/ssh/sshd_config
 if [ ! -f /usr/share/nvim/sysinit.vim ]
-	then
-		touch /root/warnVimConf
-	else
-		cat > /usr/share/nvim/sysinit.vim <<- 'EOF'
-		set number
-		set relativenumber
-		set cursorline
-		syntax enable
-		set smartindent
-		set nocompatible
-		set clipboard+=unnamedplus
-		set hidden
-		EOF
+    then
+        touch /root/warnVimConf
+    else
+        cat > /usr/share/nvim/sysinit.vim <<- 'EOF'
+        set number
+        set relativenumber
+        set cursorline
+        syntax enable
+        set smartindent
+        set nocompatible
+        set clipboard+=unnamedplus
+        set hidden
+        EOF
 fi
 
 # 写入跳板机公钥，实现跳板机免密登陆
@@ -136,7 +136,6 @@ tar -xvf /root/sr0.tar
 touch /etc/sudoers.d/baka
 echo -e 'baka\tALL=(ALL)\tNOPASSWD: ALL' >> /etc/sudoers.d/baka
 %end
-
 ```
 
 笔者用的是最小化安装的iso文件，因此软件环境也是最小化环境，至于软件包组和定制软件包定制可以参考手册
@@ -194,7 +193,7 @@ append initrd=pxeboot/initrd.img inst.repo=http://192.168.56.50/almalinux/cdrom 
 
 ### UEFI引导(GRUB)
 
-在`/var/lib/tftpboot/EFI/BOOT/grub.cfg`中的内核条目追加`inst.st`选项并指定参数
+在`/var/lib/tftpboot/EFI/BOOT/grub.cfg`中的内核条目追加`inst.ks`选项并指定参数
 
 位置在这里第三行:
 
@@ -215,4 +214,13 @@ menuentry 'Install AlmaLinux 9.3' --class fedora --class gnu-linux --class gnu -
 ## Step5-安装系统
 
 如果配置了pxeboot和设定了引导程序的启动项此时开机后就可以AFK了
- 
+
+# 补充
+
+## update 2024-4-25
+
+- 当在windows编辑完ks文件需要将文本格式由dos转为unix。以vi为例，`:set ff?`查询文件格式；`:set ff=unix`将文件格式修改为unix格式。如果不修改格式将导致ks文件post脚本无法执行
+
+> 关于vbox的题外话:如果需要使用windows网络共享功能将上网网卡的网络分享给vbox的仅主机网卡，包括但不限于需要重新修改vbox网卡ip再修改回去、重启宿主机、将vbox整张网卡的选项给改了......诸如此类操作才能正常共享出去
+> 
+> vbox的网络真的是坑中坑......
