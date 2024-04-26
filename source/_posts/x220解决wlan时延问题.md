@@ -4,8 +4,7 @@ tags:
   - network
   - nmcli
 categories:
-  - - linux
-    - nmcli
+  - [linux, nmcli ]
 date: 2024-04-22 00:36:49
 ---
 
