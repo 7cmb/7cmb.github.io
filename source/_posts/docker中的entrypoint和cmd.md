@@ -8,7 +8,6 @@ categories:
 date: 2024-04-28 16:32:05
 ---
 
-
 关于docker中的entrypoint和cmd的疑惑很久了，一直搞不明白两者的区别，参阅两篇文章后逐渐解开疑惑，在此记录
 
 > 参考:
@@ -17,19 +16,15 @@ date: 2024-04-28 16:32:05
 > 
 > [Docker 的 ENTRYPOINT 和 CMD 参数探秘 | 亚马逊AWS官方博客](https://aws.amazon.com/cn/blogs/china/demystifying-entrypoint-cmd-docker/)
 
-
-
 # ENTRYPOINT
 
 `entrypoint`参数我的理解是相当于一个指定一个解释器，就像shell的shebang。一切传入到容器的参数和选项都将由`entrypoint`指定的值来处理。
 
 也就是说指定了`entrypoint`的值以后，就可以将容器本身当成一个二进制文件或者说可执行文件，在run生成容器实例时使用镜像描述的`cmd`或者命令行中覆写的`cmd`当作参数传入
 
-如果`entrypoint`没有指定，则默认使用``
+如果`entrypoint`没有指定，则执行`cmd`中的第一个参数
 
 这个参数只能出现一次
-
-
 
 # CMD
 
@@ -37,21 +32,15 @@ date: 2024-04-28 16:32:05
 
 这个参数可与出现多次，但只有最后一次指定的会生效
 
-
-
 # 小结
 
 也就是说，ENTRYPOINT和CMD使用是相对灵活的。对于需要处理单一任务的容器可以指定ENTRYPOINT和CMD以专注特定任务；而只使用CMD而不使用ENTRYPOINT就可以随时更改容器的使用的主程序以完成不同的任务
-
-
 
 - ENTRYPOINT+CMD == 可执行文件+默认参数
 
 - ENTRYPOINT == 解释器
 
 - CMD == 直接执行命令
-
-
 
 # 分析
 
@@ -92,9 +81,7 @@ docker run -i --name 1entry_point
 
 > 对于无ENTRYPOINT只有CMD的配置，`Path`为CMD第一个字段，剩下的字段分开塞进`Args`
 > 
-> 
 > 对于ENTRIYPOINT和CMD都有的配置，`Path`应该也是ENTRYPOINT的第一个字段，剩下的CMD和ENTRYPOINT字段应该也要塞进`Args`里(这里尚未验证)
-> 
 > 
 > 另外，该配置里那段奇怪的编码字段是中文“测试”的UTF-16编码
 
@@ -122,8 +109,6 @@ docker run -i --name 1entry_point
 ```
 
 可以看到两个效果是一样的。说到底只是一个把cowsay这个可执行文件放在`entrypoint`；一个放在`cmd`
-
-
 
 # 总结
 
