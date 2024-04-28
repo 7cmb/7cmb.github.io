@@ -26,6 +26,12 @@ nvim不直接连接系统剪辑板，首先需要安装`xsel`和`xclip`之后在
 
 而ssh客户端配置中有一个叫`ForwardX11Trusted`的选项，对应参数`-Y`。指定这个参数将信任远程x客户端，即远程客户端将不再通过x服务器的认证
 
+> 
+> 
+> 此方法有安全风险，建议在安全可控的环境下使用
+> 
+> 
+> 
 > 参考:
 > 
 > [x11 - ssh, is better to use -X or -Y? - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/619083/ssh-is-better-to-use-x-or-y)
@@ -36,7 +42,7 @@ nvim不直接连接系统剪辑板，首先需要安装`xsel`和`xclip`之后在
 
 # 二、配置
 
-## ssh客服端
+## ssh客户端
 
 添加以下配置到ssh客户端配置文件以跳过x认证
 
