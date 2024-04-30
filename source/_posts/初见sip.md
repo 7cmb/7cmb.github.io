@@ -9,7 +9,6 @@ categories:
 date: 2024-04-19 15:23:39
 ---
 
-
 > 本文跳过注册保活等基本操作，默认通话双方已注册且能呼叫
 > 
 > 本文<del>复制粘贴</del>参考:
@@ -99,7 +98,6 @@ transaction、dialog和session的区别下文揭示
 > 
 > [SIP - Messaging](https://www.tutorialspoint.com/session_initiation_protocol/session_initiation_protocol_messaging.htm)
 > 
-> 
 > 例如下面过程:
 > 
 > 在这个过程中可以明显观察到无论是invite和bye都要通过register服务器转发一次，对应的转发过程开了条call-id，可以看到虽然是p2p但是并非完全透明，register server明显参与了这次完整的call。在caller与register server之间call-id为`1808150176@192.168.7.101`；而callee与register server之间call-id为`5fcdc4bf-3662-123a-9a87-1158c9642285`。这两个call-id决定了一个session的建立和结束
@@ -110,14 +108,14 @@ transaction、dialog和session的区别下文揭示
 
 - Transaction(事务):一个Transaction包含一个Rrequest和可能的多个Response。在一个Transaction在接收到特定的Final Response(2xx, 3xx, 4xx, 5xx, or 6xx)和这些Response的ACK报文后结束。结束前也可以接受多个非Final Response(1xx)。注意，在Final Responese(200)后面的ACK报文并非Transaction的一部分
 
-- Dialog(对话):一对SIP peers对话中间有多个Transaction。Dialog被设立的目的是建立、修改、拆卸(teardown，英文直译，应该是指发送bye结束session的动作)。在一对peer中可能无论何时都有可能产生多个Dialog，一般可以通过SIP头的from、to、call-id确认相应的Dialog。例如一个peer同时收到了两个bye请求，可以检查上述SIP头的字段以确认到底是哪个Dialog
+- Dialog(对话):一对SIP peers对话中间有多个Transaction。Dialog被设立的目的是建立、修改、拆卸(teardown，英文直译，应该是指发送bye结束session的动作)。在一对peer中可能无论何时都有可能产生多个Dialog，一般可以通过SIP头的from tag、to tag、call-id以确认相应的Dialog。例如一个peer同时收到了两个bye请求，可以检查上述SIP头的字段以确认到底是哪个Dialog
 
 - Session(会话):Session的概念相对简单，它仅仅用于描述流媒体传输之间的过程，没有流媒体传输就没有Session
 
 # 5 - 关于tag、call-id和branch
 
-- tag:标识身份
+- tag:标识同一个dialog(同一call-id)中caller和callee的身份
 
-- call-id:决定一段session，`caller和rigister server的call-id`和`callee和register server的call-id`共同决定了一段session(似乎跳脱出session，call-id也能当branch用，例如一对message的Request和200 OK)
+- call-id:决定一段session，`caller和rigister server的call-id`和`callee和register server的call-id`共同决定了一段session(似乎跳脱出session和dialog，call-id也能当branch用，例如一对message的Request和200 OK)
 
 - branch:决定了transaction，相对应的transaction有一样的branch值
