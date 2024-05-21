@@ -1,5 +1,5 @@
 ---
-title: ssh下使用nvim复制到系统剪辑板
+title: ssh下使用nvim复制到系统剪切板
 date: 2023-12-27 14:13:12
 tags:
  - linux
@@ -10,13 +10,13 @@ categories:
  - [linux,ssh]
 ---
 
-在DE环境下使用ssh复制到系统剪辑版十分方便，在WM却十分蛋疼.....ssh下使用终端下的文本编辑器不搞定复制问题可以说是痛不欲生了
+在DE环境下使用ssh复制到系统剪切板十分方便，在WM却十分蛋疼.....ssh下使用终端下的文本编辑器不搞定复制问题可以说是痛不欲生了
 
-在neovim中有多种解决系统剪辑版的方案，可以用`:help provider-clipboard`查看解决官方提供的方法。本文将使用`xsel`和`xclip`解决这个问题
+在neovim中有多种解决系统剪切板的方案，可以用`:help provider-clipboard`查看解决官方提供的方法。本文将使用`xsel`和`xclip`解决这个问题
 
 # 一、思路
 
-nvim不直接连接系统剪辑板，首先需要安装`xsel`和`xclip`之后在nvim配置文件加入`set clipboard+=unnamedplus`这一行以配置完成**nvim连接本地系统剪辑版**
+nvim不直接连接系统剪辑板，首先需要安装`xsel`和`xclip`之后在nvim配置文件加入`set clipboard+=unnamedplus`这一行以配置完成**nvim连接本地系统剪切板**
 
 `xsel`和`xclip`是运行在x服务上的软件，在x服务器上显然是可以使用的。ssh服务器提供x转发，所以可以在远程服务器上使用这两款软件，再利用x转发到本地x服务器以获取远程服务器上nvim复制的内容到本地剪辑板
 
