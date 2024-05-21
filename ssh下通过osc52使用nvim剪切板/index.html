@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGNOdGk4QnpVWnFXSU1rP2U9d29SeXBh.png">
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFp1Z05PMk9TQVAtai1JP2U9VUZlU2R0.png">
 <meta property="article:published_time" content="2024-05-21T05:43:41.000Z">
-<meta property="article:modified_time" content="2024-05-21T10:02:44.704Z">
+<meta property="article:modified_time" content="2024-05-21T14:12:36.933Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="nvim">
@@ -474,7 +474,7 @@
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">28</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">29</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -528,8 +528,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-05-21 18:02:44</span>
-            <span class="mobile">2024-05-21 18:02:44</span>
+            <span class="desktop">2024-05-21 22:12:36</span>
+            <span class="mobile">2024-05-21 22:12:36</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -715,15 +715,18 @@
 <h2 id="2-配置lazy-nvim"><a href="#2-配置lazy-nvim" class="headerlink" title="2-配置lazy.nvim"></a>2-配置lazy.nvim</h2><p><code>lazy.nvim</code>是neovim的插件管理器，并非那个vim发行版，注意分别</p>
 <p>安装很简单，只需要在nvim的配置文件<code>~/.config/nvim/init.lua</code>或<code>~/.config/nvim/init.vim</code>加上那么一段代码就能完成安装并配置(前提是有可用的网络):</p>
 <div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> lazypath = vim.fn.stdpath(<span class="string">&quot;data&quot;</span>) .. <span class="string">&quot;/lazy/lazy.nvim&quot;</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (vim.uv <span class="keyword">or</span> vim.loop).fs_stat(lazypath) <span class="keyword">then</span></span><br><span class="line">  vim.fn.system(&#123;</span><br><span class="line">    <span class="string">&quot;git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;clone&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--filter=blob:none&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://github.com/folke/lazy.nvim.git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--branch=stable&quot;</span>, <span class="comment">-- latest stable release</span></span><br><span class="line">    lazypath,</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">vim.opt.rtp:prepend(lazypath)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;&#125;)</span><br></pre></td></tr></table></figure></div>
-<p>自动安装过程:<br><img  
+
+<p>当然也能提前把这个仓库克隆到对应路径或者使用包管理例如AUR相关的工具安装到相应路径，这个路径得翻翻XDG定义和neovim的文档</p>
+<p>重新打开nvim后等待一会，弹出正常界面<code>:checkhealth lazy</code>即可验证插件工作情况</p>
+<h2 id="3-安装插件"><a href="#3-安装插件" class="headerlink" title="3-安装插件"></a>3-安装插件</h2><p>安装插件这一步可以非常简单，前提是科学上网，比如说lazy.nvim仓库md的例子。编辑上一节配置文件的最后一行:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;</span><br><span class="line">  <span class="string">&quot;folke/which-key.nvim&quot;</span>,		      <span class="comment">-- 1、github仓库的名字，下次打开nvim会拉取仓库安装</span></span><br><span class="line">  &#123; <span class="string">&quot;folke/neoconf.nvim&quot;</span>, cmd = <span class="string">&quot;Neoconf&quot;</span> &#125;,  <span class="comment">-- 2、第二各插件，同上</span></span><br><span class="line">  <span class="string">&quot;folke/neodev.nvim&quot;</span>,                        <span class="comment">-- 3、第三个插件，同上</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">-- lazy.nvim仓库内含详细说明，请务必花半个小时了解lua</span></span><br></pre></td></tr></table></figure></div>
+
+<p>自动安装插件过程:<br><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFp1Z05PMk9TQVAtai1JP2U9VUZlU2R0.png"
                       alt="" 
-                ><br>当然也能提前把这个仓库克隆到对应路径或者使用包管理例如AUR相关的工具安装到相应路径，这个路径得翻翻XDG定义和neovim的文档</p>
-<p>重新打开nvim后等待一会，弹出正常界面<code>:checkhealth lazy</code>即可验证插件工作情况</p>
-<h2 id="3-安装插件"><a href="#3-安装插件" class="headerlink" title="3-安装插件"></a>3-安装插件</h2><p>安装插件这一步可以非常简单，前提是科学上网，比如说lazy.nvim仓库md的例子。编辑上一节配置文件的最后一行:</p>
-<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;</span><br><span class="line">  <span class="string">&quot;folke/which-key.nvim&quot;</span>,		      <span class="comment">-- 1、github仓库的名字，下次打开nvim会拉取仓库安装</span></span><br><span class="line">  &#123; <span class="string">&quot;folke/neoconf.nvim&quot;</span>, cmd = <span class="string">&quot;Neoconf&quot;</span> &#125;,  <span class="comment">-- 2、第二各插件，同上</span></span><br><span class="line">  <span class="string">&quot;folke/neodev.nvim&quot;</span>,                        <span class="comment">-- 3、第三个插件，同上</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">-- lazy.nvim仓库内含详细说明，请务必花半个小时了解lua</span></span><br></pre></td></tr></table></figure></div>
+                ></p>
 <p>手动安装当然也可以，只要nvim能找到对应位置，并且按照插件手册写好在配置文件中写好该插件的配置；下面演示手动安装</p>
 <p>以<a class="link"   target="_blank" rel="noopener" href="https://github.com/ojroques/nvim-osc52" >nvim-osc52 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>为例，这是仓库的目录结构:</p>
 <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  nvim-osc52 git:(main) tree .</span><br><span class="line">.</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">└── lua</span><br><span class="line">    ├── osc52</span><br><span class="line">    │   └── base64.lua</span><br><span class="line">    └── osc52.lua</span><br><span class="line"></span><br><span class="line">3 directories, 4 files</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
@@ -772,7 +775,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-05-21 18:02:44
+                    :</strong> 2024-05-21 22:12:36
             </li>
         
         <li>
@@ -879,7 +882,7 @@
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共 28 篇文章
+                        共 29 篇文章
                     </span>
                     
                 </p>
