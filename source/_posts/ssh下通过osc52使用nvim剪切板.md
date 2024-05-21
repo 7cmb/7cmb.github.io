@@ -5,10 +5,8 @@ tags:
   - nvim
   - ssh
 categories:
-  - - linux
-    - nvim
-  - - linux
-    - ssh
+  - [linux, nvim]
+  - [linux, ssh]
 date: 2024-05-21 13:43:41
 ---
 
@@ -82,8 +80,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({})
 ```
-自动安装过程:
-<img src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFp1Z05PMk9TQVAtai1JP2U9VUZlU2R0.png" alt="" >
+
 当然也能提前把这个仓库克隆到对应路径或者使用包管理例如AUR相关的工具安装到相应路径，这个路径得翻翻XDG定义和neovim的文档
 
 重新打开nvim后等待一会，弹出正常界面`:checkhealth lazy`即可验证插件工作情况
@@ -98,6 +95,10 @@ require("lazy").setup({
 })
 -- lazy.nvim仓库内含详细说明，请务必花半个小时了解lua
 ```
+
+自动安装插件过程:
+<img src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFp1Z05PMk9TQVAtai1JP2U9VUZlU2R0.png" alt="" >
+
 手动安装当然也可以，只要nvim能找到对应位置，并且按照插件手册写好在配置文件中写好该插件的配置；下面演示手动安装
 
 以[nvim-osc52](https://github.com/ojroques/nvim-osc52)为例，这是仓库的目录结构:

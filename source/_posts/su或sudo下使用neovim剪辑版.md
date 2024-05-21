@@ -3,13 +3,12 @@
 title: su或sudo下使用neovim剪切板
 date: 2024-02-08 18:49:40
 tags:
-
-- linux
-- nvim
-- ssh
-  categories:
-- [linux, nvim]
-- [linux,ssh]
+ - linux
+ - nvim
+ - ssh
+categories:
+ - [linux, nvim]
+ - [linux, ssh]
 
 ---
 
