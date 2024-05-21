@@ -259,4 +259,4 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.smartindent = true
  ```
-对于其他插件各自的配置文件统一放在`nvim/lua/individual/`文件夹。虽然配置完得去`lazy_conf.lua`声明一下，但是不会演化(感觉可以用lua写脚本实现自动声明)
+对于其他插件各自的配置文件统一放在`nvim/lua/individual/`文件夹。虽然配置完得去`lazy_conf.lua`声明一下，但是不会眼花(感觉可以用lua写脚本实现自动声明)
