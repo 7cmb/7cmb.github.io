@@ -34,7 +34,7 @@ osc52是ansi下的转义序列，可以实现将文本从终端复制到系统�
 笔者使用的终端是suckless的`st`，但是并非默认开启osc52功能，需要修改源码重新编译以开启[功能](https://git.suckless.org/st/commit/a2a704492b9f4d2408d180f7aeeacf4c789a1d67.html)。对于其他终端，vim-oscyank的作者给了一份表以[参考](https://github.com/ojroques/nvim-osc52)
 
 |Terminal 	|OSC52 support|
-|:---		|:---         |
+|:---|:---|
 |alacritty| 	yes|
 |contour| 	yes|
 |far2l| 	yes
