@@ -13,33 +13,28 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://7cmb.github.io/使用wsl2打造arch全gui环境/"/>
+    <link rel="canonical" href="https://7cmb.github.io/ssh下通过osc52使用nvim剪辑板/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
+        <meta name="description" content="本文旨于记录作者利用lazy.nvim插件管理器安装ojroques&#x2F;nvim-osc52到neovim的过程参考:https:&#x2F;&#x2F;github.com&#x2F;ojroques&#x2F;vim-oscyank https:&#x2F;&#x2F;github.com&#x2F;ojroques&#x2F;nvim-osc52 https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;vim&#x2F;comments&#x2F;k1ydpn&#x2F;a_guide_on_how_to">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用WSL2打造Arch全GUI环境">
-<meta property="og:url" content="https://7cmb.github.io/%E4%BD%BF%E7%94%A8wsl2%E6%89%93%E9%80%A0arch%E5%85%A8gui%E7%8E%AF%E5%A2%83/index.html">
+<meta property="og:title" content="ssh下通过osc52使用nvim剪切板">
+<meta property="og:url" content="https://7cmb.github.io/ssh%E4%B8%8B%E9%80%9A%E8%BF%87osc52%E4%BD%BF%E7%94%A8nvim%E5%89%AA%E8%BE%91%E6%9D%BF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
+<meta property="og:description" content="本文旨于记录作者利用lazy.nvim插件管理器安装ojroques&#x2F;nvim-osc52到neovim的过程参考:https:&#x2F;&#x2F;github.com&#x2F;ojroques&#x2F;vim-oscyank https:&#x2F;&#x2F;github.com&#x2F;ojroques&#x2F;nvim-osc52 https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;vim&#x2F;comments&#x2F;k1ydpn&#x2F;a_guide_on_how_to">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1aMWdwSUo.jpg">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdidWVlblpIZVluaDJiYWs_ZT1BZFVwNlc.jpg">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdiN1RJN0h0ZER0NlcwRmM_ZT1RVVg5WEI.jpg">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjSjZsMEdfel9wRTBSSHM_ZT05UFRXZlo.jpg">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkbGlUcjZqSnR6djlVNms_ZT1qb2hSd0w.jpg">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkMnlISi1tWVE1Y29WdjA_ZT1RYkMwbVc.jpg">
-<meta property="article:published_time" content="2023-09-28T14:50:12.000Z">
-<meta property="article:modified_time" content="2024-05-15T07:29:42.534Z">
+<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGNOdGk4QnpVWnFXSU1rP2U9d29SeXBh.png">
+<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFp1Z05PMk9TQVAtai1JP2U9VUZlU2R0.png">
+<meta property="article:published_time" content="2024-05-21T05:31:35.000Z">
+<meta property="article:modified_time" content="2024-05-21T05:31:35.947Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="linux">
-<meta property="article:tag" content="折腾">
-<meta property="article:tag" content="wsl">
-<meta property="article:tag" content="arch">
+<meta property="article:tag" content="nvim">
+<meta property="article:tag" content="ssh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1aMWdwSUo.jpg">
+<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGNOdGk4QnpVWnFXSU1rP2U9d29SeXBh.png">
     
     
         <!-- Google tag (gtag.js) -->
@@ -61,7 +56,7 @@
     
     <title>
         
-            利用WSL2打造Arch全GUI环境 -
+            ssh下通过osc52使用nvim剪切板 -
         
         7cmb&#39;s blog.
     </title>
@@ -505,7 +500,7 @@
         <div class="article-title relative w-full">
             
                 <div class="w-full flex items-center pt-6 justify-start">
-                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">利用WSL2打造Arch全GUI环境</h1>
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">ssh下通过osc52使用nvim剪切板</h1>
                 </div>
             
             </div>
@@ -526,15 +521,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-09-28 22:50:12</span>
-        <span class="mobile">2023-09-28 22:50:12</span>
+        <span class="desktop">2024-05-21 13:31:35</span>
+        <span class="mobile">2024-05-21 13:31:35</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-05-15 15:29:42</span>
-            <span class="mobile">2024-05-15 15:29:42</span>
+            <span class="desktop">2024-05-21 13:31:35</span>
+            <span class="mobile">2024-05-21 13:31:35</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -558,21 +553,14 @@
                             <li>></li>
                         
                         <li>
-                            <a href="/categories/linux/arch/">arch</a>&nbsp;
+                            <a href="/categories/linux/nvim/">nvim</a>&nbsp;
                         </li>
                     
                     
                 
                     
                         <li>
-                            | <a href="/categories/linux/wsl/">wsl</a>&nbsp;
-                        </li>
-                    
-                    
-                
-                    
-                        <li>
-                            | <a href="/categories/linux/%E6%8A%98%E8%85%BE/">折腾</a>&nbsp;
+                            | <a href="/categories/linux/ssh/">ssh</a>&nbsp;
                         </li>
                     
                     
@@ -590,15 +578,11 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/%E6%8A%98%E8%85%BE/">折腾</a>&nbsp;
+                        | <a href="/tags/nvim/">nvim</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/wsl/">wsl</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/arch/">arch</a>&nbsp;
+                        | <a href="/tags/ssh/">ssh</a>&nbsp;
                     </li>
                 
             </ul>
@@ -624,170 +608,70 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <p>此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 <strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/nullpo-head/wsl-distrod" >nullpo-head &#x2F; wsl-distrod <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong> 上所支持的发行版。</p>
-<h1 id="1、先决条件"><a href="#1、先决条件" class="headerlink" title="1、先决条件"></a>1、先决条件</h1><p>系统已开启hyper-v虚拟机</p>
-<p>Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](<a class="link"   target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual#step-3---enable-virtual-machine-feature" >旧版 WSL 的手动安装步骤 | Microsoft Learn <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)。</p>
-<blockquote>
-<p>ps: Windows 10好像仅限专业版</p>
+            <blockquote>
+<p>本文旨于记录作者利用<code>lazy.nvim</code>插件管理器安装<code>ojroques/nvim-osc52</code>到neovim的过程<br>参考:<br><br><a class="link"   target="_blank" rel="noopener" href="https://github.com/ojroques/vim-oscyank" >https://github.com/ojroques/vim-oscyank <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://github.com/ojroques/nvim-osc52" >https://github.com/ojroques/nvim-osc52 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br><a class="link"   target="_blank" rel="noopener" href="https://www.reddit.com/r/vim/comments/k1ydpn/a_guide_on_how_to_copy_text_from_anywhere/" >https://www.reddit.com/r/vim/comments/k1ydpn/a_guide_on_how_to_copy_text_from_anywhere/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </blockquote>
-<h1 id="2、安装-WSL2-命令（以windows-10为例）"><a href="#2、安装-WSL2-命令（以windows-10为例）" class="headerlink" title="2、安装 WSL2 命令（以windows 10为例）"></a>2、安装 WSL2 命令（以windows 10为例）</h1><p>使用管理员权限打开 powershell 以启用“适用于 Linux 的 Windows 子系统”可选功能</p>
-<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:Microsoft<span class="literal">-Windows-Subsystem-Linux</span> /all /norestart</span><br></pre></td></tr></table></figure></div>
-
-<br>
-<br>
-
-<p>启用虚拟机功能</p>
-<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dism.exe /online /<span class="built_in">enable-feature</span> /featurename:VirtualMachinePlatform /all /norestart</span><br></pre></td></tr></table></figure></div>
-
-<p>之后重启设备以完成系统对wsl2的更新</p>
-<br>
-<br>
-
-<p>在官网链接上下载wsl2内核更新包并安装（wsl和wsl2原理不同，所以需要下载内核，具体可自行查找资料）</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" >内核更新包 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>没想到围绕一个剪切板转发能记录这么多次….<br>之前的做法是透过x11转发xclip剪切板到本地x服务器，这种做法我认为不太好。除了有<a class="link"   target="_blank" rel="noopener" href="https://askubuntu.com/questions/101829/why-is-x11-a-security-risk-in-servers" >潜在的安全问题 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>外，还有一个就是为了个剪切板搬来整个x11。无论怎么说都不是个优雅的方案<br><br><code>ojroques/vim-oscyank</code>和<code>ojroques/nvim-osc52</code>分别是vim和neovim下的插件，目的是在vim和neovim下实现osc52转义序列以将文本从终端复制到系统剪切板<br><br>osc52是ansi下的转义序列，可以实现将文本从终端复制到系统剪切板而不考虑其他东西，详见<a class="link"   target="_blank" rel="noopener" href="https://www.reddit.com/r/vim/comments/k1ydpn/a_guide_on_how_to_copy_text_from_anywhere/" >A guide on how to copy text from anywhere, including through SSH, with OSC52  <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <blockquote>
-<p>wsl与wsl2差别的官网资料： <a class="link"   target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/compare-versions#wsl-in-the-microsoft-store" >比较 WSL 版本 | Microsoft Learn <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/neovim/neovim/pull/25872" >neovim 10.0版本 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>官方支持osc52了</p>
 </blockquote>
-<br>
-<br>
-
-<p>将wsl2设为默认运行版本</p>
-<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--set-default-version</span> <span class="number">2</span></span><br></pre></td></tr></table></figure></div>
-
-<p>自此，系统对wsl2的支持就已经完成，接下来便是安装发行版。</p>
-<h1 id="3、安装带有systemd的linux发行版（以debian为例）"><a href="#3、安装带有systemd的linux发行版（以debian为例）" class="headerlink" title="3、安装带有systemd的linux发行版（以debian为例）"></a>3、安装带有systemd的linux发行版（以debian为例）</h1><p>刚好需要一个debian用以学习，写博客顺便搭了…..此步骤什么发行版都一样</p>
-<p>打开以下链接下载你所需要的最新release后解压顺带找到 <a class="link"   target="_blank" rel="noopener" href="https://images.linuxcontainers.org/images/" >这里 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 以下载你所需要的发行版</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/nullpo-head/wsl-distrod" >nullpo-head &#x2F; wsl-distrod <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<br>
-<br>
-
-<p>找到 <strong>distrod_wsl_launcher.exe</strong> 并运行</p>
-<img  title="" 
+<h1 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h1><p>1、终端支持osc52<br><br>2、使用neovim<br><br>笔者配置:<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1aMWdwSUo.jpg"
-                      alt="index_of_files"
-                >
-
-<p>运行后将出现以下界面</p>
-<img  title="distrods_eg" 
+                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGNOdGk4QnpVWnFXSU1rP2U9d29SeXBh.png"
+                      alt="" 
+                ></p>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="1-配置终端"><a href="#1-配置终端" class="headerlink" title="1-配置终端"></a>1-配置终端</h2><p>笔者使用的终端是suckless的<code>st</code>，但是并非默认开启osc52功能，需要修改源码重新编译以开启<a class="link"   target="_blank" rel="noopener" href="https://git.suckless.org/st/commit/a2a704492b9f4d2408d180f7aeeacf4c789a1d67.html" >功能 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。对于其他终端，vim-oscyank的作者给了一份表以<a class="link"   target="_blank" rel="noopener" href="https://github.com/ojroques/nvim-osc52" >参考 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>|Terminal 	|OSC52 support|<br>|:—		|:—         |<br>|alacritty| 	yes|<br>|contour| 	yes|<br>|far2l| 	yes<br>|foot| 	yes|<br>|gnome terminal (and other VTE-based terminals)| 	not yet|<br>|hterm| 	yes|<br>|iterm2| 	yes|<br>|kitty| 	yes|<br>|konsole| 	not yet|<br>|qterminal| 	not yet|<br>|rxvt| 	yes|<br>|st| 	yes (but needs to be enabled, see here)|<br>|terminal.app| 	no, but see workaround|<br>|tmux| 	yes|<br>|urxvt| 	yes (with a script, see here)|<br>|wezterm| 	yes|<br>|windows terminal| 	yes|<br>|xterm.js (Hyper terminal)| 	not yet|<br>|zellij| 	yes|</p>
+<p>照着各家终端配置完测试功能:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> -ne <span class="string">&quot;\033]52;c;<span class="subst">$(echo -n hello | base64)</span>\a&quot;</span></span><br></pre></td></tr></table></figure></div>
+<p>复制以下命令到终端并执行，检查粘贴结果是否为hello，否则步骤未完成</p>
+<h2 id="2-配置lazy-nvim"><a href="#2-配置lazy-nvim" class="headerlink" title="2-配置lazy.nvim"></a>2-配置lazy.nvim</h2><p><code>lazy.nvim</code>是neovim的插件管理器，并非那个vim发行版，注意分别</p>
+<p>安装很简单，只需要在nvim的配置文件<code>~/.config/nvim/init.lua</code>或<code>~/.config/nvim/init.vim</code>加上那么一段代码就能完成安装并配置(前提是有可用的网络):</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> lazypath = vim.fn.stdpath(<span class="string">&quot;data&quot;</span>) .. <span class="string">&quot;/lazy/lazy.nvim&quot;</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (vim.uv <span class="keyword">or</span> vim.loop).fs_stat(lazypath) <span class="keyword">then</span></span><br><span class="line">  vim.fn.system(&#123;</span><br><span class="line">    <span class="string">&quot;git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;clone&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--filter=blob:none&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://github.com/folke/lazy.nvim.git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--branch=stable&quot;</span>, <span class="comment">-- latest stable release</span></span><br><span class="line">    lazypath,</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">vim.opt.rtp:prepend(lazypath)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;&#125;)</span><br></pre></td></tr></table></figure></div>
+<p>自动安装过程:<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdidWVlblpIZVluaDJiYWs_ZT1BZFVwNlc.jpg"
-                      alt=""
-                >
-
-<p>此时选择 <em><strong>[1]</strong></em> 则使用本地文件，选择 <em><strong>[2]</strong></em> 则使用指定连接以下载对应发行版，一般选 <em><strong>[2]</strong></em> 就行，笔者因为网络问题故选 <em><strong>[1]</strong></em> 以下示例为使用本地文件的操作</p>
-<br>
-<br>
-
-<p>输入文件路径，摁shift加右键即可选择复制路径，之后删除引号</p>
-<img  title="distrods_input" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdiN1RJN0h0ZER0NlcwRmM_ZT1RVVg5WEI.jpg"
-                      alt=""
-                >
-
+                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFp1Z05PMk9TQVAtai1JP2U9VUZlU2R0.png"
+                      alt="" 
+                ><br>当然也能提前把这个仓库克隆到对应路径或者使用包管理例如AUR相关的工具安装到相应路径，这个路径得翻翻XDG定义和neovim的文档</p>
+<p>重新打开nvim后等待一会，弹出正常界面<code>:checkhealth lazy</code>即可验证插件工作情况</p>
+<h2 id="3-安装插件"><a href="#3-安装插件" class="headerlink" title="3-安装插件"></a>3-安装插件</h2><p>安装插件这一步可以非常简单，前提是科学上网，比如说lazy.nvim仓库md的例子。编辑上一节配置文件的最后一行:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;</span><br><span class="line">  <span class="string">&quot;folke/which-key.nvim&quot;</span>,		      <span class="comment">-- 1、github仓库的名字，下次打开nvim会拉取仓库安装</span></span><br><span class="line">  &#123; <span class="string">&quot;folke/neoconf.nvim&quot;</span>, cmd = <span class="string">&quot;Neoconf&quot;</span> &#125;,  <span class="comment">-- 2、第二各插件，同上</span></span><br><span class="line">  <span class="string">&quot;folke/neodev.nvim&quot;</span>,                        <span class="comment">-- 3、第三个插件，同上</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">-- lazy.nvim仓库内含详细说明，请务必花半个小时了解lua</span></span><br></pre></td></tr></table></figure></div>
+<p>手动安装当然也可以，只要nvim能找到对应位置，并且按照插件手册写好在配置文件中写好该插件的配置；下面演示手动安装</p>
+<p>以<a class="link"   target="_blank" rel="noopener" href="https://github.com/ojroques/nvim-osc52" >nvim-osc52 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>为例，这是仓库的目录结构:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  nvim-osc52 git:(main) tree .</span><br><span class="line">.</span><br><span class="line">├── LICENSE</span><br><span class="line">├── README.md</span><br><span class="line">└── lua</span><br><span class="line">    ├── osc52</span><br><span class="line">    │   └── base64.lua</span><br><span class="line">    └── osc52.lua</span><br><span class="line"></span><br><span class="line">3 directories, 4 files</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>很明显，这里面的文件能全部直接放进<code>~/.config/nvim/</code>这个目录(当然许可证、md、git文件可以忽略)，这样nvim就知道这里有插件了</p>
 <blockquote>
-<p>系统包选择rootfs,内核已经安装所以不需要的完整系统</p>
+<p>这种做法自己瞎折腾的，直接把插件当作模块，详见<code>:h lua-guide-modules</code></p>
+<p>使用<code>:h packadd</code>参考官方手册受动安装插件正解</p>
 </blockquote>
-<p>此时系统wsl2发行版已安装，接着设置此发行版用户名及密码</p>
-<img  title="distrods_complete" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjSjZsMEdfel9wRTBSSHM_ZT05UFRXZlo.jpg"
-                      alt=""
-                >
-
-<br>
-<br>
-
-<p>为了保障开机自启你的wsl2虚拟机，还需要一点工作，在 <strong>虚拟机的bash</strong> 内输入（此步报错请尝试重启设备后重试）</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /opt/distrod/bin/distrod <span class="built_in">enable</span> --start-on-windows-boot</span><br></pre></td></tr></table></figure></div>
-
-<p>接下来输入你的root密码后win10将会弹窗让你输入微软账户密码，照例输上，自此，你的wsl2 distrods with systemd就能开机自启了。</p>
-<br>
-<br>
-
-<p>最后一步就是打开虚拟机的端口转发服务，以ssh服务端口22为例，你需要在虚拟机的bash输入（copy的注释我就留着了</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 22 | sudo <span class="built_in">tee</span> /opt/distrod/conf/tcp4_ports  <span class="comment"># update the portproxy.service&#x27;s configuration</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> --now portproxy.service  <span class="comment"># enable and start it</span></span><br></pre></td></tr></table></figure></div>
-
+<p>但是这样似乎就把lazy.nvim晾在一边了，所以可以在刚刚写好的nvim配置文件中添加一行:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;</span><br><span class="line">&#123;<span class="string">&quot;nvim-lualine/lualine.nvim&quot;</span>,dependencies = &#123; <span class="string">&#x27;nvim-tree/nvim-web-devicons&#x27;</span> &#125;&#125;,</span><br><span class="line"> <span class="comment">-- 添加下面这一行以指明插件所在目录</span></span><br><span class="line">&#123;name=<span class="string">&quot;osc52&quot;</span>,dir=<span class="string">&quot;~/.config/nvim/plugins/nvim-osc52&quot;</span>&#125;,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>然后把整个插件仓库放在刚刚指明的插件目录的位置中即可识别:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  nvim tree .</span><br><span class="line">.</span><br><span class="line">├── init.lua</span><br><span class="line">├── lua</span><br><span class="line">└── plugins</span><br><span class="line">    └── nvim-osc52</span><br><span class="line">        ├── LICENSE</span><br><span class="line">        ├── README.md</span><br><span class="line">        └── lua</span><br><span class="line">            ├── osc52</span><br><span class="line">            │   └── base64.lua</span><br><span class="line">            └── osc52.lua</span><br></pre></td></tr></table></figure></div>
+<p>之后执行<code>:Lazy</code>检查该路径是否被加载</p>
 <blockquote>
-<p>根据官网的信息，该服务在win11上会有问题，具体表现在该服务不会随着windows开机自启，并表示将来会修复</p>
-<p>Updated at 2023-09-28</p>
+<p>记得依插件说明修改或添加配置文件</p>
 </blockquote>
-<br>
-<br>
-
-<p>此时无图形界面的wsl2的发行版已经安装完毕，接下来安装软件和图形界面的步骤就自由发挥了，假设你不想安装完整的图形界面，wsl2自带wslg，能直接开启对应软件的图形服务，如果你想拥有一个完整的图形界面，请自行安装对应软件，一千个人就有一千个不同的图形界面，此步忽略。</p>
-<h1 id="4、以-DWM-为图形界面，部署vnc服务"><a href="#4、以-DWM-为图形界面，部署vnc服务" class="headerlink" title="4、以 DWM 为图形界面，部署vnc服务"></a>4、以 <a class="link"   target="_blank" rel="noopener" href="https://dwm.suckless.org/" >DWM <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 为图形界面，部署vnc服务</h1><p>假设到此，你的图形界面已经安装好了，是时候部署你的linux桌面了，理论上来说除了vnc还能用xdrp和xserver，但是xdrp过于卡顿，xserver因为笔者的图形界面原因不便使用，故选择vnc作为图形界面的中转。</p>
-<p>安装vnc服务端</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S tigervnc</span><br></pre></td></tr></table></figure></div>
-
-<br>
-<br>
-
-<p>安装完成后为当前用户设置密码</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vncpasswd</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）"><a href="#修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）" class="headerlink" title="修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）"></a>修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）</h2><p>首先确认自己的系统有什么桌面环境 <code>ls /usr/share/xsessions</code> 记录下输出结果，例如我的是（自行编辑则参考 <a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Desktop_entries" >Desktop entries <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>）</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ <span class="built_in">ls</span> /usr/share/xsessions</span><br><span class="line">dwm.desktop</span><br></pre></td></tr></table></figure></div>
-
-<br>
-<br>
-
-<p>之后修改本地用户配置文件，路径在 <code>~/.vnc/config</code> </p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># session=gnome    //桌面</span></span><br><span class="line"><span class="comment"># securitytypes=vncauth,tlsvnc</span></span><br><span class="line"><span class="comment"># geometry=2000x1200    //分辨率</span></span><br><span class="line"><span class="comment"># localhost    //一定一定记得要删掉这行</span></span><br><span class="line"><span class="comment"># alwaysshared    //多用户</span></span><br></pre></td></tr></table></figure></div>
-
-<p>这是默认配置，session请参考上一步的结果，我的图形界面为dwm则修改为</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line">session=dwm</span><br><span class="line">geometry=2560x1440</span><br><span class="line">alwaysshared</span><br></pre></td></tr></table></figure></div>
-
-<br>
-<br>
-
-<p>接下来修改系统配置，路径在 <code>/etc/tigervnc/vncserver-config-defaults</code> ，系统配置会和本地用户配置一起读取，不进行配置将导致奇怪问题</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Default settings for VNC servers started by the vncserver service</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Any settings given here will override the builtin defaults, but can</span></span><br><span class="line"><span class="comment"># also be overriden by ~/.vnc/config and vncserver-config-mandatory.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># See HOWTO.md and the following manpages for more details:</span></span><br><span class="line"><span class="comment">#     vncsession(8) Xvnc(1)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Several common settings are shown below. Uncomment and modify to your</span></span><br><span class="line"><span class="comment"># liking.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># session=gnome</span></span><br><span class="line"><span class="comment"># securitytypes=vncauth,tlsvnc</span></span><br><span class="line"><span class="comment"># geometry=2000x1200</span></span><br><span class="line"><span class="comment"># localhost</span></span><br><span class="line"><span class="comment"># alwaysshared</span></span><br><span class="line"><span class="comment"># $(ip addr |grep inet|grep eth0|awk -F &#x27;[/]&#x27; &#x27;&#123;print $1&#125;&#x27;|awk &#x27;&#123;print $2&#125;&#x27;)</span></span><br><span class="line"></span><br><span class="line">session=dwm</span><br><span class="line">geometry=2560x1440</span><br><span class="line">alwaysshared</span><br></pre></td></tr></table></figure></div>
-
-<br>
-<br>
-
-<p>然后在同目录下检查 <code>vncserver-config-mandatory</code> 确保没有localhost参数</p>
-<p>接着编辑同目录下 <code>vncserver.users</code> 将用户和端口进行绑定</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> TigerVNC User assignment</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This file assigns users to specific VNC display numbers.</span></span><br><span class="line"><span class="comment"># The syntax is &lt;display&gt;=&lt;username&gt;. E.g.:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># :2=andrew</span></span><br><span class="line"><span class="comment"># :3=lisa</span></span><br><span class="line">  :1=alicemargandroid</span><br></pre></td></tr></table></figure></div>
-
-<p>这个例子表示第八行表示5900+1端口绑定用户为alicemargandroid</p>
-<br>
-<br>
-
-<p>最后编辑的文件是 <code>/etc/X11/Xwrapper.config</code> ，修改为</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">allowed_users=anybody</span><br><span class="line">needs_root_rights=no</span><br></pre></td></tr></table></figure></div>
-
-<p>自此，vnc配置文件修改完成</p>
-<p>接着启动服务即可愉快连接</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> vncserver@:1</span><br><span class="line">sudo systemctl start vncserver@:1</span><br></pre></td></tr></table></figure></div>
-
-<p>直接使用loopback:5900+X连接</p>
-<img  title="vnc1" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkbGlUcjZqSnR6djlVNms_ZT1qb2hSd0w.jpg"
-                      alt=""
-                >
-
-<img  title="vnc2" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkMnlISi1tWVE1Y29WdjA_ZT1RYkMwbVc.jpg"
-                      alt=""
-                >
-
-<p>这时你就会发现即使正确配置了fcitx输入法也可能在某些场景无法唤出，这时就又要修改配置文件了</p>
-<h1 id="5、修改-xprofile-确保输入法正常运行"><a href="#5、修改-xprofile-确保输入法正常运行" class="headerlink" title="5、修改 ~/.xprofile 确保输入法正常运行"></a>5、修改 <code>~/.xprofile</code> 确保输入法正常运行</h1><p>在 <code>~/.xprofile</code> 中添加如下几行</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> INPUT_METHOD=fcitx5</span><br><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx5</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx5</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=@im=fcitx5</span><br></pre></td></tr></table></figure></div>
-
-<p>自此，全gui环境配置完成</p>
-<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这时你会发现俺声音服务呢，这个只需要配置个简单的声音转发，这个坑晚点填。</p>
+<h3 id="3-1-部署nvim-osc52"><a href="#3-1-部署nvim-osc52" class="headerlink" title="3.1-部署nvim-osc52"></a>3.1-部署nvim-osc52</h3><p>假设上一步只是放置了这个仓库到nvim配置文件中lazy.nvim指明的插件目录而并没有对其配置，那插件自然是没办法常运行的，这时候就要把插件的配置写进nvim的配置文件中</p>
+<ul>
+<li><p>首先在init.lua添加这一段:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;&lt;leader&gt;c&#x27;</span>, require(<span class="string">&#x27;osc52&#x27;</span>).copy_operator, &#123;<span class="built_in">expr</span> = <span class="literal">true</span>&#125;)</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;&lt;leader&gt;cc&#x27;</span>, <span class="string">&#x27;&lt;leader&gt;c_&#x27;</span>, &#123;remap = <span class="literal">true</span>&#125;)</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;v&#x27;</span>, <span class="string">&#x27;&lt;leader&gt;c&#x27;</span>, require(<span class="string">&#x27;osc52&#x27;</span>).copy_visual)</span><br></pre></td></tr></table></figure></div>
+<p>添加完毕即可使用nvim-osc52这个插件。使用方法为命令模式中按顺序按下<code>\cc</code>复制当前行，视图模式中按顺序按下<code>\c</code>复制选定文本</p>
+</li>
+<li><p>还能指定将复制内容放到nvim的<code>+</code>寄存器:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> copy()</span><br><span class="line">  <span class="keyword">if</span> vim.v.event.operator == <span class="string">&#x27;y&#x27;</span> and vim.v.event.regname == <span class="string">&#x27;+&#x27;</span> <span class="keyword">then</span></span><br><span class="line">    require(<span class="string">&#x27;osc52&#x27;</span>).copy_register(<span class="string">&#x27;+&#x27;</span>)</span><br><span class="line">  end</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">vim.api.nvim_create_autocmd(<span class="string">&#x27;TextYankPost&#x27;</span>, &#123;callback = copy&#125;)</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>当然也能将osc52作为nvim的剪切板，但是要先注释掉上面**<code>+</code>寄存器**的相关内容:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">local</span> <span class="keyword">function</span> copy(lines, _)</span><br><span class="line">  require(<span class="string">&#x27;osc52&#x27;</span>).copy(table.concat(lines, <span class="string">&#x27;\n&#x27;</span>))</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line"><span class="built_in">local</span> <span class="keyword">function</span> <span class="built_in">paste</span>()</span><br><span class="line">  <span class="built_in">return</span> &#123;vim.fn.split(vim.fn.getreg(<span class="string">&#x27;&#x27;</span>), <span class="string">&#x27;\n&#x27;</span>), vim.fn.getregtype(<span class="string">&#x27;&#x27;</span>)&#125;</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">vim.g.clipboard = &#123;</span><br><span class="line">  name = <span class="string">&#x27;osc52&#x27;</span>,</span><br><span class="line">  copy = &#123;[<span class="string">&#x27;+&#x27;</span>] = copy, [<span class="string">&#x27;*&#x27;</span>] = copy&#125;,</span><br><span class="line">  <span class="built_in">paste</span> = &#123;[<span class="string">&#x27;+&#x27;</span>] = <span class="built_in">paste</span>, [<span class="string">&#x27;*&#x27;</span>] = <span class="built_in">paste</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-- Now the <span class="string">&#x27;+&#x27;</span> register will copy to system clipboard using OSC52</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;&lt;leader&gt;c&#x27;</span>, <span class="string">&#x27;&quot;+y&#x27;</span>)</span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;&lt;leader&gt;cc&#x27;</span>, <span class="string">&#x27;&quot;+yy&#x27;</span>)</span><br></pre></td></tr></table></figure></div>
+<p>这时候就能愉快地使用vim命令复制到osc52的剪切板了，缺点是nvim外部复制的内容需要在插入模式下<code>shift+control+c</code>才能粘贴进nvim。用vim命令能够复制线面会弹出osc52的提示</p>
+</li>
+</ul>
+<h2 id="4-重新规划配置文件-可选"><a href="#4-重新规划配置文件-可选" class="headerlink" title="4-重新规划配置文件(可选)"></a>4-重新规划配置文件(可选)</h2><p>所有插件的配置全扔一起感觉有点乱。笔者眼有点花所以需要做点特别的配置</p>
+<p>首先是目录结构:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> ➜  nvim tree .</span><br><span class="line">.</span><br><span class="line">├── init.lua</span><br><span class="line">├── init.vim.bak</span><br><span class="line">├── lazy-lock.json</span><br><span class="line">├── lua</span><br><span class="line">│   ├── individual</span><br><span class="line">│   │   ├── lualine_conf.lua</span><br><span class="line">│   │   └── nvim-osc52_conf.lua</span><br><span class="line">│   ├── lazy_conf.lua</span><br><span class="line">│   └── opt_conf.lua</span><br><span class="line">└── plugins</span><br><span class="line">    └── nvim-osc52</span><br><span class="line">        ├── LICENSE</span><br><span class="line">        ├── README.md</span><br><span class="line">        └── lua</span><br><span class="line">            ├── osc52</span><br><span class="line">            │   └── base64.lua</span><br><span class="line">            └── osc52.lua</span><br><span class="line"></span><br><span class="line">7 directories, 11 files</span><br><span class="line"> </span><br></pre></td></tr></table></figure></div>
+<p> <code>init.lua</code>仅仅声明后续用到的文件:<br> <div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;lazy_conf&#x27;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;opt_conf&#x27;</span>)</span><br></pre></td></tr></table></figure></div><br> <code>lazy_conf.lua</code>包含lazy.nvim本身的配置和声明各个插件的配置:<br> <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">local</span> lazypath = vim.fn.stdpath(<span class="string">&quot;data&quot;</span>) .. <span class="string">&quot;/lazy/lazy.nvim&quot;</span></span><br><span class="line"><span class="keyword">if</span> not (vim.uv or vim.loop).fs_stat(lazypath) <span class="keyword">then</span></span><br><span class="line">  vim.fn.system(&#123;</span><br><span class="line">    <span class="string">&quot;git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;clone&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--filter=blob:none&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://github.com/folke/lazy.nvim.git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--branch=stable&quot;</span>, -- latest stable release</span><br><span class="line">    lazypath,</span><br><span class="line">  &#125;)</span><br><span class="line">end</span><br><span class="line">vim.opt.rtp:prepend(lazypath)</span><br><span class="line">require(<span class="string">&quot;lazy&quot;</span>).setup(&#123;</span><br><span class="line">&#123;<span class="string">&quot;nvim-lualine/lualine.nvim&quot;</span>,dependencies = &#123; <span class="string">&#x27;nvim-tree/nvim-web-devicons&#x27;</span> &#125;&#125;,</span><br><span class="line">&#123;name=<span class="string">&quot;osc52&quot;</span>,<span class="built_in">dir</span>=<span class="string">&quot;/home/baka/.config/nvim/plugins/nvim-osc52&quot;</span>&#125;,</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">-- IMPORT CONFIG FOR EACH PLUGINS</span><br><span class="line">require(<span class="string">&#x27;individual.nvim-osc52_conf&#x27;</span>) -- `nvim/lua/individual/nvim-osc52.lua`包含osc52配置</span><br><span class="line">require(<span class="string">&#x27;individual.lualine_conf&#x27;</span>)    -- `nvim/lua/individual/lualine_conf.lua`包含lualine配置</span><br></pre></td></tr></table></figure></div><br> <code>opt.lua</code>包含nvim的option:<br> <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim.opt.number = <span class="literal">true</span></span><br><span class="line">vim.opt.relativenumber = <span class="literal">true</span></span><br><span class="line">vim.opt.cursorline = <span class="literal">true</span></span><br><span class="line">vim.highlight.priorities.syntax = 50</span><br><span class="line">vim.opt.clipboard:append &#123;<span class="string">&#x27;unnamedplus&#x27;</span>&#125;</span><br><span class="line">vim.opt.hidden = <span class="literal">true</span></span><br><span class="line">vim.opt.tabstop = 2</span><br><span class="line">vim.opt.shiftwidth = 2</span><br><span class="line">vim.opt.softtabstop = 2</span><br><span class="line">vim.opt.smartindent = <span class="literal">true</span></span><br></pre></td></tr></table></figure></div><br>对于其他插件各自的配置文件统一放在<code>nvim/lua/individual/</code>文件夹。虽然配置完得去<code>lazy_conf.lua</code>声明一下，但是不会演化(感觉可以用lua写脚本实现自动声明)</p>
 
         </div>
 
@@ -795,18 +679,18 @@
             <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> 利用WSL2打造Arch全GUI环境</li>
+        <li><strong>标题:</strong> ssh下通过osc52使用nvim剪切板</li>
         <li><strong>作者:</strong> 7cmb</li>
         <li><strong>创建于
-                :</strong> 2023-09-28 22:50:12</li>
+                :</strong> 2024-05-21 13:31:35</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-05-15 15:29:42
+                    :</strong> 2024-05-21 13:31:35
             </li>
         
         <li>
-            <strong>链接:</strong> https://7cmb.com/使用wsl2打造arch全gui环境/
+            <strong>链接:</strong> https://7cmb.com/ssh下通过osc52使用nvim剪辑板/
         </li>
         <li>
             <strong>
@@ -832,15 +716,11 @@
                     </li>
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/%E6%8A%98%E8%85%BE/">#折腾</a>&nbsp;
+                        <a href="/tags/nvim/">#nvim</a>&nbsp;
                     </li>
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/wsl/">#wsl</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item mx-0.5">
-                        <a href="/tags/arch/">#arch</a>&nbsp;
+                        <a href="/tags/ssh/">#ssh</a>&nbsp;
                     </li>
                 
             </ul>
@@ -851,29 +731,14 @@
         
             <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
                 
-                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-                        <a class="prev"
-                        rel="prev"
-                        href="/pulseaudio%E5%AE%9E%E7%8E%B0linux%E7%9A%84%E5%A3%B0%E9%9F%B3%E8%BD%AC%E5%8F%91/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">Pulseaudio实现linux的声音转发</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
                         <a class="next"
                         rel="next"
-                        href="/%E5%9B%BE%E5%BA%8A%E6%B5%8B%E8%AF%95/"
+                        href="/docker%E4%B8%AD%E7%9A%84entrypoint%E5%92%8Ccmd/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">图床测试</span>
+                                <span class="post-nav-title-item">docker中的entrypoint和cmd</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -894,8 +759,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">利用WSL2打造Arch全GUI环境</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-text">1、先决条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85-WSL2-%E5%91%BD%E4%BB%A4%EF%BC%88%E4%BB%A5windows-10%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-text">2、安装 WSL2 命令（以windows 10为例）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E3%80%81%E5%AE%89%E8%A3%85%E5%B8%A6%E6%9C%89systemd%E7%9A%84linux%E5%8F%91%E8%A1%8C%E7%89%88%EF%BC%88%E4%BB%A5debian%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="nav-text">3、安装带有systemd的linux发行版（以debian为例）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4%E3%80%81%E4%BB%A5-DWM-%E4%B8%BA%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%EF%BC%8C%E9%83%A8%E7%BD%B2vnc%E6%9C%8D%E5%8A%A1"><span class="nav-text">4、以 DWM  为图形界面，部署vnc服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E6%AD%A4%E6%AD%A5%E5%B0%A4%E4%B8%BA%E9%87%8D%E8%A6%81%EF%BC%8C%E5%BD%93%E6%97%B6%E6%8E%92%E6%9F%A5%E4%BA%86%E5%8D%8A%E5%A4%A9%E9%97%AE%E9%A2%98%E6%9C%80%E5%90%8E%E5%8F%91%E7%8E%B0%E8%87%AA%E5%B7%B1%E6%98%AF%E5%82%BB%E9%80%BC%EF%BC%89"><span class="nav-text">修改配置文件（此步尤为重要，当时排查了半天问题最后发现自己是傻逼）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5%E3%80%81%E4%BF%AE%E6%94%B9-xprofile-%E7%A1%AE%E4%BF%9D%E8%BE%93%E5%85%A5%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C"><span class="nav-text">5、修改 ~&#x2F;.xprofile 确保输入法正常运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-text">结语</span></a></li></ol>
+        <div class="page-title">ssh下通过osc52使用nvim剪切板</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-text">先决条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5"><span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AE%E7%BB%88%E7%AB%AF"><span class="nav-text">1-配置终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E9%85%8D%E7%BD%AElazy-nvim"><span class="nav-text">2-配置lazy.nvim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-text">3-安装插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E9%83%A8%E7%BD%B2nvim-osc52"><span class="nav-text">3.1-部署nvim-osc52</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E9%87%8D%E6%96%B0%E8%A7%84%E5%88%92%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%E5%8F%AF%E9%80%89"><span class="nav-text">4-重新规划配置文件(可选)</span></a></li></ol></li></ol>
 
     </div>
 </div>
