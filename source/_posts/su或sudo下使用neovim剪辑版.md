@@ -28,7 +28,7 @@ $ xauth list $DISPLAY
 routerAlmaLinux/unix:11  MIT-MAGIC-COOKIE-1  一串神秘数字
 
 # 以root为例，写入以上结果
-$ sudo xauth add 以上命令输出的内容
+$ sudo xauth add routerAlmaLinux/unix:11  MIT-MAGIC-COOKIE-1  一串神秘数字
 ```
 
 这样就能以root身份在本地使用远程x应用了

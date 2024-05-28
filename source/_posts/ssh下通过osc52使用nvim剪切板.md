@@ -21,7 +21,10 @@ date: 2024-05-21 13:43:41
 之前的做法是透过x11转发xclip剪切板到本地x服务器，这种做法我认为不太好。除了有[潜在的安全问题](https://askubuntu.com/questions/101829/why-is-x11-a-security-risk-in-servers)外，还有一个就是为了个剪切板搬来整个x11。无论怎么说都不是个优雅的方案<br>
 `ojroques/vim-oscyank`和`ojroques/nvim-osc52`分别是vim和neovim下的插件，目的是在vim和neovim下实现osc52转义序列以将文本从终端复制到系统剪切板<br>
 osc52是ansi下的转义序列，可以实现将文本从终端复制到系统剪切板而不考虑其他东西，详见[A guide on how to copy text from anywhere, including through SSH, with OSC52 ](https://www.reddit.com/r/vim/comments/k1ydpn/a_guide_on_how_to_copy_text_from_anywhere/)
-> [neovim 10.0版本](https://github.com/neovim/neovim/pull/25872)官方支持osc52了
+> [neovim 10.0版本](https://github.com/neovim/neovim/pull/25872)官方支持osc52了<br>
+> 
+>UPDATE 2024.5.28:<br>
+> 插件还没用上一个星期就用上10.0了.......
 # 先决条件
 1、终端支持osc52<br>
 2、使用neovim<br>
