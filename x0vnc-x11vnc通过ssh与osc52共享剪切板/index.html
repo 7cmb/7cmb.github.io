@@ -13,29 +13,27 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://7cmb.github.io/keepalived控制lvs与实现持久化/"/>
+    <link rel="canonical" href="https://7cmb.github.io/x0vnc-x11vnc通过ssh与osc52共享剪切板/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="用keepalived来控制lvs的行为而不通过ipvsadm可以大大简化配置流程。用ipvsadm配置还得通过一些手段 把配置保留下来。keepalived一站式解决lvs、vrrp，实在是太爽啦(就是有些地方UserGuide和Manual会打架) 对于配置keepalived的vrrp实例还是很简单的，就是注意配置文件&#x2F;etc&#x2F;keepalived&#x2F;keepalive.conf权限不能为执行">
+        <meta name="description" content="前言没想到这次写文又又又又是因为剪贴板的事情。这次的场景是控制本地x11的x0vncserver下共享剪贴板。archwiki 没有写解决方案，而在该项目的issue 中，这位老哥@mathewng表示一种workaround，具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板x11vnc -nofb -clip 4x4+0+0。 这意味着将开启两个本地x11的vnc会话，一个是一切正常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="keepalived控制lvs与实现持久化">
-<meta property="og:url" content="https://7cmb.github.io/keepalived%E6%8E%A7%E5%88%B6lvs%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%8C%81%E4%B9%85%E5%8C%96/index.html">
+<meta property="og:title" content="x0vnc&#x2F;x11vnc通过ssh与osc52共享剪切板">
+<meta property="og:url" content="https://7cmb.github.io/x0vnc-x11vnc%E9%80%9A%E8%BF%87ssh%E4%B8%8Eosc52%E5%85%B1%E4%BA%AB%E5%89%AA%E5%88%87%E6%9D%BF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="用keepalived来控制lvs的行为而不通过ipvsadm可以大大简化配置流程。用ipvsadm配置还得通过一些手段 把配置保留下来。keepalived一站式解决lvs、vrrp，实在是太爽啦(就是有些地方UserGuide和Manual会打架) 对于配置keepalived的vrrp实例还是很简单的，就是注意配置文件&#x2F;etc&#x2F;keepalived&#x2F;keepalive.conf权限不能为执行">
+<meta property="og:description" content="前言没想到这次写文又又又又是因为剪贴板的事情。这次的场景是控制本地x11的x0vncserver下共享剪贴板。archwiki 没有写解决方案，而在该项目的issue 中，这位老哥@mathewng表示一种workaround，具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板x11vnc -nofb -clip 4x4+0+0。 这意味着将开启两个本地x11的vnc会话，一个是一切正常">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2hwS0ZHS3NhRG1pODZWP2U9WlNkaDFs.png">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png">
-<meta property="article:published_time" content="2024-02-21T14:41:35.000Z">
-<meta property="article:modified_time" content="2024-05-15T07:29:42.530Z">
+<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGtuQmdqcnZDZVFsUzBEP2U9U3dQanBI.png">
+<meta property="article:published_time" content="2024-05-28T14:46:13.000Z">
+<meta property="article:modified_time" content="2024-05-28T18:06:51.310Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="linux">
-<meta property="article:tag" content="lvs">
-<meta property="article:tag" content="keepalived">
+<meta property="article:tag" content="ssh">
+<meta property="article:tag" content="vnc">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png">
+<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGtuQmdqcnZDZVFsUzBEP2U9U3dQanBI.png">
     
     
         <!-- Google tag (gtag.js) -->
@@ -57,7 +55,7 @@
     
     <title>
         
-            keepalived控制lvs与实现持久化 -
+            x0vnc/x11vnc通过ssh与osc52共享剪切板 -
         
         7cmb&#39;s blog.
     </title>
@@ -501,7 +499,7 @@
         <div class="article-title relative w-full">
             
                 <div class="w-full flex items-center pt-6 justify-start">
-                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">keepalived控制lvs与实现持久化</h1>
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">x0vnc/x11vnc通过ssh与osc52共享剪切板</h1>
                 </div>
             
             </div>
@@ -522,15 +520,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2024-02-21 22:41:35</span>
-        <span class="mobile">2024-02-21 22:41:35</span>
+        <span class="desktop">2024-05-28 22:46:13</span>
+        <span class="mobile">2024-05-28 22:46:13</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-05-15 15:29:42</span>
-            <span class="mobile">2024-05-15 15:29:42</span>
+            <span class="desktop">2024-05-29 02:06:51</span>
+            <span class="mobile">2024-05-29 02:06:51</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -554,14 +552,14 @@
                             <li>></li>
                         
                         <li>
-                            <a href="/categories/linux/lvs/">lvs</a>&nbsp;
+                            <a href="/categories/linux/vnc/">vnc</a>&nbsp;
                         </li>
                     
                     
                 
                     
                         <li>
-                            | <a href="/categories/linux/keepalibed/">keepalibed</a>&nbsp;
+                            | <a href="/categories/linux/ssh/">ssh</a>&nbsp;
                         </li>
                     
                     
@@ -579,11 +577,11 @@
                     </li>
                 
                     <li>
-                        | <a href="/tags/lvs/">lvs</a>&nbsp;
+                        | <a href="/tags/ssh/">ssh</a>&nbsp;
                     </li>
                 
                     <li>
-                        | <a href="/tags/keepalived/">keepalived</a>&nbsp;
+                        | <a href="/tags/vnc/">vnc</a>&nbsp;
                     </li>
                 
             </ul>
@@ -609,53 +607,49 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <p>用<code>keepalived</code>来控制lvs的行为而不通过<code>ipvsadm</code>可以大大简化配置流程。用ipvsadm配置还得通过一些<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/alexlv/p/14789862.html#:~:text=%2Fetc%2Fsysconfig%2Fipvsadm,4%E3%80%81%E9%80%9A%E8%BF%87%E9%87%8D%E5%AE%9A%E5%90%91%E5%B0%86%E5%BD%93%E5%89%8D%E8%A7%84%E5%88%99%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0%E7%B3%BB%E7%BB%9F%E9%BB%98%E8%AE%A4%E7%9A%84%E8%A7%84%E5%88%99%E5%AD%98%E6%94%BE%E4%BD%8D%E7%BD%AE%EF%BC%8C%E5%B0%86%E8%A7%84%E5%88%99%E5%AD%98%E6%94%BE%E5%9C%A8%E8%BF%99%E4%B8%AA%E6%96%87%E4%BB%B6%E9%87%8C%EF%BC%8C%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%81%A2%E5%A4%8D%E9%87%8C%E9%9D%A2%E7%9A%84%E8%A7%84%E5%88%99" >手段 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>把配置保留下来。keepalived一站式解决lvs、vrrp，实在是太爽啦(就是有些地方UserGuide和Manual会打架)</p>
-<p>对于配置keepalived的vrrp实例还是很简单的，就是注意配置文件<code>/etc/keepalived/keepalive.conf</code>权限不能为执行，否则会报错<del>(远程配置文件的时候还没有搞定su下x转发的问题,我踏马直接肌肉记忆777)</del></p>
-<h2 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h2><p><em><strong>部分条目注释将放在备份调度器配置文件</strong></em><br><em><strong>部分条目注释将放在备份调度器配置文件</strong></em><br><em><strong>部分条目注释将放在备份调度器配置文件</strong></em></p>
-<p>主调度器配置<br>路径<code>/etc/keepalived/keepalived.conf</code>:</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">  router_id lvs1</span><br><span class="line"><span class="comment"># lvs_sync_daemon enp0s3</span></span><br><span class="line"><span class="comment"># lvs_timeouts tcp 30 tcpfin 90 udp 90</span></span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">   state BACKUP</span><br><span class="line">   interface enp0s3</span><br><span class="line">   virtual_router_id 51</span><br><span class="line">   priority 101</span><br><span class="line">   advert_int 10</span><br><span class="line">   authentication &#123;</span><br><span class="line">       auth_type PASS</span><br><span class="line">       auth_pass 1111</span><br><span class="line">   &#125;</span><br><span class="line">   virtual_ipaddress &#123;</span><br><span class="line">      192.168.56.49/24</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">virtual_server 192.168.56.49 80 &#123;</span><br><span class="line">   delay_loop 10</span><br><span class="line">   lb_algo rr</span><br><span class="line">   lb_kind DR</span><br><span class="line">   persistence_timeout </span><br><span class="line">   protocol TCP</span><br><span class="line">   real_server 192.168.56.56 80 &#123;</span><br><span class="line">       weight 100</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">            connect_timeout 3</span><br><span class="line">                retry 3</span><br><span class="line">                delay_before_retry 3</span><br><span class="line">                connect_port 80</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   real_server 192.168.56.57 80 &#123;</span><br><span class="line">       weight 100</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">            connect_timeout 3</span><br><span class="line">                retry 3</span><br><span class="line">                delay_before_retry 3</span><br><span class="line">                connect_port 80</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>备份调度器配置<br>路径同上:</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">global_defs &#123;</span><br><span class="line">  router_id lvs2</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 同步lvs的配置，此步不开下行配置可能不生效 </span></span><br><span class="line"><span class="comment"># lvs_sync_daemon enp0s3</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 设置lvs超时时间，为空则保持之前的设置不变，此行和持久化强相关</span></span><br><span class="line"><span class="comment"># lvs_timeouts tcp 30 tcpfin 90 udp 90</span></span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">   state BACKUP</span><br><span class="line">   interface enp0s3</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 同一组vrrp服务虚拟路由id相同，同一接口可以跑多组服务</span></span><br><span class="line">   virtual_router_id 51</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 优先级以大为优 </span></span><br><span class="line">   priority 100</span><br><span class="line"></span><br><span class="line">   advert_int 10</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 同一组认证需相同</span></span><br><span class="line">   authentication &#123;</span><br><span class="line">       auth_type PASS</span><br><span class="line">       auth_pass 1111</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment"># vip和主调度器配置不相同的话，包括掩码前缀有无，将导致vrrp分组失败</span></span><br><span class="line">   virtual_ipaddress &#123;</span><br><span class="line">      192.168.56.49/24</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">virtual_server 192.168.56.49 80 &#123;</span><br><span class="line">   delay_loop 10</span><br><span class="line">   lb_algo rr</span><br><span class="line">   lb_kind DR</span><br><span class="line"></span><br><span class="line">   <span class="comment"># 开启持久化，持久化时间默认360，单位为秒</span></span><br><span class="line">   persistence_timeout </span><br><span class="line"></span><br><span class="line">   protocol TCP</span><br><span class="line">   real_server 192.168.56.56 80 &#123;</span><br><span class="line">       weight 100</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">            connect_timeout 3</span><br><span class="line">                retry 3</span><br><span class="line">                delay_before_retry 3</span><br><span class="line">                connect_port 80</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   real_server 192.168.56.57 80 &#123;</span><br><span class="line">       weight 100</span><br><span class="line">       TCP_CHECK &#123;</span><br><span class="line">            connect_timeout 3</span><br><span class="line">                retry 3</span><br><span class="line">                delay_before_retry 3</span><br><span class="line">                connect_port 80</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>重启keepalived验证配置是否成功:</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[baka@lvs1 ~]$ sudo ipvsadm -L</span><br><span class="line">IP Virtual Server version 1.2.1 (size=4096)</span><br><span class="line">Prot LocalAddress:Port Scheduler Flags</span><br><span class="line">  -&gt; RemoteAddress:Port           Forward Weight ActiveConn InActConn</span><br><span class="line">TCP  lvs1:http rr persistent 360</span><br><span class="line">  -&gt; 192.168.56.56:http           Route   100    12         0</span><br><span class="line">  -&gt; 192.168.56.57:http           Route   100    19         0</span><br></pre></td></tr></table></figure></div>
-
-<p>可以看到成功配置，符合期望</p>
-<p>本配置如下:<br>Master LVS:192.168.56.51<br>Backup LVS:192.168.56.52<br>Real Server1:192.168.56.56<br>Real Server2:192.168.56.57</p>
-<h2 id="关于持久化"><a href="#关于持久化" class="headerlink" title="关于持久化"></a>关于持久化</h2><p>以上配置成功后，发现轮询不生效了，即使持久化时间即上述配置文件的<code>persistence_timeout</code>设置得很短，也无法在此时间后切换rs。百思不得其解，遂发现该行为还和<code>lvs_timeouts</code>控制的时间有关。如果是DR模式下使用curl直接访问上述配置的vip，在主调度器使用<code>ipvsadm -lnc</code>查询lvs连接表时，一共有两种条目，则分别为<code>ASSURED</code>和<code>ESTABLISHED</code></p>
-<p>先下结论:<br><strong>对于同一个客户端(相同ip)，当这个表中还有它的条目时，那么使用该ip的客户端下次将还是连接相同的rs</strong></p>
-<p>persistence_timeout设定的时间对应lvs表的条目是<code>ASSURED</code><br>tcp连接建立成功后对应的条目是<code>ESTABLISHED</code>:<br><img  title="" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png"
-                      alt="借图一用" 
-                ></p>
-<p>lvs_timeouts默认值是tcp 900 tcpfin 120 udp 300</p>
-<p>持久化选项开启后，lvs将根据这个表来定义持久化行为。对于同一客户端(用ip区分不同客户端)，当这个表对应的条目全部消失了，才会根据负载均衡指定的方式为这个客户端分配下一台rs</p>
-<p>一般来说，<code>persistence_time</code>设定的值要比lvs_timeouts的值要大（如果这个值小于lvs_timeouts那它根本没有意义），否则最后一个连接条目消失前，它会在超时的时候重新刷新倒计时为一分钟<br>也就是说如果<code>persistence_time</code>小于lvs_timeouts时，它最长持续时间是表中最后一个连接条目消失后加一分钟</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>没想到这次写文又又又又是因为剪贴板的事情。这次的场景是控制本地x11的x0vncserver下共享剪贴板。<a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/TigerVNC#Running_x0vncserver_to_directly_control_the_local_display" >archwiki <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>没有写解决方案，而在该项目的<a class="link"   target="_blank" rel="noopener" href="https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-1358864856" >issue <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，这位老哥<code>@mathewng</code>表示一种workaround，具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板<code>x11vnc -nofb -clip 4x4+0+0</code>。</p>
+<p>这意味着将开启两个本地x11的vnc会话，一个是一切正常除了剪贴板的<code>x0vncserver -rfbauth ~/.vnc/passwd</code>；另一个是啥都没有仅剩下捕抓键盘和剪贴板<code>x11vnc -nofb -clip 4x4+0+0</code>(BTW，这里为了前者的正常体验可以加上-repeat参数，就是有亿点点小问题)。</p>
+<p>两个残疾人取长补短看起来很滑稽，但是确实很好地解决了两者的不足。唯一的缺点是无法将中文复制出来</p>
 <blockquote>
-<p>以ip区分不同客户端   </p>
-<p>每次有新连接刷新或建立时，<code>persistence_time</code>将同步刷新</p>
-<p>lvs_timemouts控制每个连接条目保持的时间，条目保持的时间和persistence_time共同控制客户端保持访问同一台rs</p>
+<p>PS:x0vnc服务器中的rdp远程windows主机中文却能正确复制出来。鄙人由于不懂编码，觉得煞是奇怪</p>
 </blockquote>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>这里有一个超短的<code>lvs_timeouts</code>和一个比它更短<code>persistence_time</code>:<br><img  title="" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2hwS0ZHS3NhRG1pODZWP2U9WlNkaDFs.png"
-                      alt="" 
-                ><br>建立连接的条目消失后，理应更早一秒消失的<code>persistence_time</code>居然带着更长的时间回来了:<br><img  title="" 
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png"
-                      alt="我在这呢" 
-                ></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>持久化不但需要看持久化时间(persistence_time)，更要看lvs连接条目的保持时间(lvs_timeouts)。真是人不可貌相</p>
+<p>无法复制中文以汉语为主要语言的人无异于弃用。想起之前的x11转发和osc52，顿时心生一计——好像能通过bash脚本把两者结合在一起，以一种比较诡异的办法共享双方剪贴板</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>通过ssh上的x11转发加上指定的配置能获得指定x11会话，在这个基础上就可以做到通过ssh控制指定的x11会话。例如像这样通过ssh在x11本地会话下打开<code>xclock</code>:<br><img src='https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGtuQmdqcnZDZVFsUzBEP2U9U3dQanBI.png' alt=''><br>而剪贴板是由x11提供的，那么说在ssh中提取或者操作剪贴板内容也不在话下了。很明显，<code>xclip</code>可以通过命令行胜任这个工作:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ pacman -Ss xclip</span><br><span class="line">extra/xclip 0.13-5 [installed]</span><br><span class="line">    Command line interface to the X11 clipboard</span><br><span class="line"><span class="comment">#  example:</span></span><br><span class="line">➜  ~ <span class="built_in">echo</span> <span class="string">&#x27;我要被复制了&#x27;</span> | xclip -i -r -selection clipboard <span class="comment"># 复制到clipboard</span></span><br><span class="line">➜  ~ xclip -o -selection clipboard <span class="comment"># 输出clipboard内容</span></span><br><span class="line">我要被复制了</span><br></pre></td></tr></table></figure></div>
+<p>直到这里也仅限于将指定x11会话的内容在ssh中输出出来，或者将ssh中输入的内容通过echo\管道\重定向等方法复制到指定x11会话的剪贴板中，不能单纯通过命令行真正做到双向粘贴</p>
+<p><strong>但是</strong>，osc52和终端软件配合就能真正做到只通过bash的命令行分享x0vnc服务器的剪贴板到ssh客户端机器，并且只通过bash命令更改x0vnc剪贴板内容</p>
+<p>能通过命令行的事情自然能写脚本替代手打，脚本能通过快捷键以及各种方法快速执行。所以笔者将以一个简单的脚本实现标题目的</p>
 <blockquote>
-<p>本帖参考:<br><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/6b3202599682" >lvs 两个timeout解析 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://icloudnative.io/posts/lvs-persistent-connection/#%E5%89%8D%E8%A8%80" >LVS负载均衡之持久性连接介绍 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="http://www.linuxvirtualserver.org/docs/persistence.html" >Persistence Handling in LVS <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> </p>
+<p>这里的复制演示仅仅只代表clipboard剪贴板，linux有三种剪贴板，详见以下链接:</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://superuser.com/questions/90257/what-is-the-difference-between-the-x-clipboards" >https://superuser.com/questions/90257/what-is-the-difference-between-the-x-clipboards <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/139191/whats-the-difference-between-primary-selection-and-clipboard-buffer" >https://unix.stackexchange.com/questions/139191/whats-the-difference-between-primary-selection-and-clipboard-buffer <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </blockquote>
+<h1 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h1><ul>
+<li>ssh使用的<code>终端</code>与x0vncserver服务主机使用的<code>终端</code>支持<code>osc52转义序列</code></li>
+<li>ssh服务器开启<code>X11Forwarding</code>,ssh客户端开启<code>ForwardX11</code>和<code>ForwardX11Trusted</code>(两个选项可以用open-ssh命令行参数<code>-Y</code>替代)</li>
+</ul>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="1-脚本目录结构"><a href="#1-脚本目录结构" class="headerlink" title="1-脚本目录结构"></a>1-脚本目录结构</h2><p>文件一览:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">➜  remote_clip <span class="built_in">ls</span> -hl</span><br><span class="line">total 24K</span><br><span class="line">-rw-r--r-- 1 baka baka  37 May 29 01:08 clipboard</span><br><span class="line">-rwxr-xr-x 1 baka baka 131 May 28 15:12 evnc.sh</span><br><span class="line">-rwxr-xr-x 1 baka baka 131 May 28 00:51 sc.sh</span><br><span class="line">-rwxr-xr-x 1 baka baka 131 May 27 23:16 vc.sh</span><br><span class="line">-rwxr-xr-x 1 baka baka 142 May 27 23:31 wvnc.sh</span><br><span class="line">-rw-r--r-- 1 baka baka 668 May 28 22:44 yank_head</span><br></pre></td></tr></table></figure></div>
+<ul>
+<li><code>clipboard</code>提供写入x0vncserver会话剪贴板的内容</li>
+<li><code>evnc.sh</code>提供使用默认文件编辑器打开<code>clipboard</code>文件的方法</li>
+<li><code>sc.sh</code>将x0vncserver会话的剪贴板的内容复制到ssh客户端机器(蹩脚英文ssh copy)</li>
+<li><code>vc.sh</code>将<code>clipboard</code>内容复制到x0vncserver会话剪贴板(蹩脚英文vnc copy)</li>
+<li><code>wvnc.sh</code>将传入的第一个参数写入到<code>clipboard</code></li>
+<li><code>yank_head</code>上述脚本的实现方法</li>
+</ul>
+<h2 id="2-脚本内容"><a href="#2-脚本内容" class="headerlink" title="2-脚本内容"></a>2-脚本内容</h2><p><code>yank_head</code>上述脚本的实现方法:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># OSC52YANK WORKAROUND FOR X0VNCSERVER VIA SSH</span></span><br><span class="line"><span class="comment"># YANK TO SSH CLIENT HOST FROM X CLIPBOARD</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># X11Forwarding INITE</span></span><br><span class="line"><span class="built_in">export</span> DISPLAY=:0</span><br><span class="line">xauth add $(xauth list <span class="variable">$DISPLAY</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">yank_to_client</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">echo</span> -ne <span class="string">&quot;\033]52;c;<span class="subst">$(xclip -o | base64 )</span>\a&quot;</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;YANKED&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># YANK TO VNC SERVER HOST FROM &quot;$yk_path/clipboard&quot;</span></span><br><span class="line"><span class="function"><span class="title">yank_to_server</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">echo</span> -ne <span class="string">&quot;\033]52;c;<span class="subst">$(cat <span class="string">&quot;<span class="variable">$yk_path</span>/clipboard&quot;</span> | base64 )</span>\a&quot;</span></span><br><span class="line">	notify-send <span class="string">&quot;VNC SERVER REV CLIPBOARD&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># WRITE SOMETHING TO &quot;$yk_path/clipboard&quot; </span></span><br><span class="line"><span class="function"><span class="title">open_clipboard</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$input</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$input</span>&quot;</span> &gt; <span class="string">&quot;<span class="variable">$yk_path</span>/clipboard&quot;</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;WRITTEN&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">edit_clipboard</span></span>()</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">#  TO WRITE SOMETHING VIA EDITOR</span></span><br><span class="line">  <span class="variable">$EDITOR</span> <span class="string">&quot;<span class="variable">$yk_path</span>/clipboard&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><code>evnc.sh</code>提供使用默认文件编辑器打开<code>clipboard</code>文件的方法:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PATH TO SCRIPT DIR</span></span><br><span class="line">yk_path=$(<span class="built_in">dirname</span> $(<span class="built_in">realpath</span> <span class="string">&quot;<span class="variable">$&#123;BASH_SOURCE[0]&#125;</span>&quot;</span>))</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$yk_path</span></span><br><span class="line"></span><br><span class="line">. ./yank_head</span><br><span class="line">edit_clipboard</span><br></pre></td></tr></table></figure></div>
+<p><code>sc.sh</code>将x0vncserver会话的剪贴板的内容复制到ssh客户端机器(蹩脚英文ssh copy):</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PATH TO SCRIPT DIR</span></span><br><span class="line">yk_path=$(<span class="built_in">dirname</span> $(<span class="built_in">realpath</span> <span class="string">&quot;<span class="variable">$&#123;BASH_SOURCE[0]&#125;</span>&quot;</span>))</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$yk_path</span></span><br><span class="line"></span><br><span class="line">. ./yank_head</span><br><span class="line">yank_to_client</span><br></pre></td></tr></table></figure></div>
+<p><code>vc.sh</code>将<code>clipboard</code>内容复制到x0vncserver会话剪贴板(蹩脚英文vnc copy):</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PATH TO SCRIPT DIR</span></span><br><span class="line">yk_path=$(<span class="built_in">dirname</span> $(<span class="built_in">realpath</span> <span class="string">&quot;<span class="variable">$&#123;BASH_SOURCE[0]&#125;</span>&quot;</span>))</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$yk_path</span></span><br><span class="line"></span><br><span class="line">. ./yank_head</span><br><span class="line">yank_to_server</span><br></pre></td></tr></table></figure></div>
+<p><code>wvnc.sh</code>将传入的第一个参数写入到<code>clipboard</code>:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PATH TO SCRIPT DIR</span></span><br><span class="line">yk_path=$(<span class="built_in">dirname</span> $(<span class="built_in">realpath</span> <span class="string">&quot;<span class="variable">$&#123;BASH_SOURCE[0]&#125;</span>&quot;</span>))</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$yk_path</span></span><br><span class="line"></span><br><span class="line">. ./yank_head</span><br><span class="line">input=<span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line">open_clipboard</span><br></pre></td></tr></table></figure></div>
+<h2 id="3-食用方法"><a href="#3-食用方法" class="headerlink" title="3-食用方法"></a>3-食用方法</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- evnc.sh</span><br><span class="line">- 在ssh中</span><br><span class="line">- 直接执行</span><br><span class="line">- 使用默认文本编辑器打开文件clipboard</span><br><span class="line">- end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- wvnc.sh </span><br><span class="line">- 在ssh中</span><br><span class="line">- 执行wvnc.sh <span class="string">&#x27;要复制的内容&#x27;</span></span><br><span class="line">- 将<span class="string">&#x27;要复制的内容&#x27;</span>写入clipboard</span><br><span class="line">- 写入内容不包含引号且内容不能含有</span><br><span class="line">- 单引号</span><br><span class="line">- end</span><br><span class="line"></span><br><span class="line">- sc.sh</span><br><span class="line">- 在ssh中</span><br><span class="line">- 直接执行</span><br><span class="line">- 将x0vncserver服务器中剪贴板的内容</span><br><span class="line">- 复制到ssh客户端的主机</span><br><span class="line">- end</span><br><span class="line"></span><br><span class="line">- vc.sh</span><br><span class="line">- 在x0vncserver中的终端</span><br><span class="line">- 直接执行</span><br><span class="line">- 将文件clipboard中的内容</span><br><span class="line">- 复制到x0vncserver服务器中</span><br><span class="line">- vnc</span><br></pre></td></tr></table></figure></div>
+<p>如果要将vc.sh放到图形界面的快捷键中，请务必使用终端执行此命令</p>
 
         </div>
 
@@ -663,18 +657,18 @@
             <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> keepalived控制lvs与实现持久化</li>
+        <li><strong>标题:</strong> x0vnc/x11vnc通过ssh与osc52共享剪切板</li>
         <li><strong>作者:</strong> 7cmb</li>
         <li><strong>创建于
-                :</strong> 2024-02-21 22:41:35</li>
+                :</strong> 2024-05-28 22:46:13</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-05-15 15:29:42
+                    :</strong> 2024-05-29 02:06:51
             </li>
         
         <li>
-            <strong>链接:</strong> https://7cmb.com/keepalived控制lvs与实现持久化/
+            <strong>链接:</strong> https://7cmb.com/x0vnc-x11vnc通过ssh与osc52共享剪切板/
         </li>
         <li>
             <strong>
@@ -700,11 +694,11 @@
                     </li>
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/lvs/">#lvs</a>&nbsp;
+                        <a href="/tags/ssh/">#ssh</a>&nbsp;
                     </li>
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/keepalived/">#keepalived</a>&nbsp;
+                        <a href="/tags/vnc/">#vnc</a>&nbsp;
                     </li>
                 
             </ul>
@@ -715,29 +709,14 @@
         
             <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
                 
-                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-                        <a class="prev"
-                        rel="prev"
-                        href="/git%E8%83%A1%E6%80%9D%E4%B9%B1%E6%83%B3/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">git胡思乱想</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
                         <a class="next"
                         rel="next"
-                        href="/su%E6%88%96sudo%E4%B8%8B%E4%BD%BF%E7%94%A8neovim%E5%89%AA%E8%BE%91%E7%89%88/"
+                        href="/ssh%E4%B8%8B%E9%80%9A%E8%BF%87osc52%E4%BD%BF%E7%94%A8nvim%E5%89%AA%E5%88%87%E6%9D%BF/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">su或sudo下使用neovim剪切板</span>
+                                <span class="post-nav-title-item">ssh下通过osc52使用nvim剪切板</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -758,8 +737,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">keepalived控制lvs与实现持久化</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-text">基本配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-text">关于持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-text">结论</span></a></li></ol>
+        <div class="page-title">x0vnc/x11vnc通过ssh与osc52共享剪切板</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-text">先决条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5"><span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%84%9A%E6%9C%AC%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-text">1-脚本目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%84%9A%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-text">2-脚本内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%A3%9F%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">3-食用方法</span></a></li></ol></li></ol>
 
     </div>
 </div>
