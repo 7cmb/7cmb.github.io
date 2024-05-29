@@ -10,14 +10,14 @@ categories:
  - [linux, vnc]
 ---
 # 前言
-没想到这次写文又又又又是因为剪贴板的事情。这次的场景是控制本地x11的x0vncserver下共享剪贴板。[archwiki](https://wiki.archlinux.org/title/TigerVNC#Running_x0vncserver_to_directly_control_the_local_display)没有写解决方案，而在该项目的[issue](https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-1358864856)中，这位老哥`@mathewng`表示一种workaround，具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板`x11vnc -nofb -clip 4x4+0+0`。
+没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。[archwiki](https://wiki.archlinux.org/title/TigerVNC#Running_x0vncserver_to_directly_control_the_local_display)没有写解决方案，在该项目的[issue](https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-1358864856)中，这位老哥`@mathewng`表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板`x11vnc -nofb -clip 4x4+0+0`。
 
-这意味着将开启两个本地x11的vnc会话，一个是一切正常除了剪贴板的`x0vncserver -rfbauth ~/.vnc/passwd`；另一个是啥都没有仅剩下捕抓键盘和剪贴板`x11vnc -nofb -clip 4x4+0+0`(BTW，这里为了前者的正常体验可以加上-repeat参数，就是有亿点点小问题)。
+这意味着将开启两个本地x11的vnc会话，一个是一切正常除了不能把服务端主机剪贴板发送给客户端主机的`x0vncserver -rfbauth ~/.vnc/passwd`；另一个是啥都没有仅剩下捕抓键盘和剪贴板`x11vnc -nofb -clip 4x4+0+0`(BTW，这里为了前者的正常体验可以加上-repeat参数，就是有亿点点小问题)
 
-两个残疾人取长补短看起来很滑稽，但是确实很好地解决了两者的不足。唯一的缺点是无法将中文复制出来
+两个残疾人取长补短看起来很滑稽，但是确实很好地解决了两者的不足。但是最大的缺点是无法将中文复制出来
 > PS:x0vnc服务器中的rdp远程windows主机中文却能正确复制出来。鄙人由于不懂编码，觉得煞是奇怪
 
-无法复制中文对于以汉语为主要语言的人无异于弃用。想起之前的x11转发和osc52，顿时心生一计——好像能通过bash脚本把两者结合在一起，以一种比较诡异的办法共享双方剪贴板
+无法复制中文对于以汉语为主要语言的人实在是鸡肋。想起之前的x11转发和osc52，顿时心生一计——好像能把两者结合在一起，再将命令写进bash脚本，以一种比较诡异的办法共享双方剪贴板
 
 # 思路
 通过ssh上的x11转发加上指定的配置能获得指定x11会话，在这个基础上就可以做到通过ssh控制指定的x11会话。例如像这样通过ssh在x11本地会话下打开`xclock`:
@@ -38,7 +38,7 @@ extra/xclip 0.13-5 [installed]
 
 能通过命令行的事情自然能写脚本替代手打，脚本能通过快捷键以及各种方法快速执行。所以笔者将以一个简单的脚本实现标题目的
 
-> 这里的复制演示仅仅只代表clipboard剪贴板，linux有三种剪贴板，详见以下链接:
+> 这里的复制演示仅仅只代表x11的clipboard剪贴板，linux有三种剪贴板，详见以下链接:
 >
 >https://superuser.com/questions/90257/what-is-the-difference-between-the-x-clipboards
 >
@@ -65,7 +65,7 @@ total 24K
 - `sc.sh`将x0vncserver会话的剪贴板的内容复制到ssh客户端机器(蹩脚英文ssh copy)
 - `vc.sh`将`clipboard`内容复制到x0vncserver会话剪贴板(蹩脚英文vnc copy)
 - `wvnc.sh`将传入的第一个参数写入到`clipboard`
--  `yank_head`上述脚本的实现方法
+- `yank_head`上述脚本的具体实现方法
 ## 2-脚本内容
 `yank_head`上述脚本的实现方法:
 ```bash
@@ -81,14 +81,14 @@ xauth add $(xauth list $DISPLAY)
 yank_to_client()
 {
   echo -ne "\033]52;c;$(xclip -o | base64 )\a"
-	echo "YANKED"
+  echo "YANKED"
 }
 
 # YANK TO VNC SERVER HOST FROM "$yk_path/clipboard"
 yank_to_server()
 {
   echo -ne "\033]52;c;$(cat "$yk_path/clipboard" | base64 )\a"
-	notify-send "VNC SERVER REV CLIPBOARD"
+  notify-send "VNC SERVER REV CLIPBOARD"
 }
 
 # WRITE SOMETHING TO "$yk_path/clipboard" 
@@ -96,10 +96,10 @@ open_clipboard()
 {
   echo $input
   echo "$input" > "$yk_path/clipboard"
-	echo "WRITTEN"
+  echo "WRITTEN"
 }
 
-
+# EDIT "$yk_path/clipboard"
 edit_clipboard()
 {
 #  TO WRITE SOMETHING VIA EDITOR
@@ -163,9 +163,9 @@ open_clipboard
 - wvnc.sh 
 - 在ssh中
 - 执行wvnc.sh '要复制的内容'
-- 将'要复制的内容'写入clipboard
-- 写入内容不包含引号且内容不能含有
-- 单引号
+- 将'要复制的内容'写入文件clipboard
+- 写入内容不包含单引号且内容
+- 不能含有单引号
 - end
 
 - sc.sh
@@ -180,6 +180,6 @@ open_clipboard
 - 直接执行
 - 将文件clipboard中的内容
 - 复制到x0vncserver服务器中
-- vnc
+- end
 ```
 如果要将vc.sh放到图形界面的快捷键中，请务必使用终端执行此命令
