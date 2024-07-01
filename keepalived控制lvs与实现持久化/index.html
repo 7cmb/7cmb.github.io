@@ -25,17 +25,17 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="用keepalived来控制lvs的行为而不通过ipvsadm可以大大简化配置流程。用ipvsadm配置还得通过一些手段 把配置保留下来。keepalived一站式解决lvs、vrrp，实在是太爽啦(就是有些地方UserGuide和Manual会打架) 对于配置keepalived的vrrp实例还是很简单的，就是注意配置文件&#x2F;etc&#x2F;keepalived&#x2F;keepalive.conf权限不能为执行">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2hwS0ZHS3NhRG1pODZWP2U9WlNkaDFs.png">
-<meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png">
+<meta property="og:image" content="https://telegraph.7cmb.com/file/0f9c6333cffdb37304267.png">
+<meta property="og:image" content="https://telegraph.7cmb.com/file/8e88289b6fd130ee964c7.png">
+<meta property="og:image" content="https://telegraph.7cmb.com/file/0f9c6333cffdb37304267.png">
 <meta property="article:published_time" content="2024-02-21T14:41:35.000Z">
-<meta property="article:modified_time" content="2024-05-15T07:29:42.530Z">
+<meta property="article:modified_time" content="2024-07-01T02:11:30.760Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="lvs">
 <meta property="article:tag" content="keepalived">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png">
+<meta name="twitter:image" content="https://telegraph.7cmb.com/file/0f9c6333cffdb37304267.png">
     
     
         <!-- Google tag (gtag.js) -->
@@ -529,8 +529,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-05-15 15:29:42</span>
-            <span class="mobile">2024-05-15 15:29:42</span>
+            <span class="desktop">2024-07-01 10:11:30</span>
+            <span class="mobile">2024-07-01 10:11:30</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -628,7 +628,7 @@
 <p>persistence_timeout设定的时间对应lvs表的条目是<code>ASSURED</code><br>tcp连接建立成功后对应的条目是<code>ESTABLISHED</code>:<br><img  title="" 
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png"
+                     data-src="https://telegraph.7cmb.com/file/0f9c6333cffdb37304267.png"
                       alt="借图一用" 
                 ></p>
 <p>lvs_timeouts默认值是tcp 900 tcpfin 120 udp 300</p>
@@ -642,12 +642,12 @@
 <h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>这里有一个超短的<code>lvs_timeouts</code>和一个比它更短<code>persistence_time</code>:<br><img  title="" 
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2hwS0ZHS3NhRG1pODZWP2U9WlNkaDFs.png"
+                     data-src="https://telegraph.7cmb.com/file/8e88289b6fd130ee964c7.png"
                       alt="" 
                 ><br>建立连接的条目消失后，理应更早一秒消失的<code>persistence_time</code>居然带着更长的时间回来了:<br><img  title="" 
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png"
+                     data-src="https://telegraph.7cmb.com/file/0f9c6333cffdb37304267.png"
                       alt="我在这呢" 
                 ></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>持久化不但需要看持久化时间(persistence_time)，更要看lvs连接条目的保持时间(lvs_timeouts)。真是人不可貌相</p>
@@ -670,7 +670,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-05-15 15:29:42
+                    :</strong> 2024-07-01 10:11:30
             </li>
         
         <li>
@@ -750,6 +750,64 @@
         
 
 
+        
+            <div class="comment-container px-2 sm:px-6 md:px-8 pb-8">
+                <div class="comments-container mt-10 w-full ">
+    <div id="comment-anchor" class="w-full h-2.5"></div>
+    <div class="comment-area-title w-full my-1.5 md:my-2.5 text-xl md:text-3xl font-bold">
+        评论
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script data-swup-reload-script
+            src="//cdn.staticfile.org/gitalk/1.8.0/gitalk.min.js"></script>
+    <script data-swup-reload-script>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: 'Ov23liLeIvqFFfwJf0ZL',
+                    clientSecret: 'b751a832b5fcc808732cdac34fb7b489a6308d9b',
+                    repo: 'gitalk',
+                    owner: '7cmb',
+                    admin: ['7cmb'],
+                    id: __gitalk__pathname,
+                    language: 'zh-CN',
+                    proxy: 'https://github.com/login/oauth/access_token'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
         
     </div>
 
@@ -861,6 +919,10 @@
         
 
         <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
         
     </ul>
 </div>
