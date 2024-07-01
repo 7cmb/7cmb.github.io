@@ -19,15 +19,15 @@ lvm一直没找到使用场景，直到我的小黑从朋友那转了回来 。�
 
 `lsblk`稍微看一下，很好，已经分好区了，等等全给格了:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUzZ0T0J5MkFCSkhEQzJVP2U9VUxVUUhI.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/7e9d33c18d91da872f95f.png" alt="lsblk">
 
 ## 2-分区
 
 本设备已经设置了UEFI启动，遂`fdisk`把所有硬盘的`label`设置为GPT。除了EFI分区留1G放引导外其他通通做成`Linux LVM`格式:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVEFMbWQ1Zk16WjBzeUhBP2U9MGVXU01M.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/a63bb31607761bb689ebb.png" alt="partition1">
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUzlOYjNTdVVmeENSdFBY.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/8df2cc9e1e4dad2769de0.png" alt="partition2">
 
 ## 3-LVM基本命令
 
@@ -57,9 +57,9 @@ LVM操作无非三种命令:
 
 下列命令对应查看LVM信息
 
-- `pvs` `vgs` `lvs`    # 简述
+- `pvs` `vgs` `lvs`    # 简述
 
-- `pvdisplay` `vgdisplay` `lvdisplay`    # 详细
+- `pvdisplay` `vgdisplay` `lvdisplay`    # 详细
 
 这两种命令LVM信息的状态略详
 

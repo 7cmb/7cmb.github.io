@@ -74,11 +74,11 @@ wsl --set-default-version 2
 
 找到 **distrod_wsl_launcher.exe** 并运行
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjUjNvcjNpYmVja2hjaEk_ZT1aMWdwSUo.jpg" alt="index_of_files">
+<img title="" src="https://telegraph.7cmb.com/file/f0c1263ee41ecc2890553.png" alt="index_of_files">
 
 运行后将出现以下界面
 
-<img title="distrods_eg" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdidWVlblpIZVluaDJiYWs_ZT1BZFVwNlc.jpg" alt="">
+<img title="distrods_eg" src="https://telegraph.7cmb.com/file/eee2409005dd4100ff6f6.png" alt="eg">
 
 此时选择 ***[1]*** 则使用本地文件，选择 ***[2]*** 则使用指定连接以下载对应发行版，一般选 ***[2]*** 就行，笔者因为网络问题故选 ***[1]*** 以下示例为使用本地文件的操作
 
@@ -87,13 +87,13 @@ wsl --set-default-version 2
 
 输入文件路径，摁shift加右键即可选择复制路径，之后删除引号
 
-<img title="distrods_input" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdiN1RJN0h0ZER0NlcwRmM_ZT1RVVg5WEI.jpg" alt="">
+<img title="distrods_input" src="https://telegraph.7cmb.com/file/587ce25e7822ac299d314.png" alt="distrods_input">
 
 > 系统包选择rootfs,内核已经安装所以不需要的完整系统
 
 此时系统wsl2发行版已安装，接着设置此发行版用户名及密码
 
-<img title="distrods_complete" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdjSjZsMEdfel9wRTBSSHM_ZT05UFRXZlo.jpg" alt="">
+<img title="distrods_complete" src="https://telegraph.7cmb.com/file/2c1ef0e427216aed521f1.png" alt="distrods_complete">
 
 <br>
 <br>
@@ -266,9 +266,9 @@ sudo systemctl start vncserver@:1
 
 直接使用loopback:5900+X连接
 
-<img title="vnc1" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkbGlUcjZqSnR6djlVNms_ZT1qb2hSd0w.jpg" alt="">
+<img title="vnc1" src="https://telegraph.7cmb.com/file/f15bc4bd22a9befbaea0c.png" alt="vnc1">
 
-<img title="vnc2" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdkMnlISi1tWVE1Y29WdjA_ZT1RYkMwbVc.jpg" alt="">
+<img title="vnc2" src="https://telegraph.7cmb.com/file/05e2cd5bb5c9d47e28b9e.png" alt="vnc2">
 
 这时你就会发现即使正确配置了fcitx输入法也可能在某些场景无法唤出，这时就又要修改配置文件了
 

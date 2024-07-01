@@ -73,11 +73,11 @@ docker run -i --name 1entry_point
 
 `1no_entry_point`修改`Path` `Args` `Cmd` `Entrypoint`为以下值:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFI1b1lpSTFuQl9DakhxP2U9TWJTRGRH.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/94d3f77b114a3608ba2ef.png" alt="">
 
 `1entry_point`修改`Path` `Args` `Cmd` `Entrypoint`为以下值:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVE1RSUNCZWJCZWR2WERRP2U9aTVhc0dL.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/b5113c38d45ade9bd5d4a.png" alt="">
 
 > 对于无ENTRYPOINT只有CMD的配置，`Path`为CMD第一个字段，剩下的字段分开塞进`Args`
 > 

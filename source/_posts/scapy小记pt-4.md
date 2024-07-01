@@ -121,7 +121,7 @@ Ether / IP / TCP / HTTP / 'GET' '/s?z=people&c=3' 'HTTP/1.1'
 
 太难看了，贴张图片:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdmZ2NDMEdTZUNVZzN2dTQ_ZT1ESTFnTE8.png" alt="" >
+<img title="" src="https://telegraph.7cmb.com/file/0fcb4427553316beb96fb.png" alt="sniff1" >
 
 可见本来应该为field应该为Raw的数据可以解析出来了，并且可以通过字典类型访问，pkt["key"].field:
 
@@ -149,8 +149,8 @@ pip install cryptography
 
 再进行嗅探:
 
-```
->>> plist.nsummary()    #该对象有Client Hello包，所以不再抓包，直接使用http阶段的结果
+```python
+>>> plist.nsummary()    #该对象有Client Hello包，所以不再抓包，直接使用http阶段的结果
 0000 Ether / IP / TCP / TLS 172.16.27.191:36870 > 36.158.231.204:443 / TLS / TLS Handshake - Client Hello
 0001 Ether / IP / TCP / HTTP / 'GET' '/' 'HTTP/1.1'
 0002 Ether / IP / TCP / HTTP / 'GET' '/s?z=people&c=9' 'HTTP/1.1'
@@ -165,6 +165,6 @@ pip install cryptography
 
 分析:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdmMUxycDZmVDg1Zmpyckk_ZT1zZjFUbHo.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/2173aada94c83659aa827.png" alt="sniff2">
 
 至此，一个简单的分析完成

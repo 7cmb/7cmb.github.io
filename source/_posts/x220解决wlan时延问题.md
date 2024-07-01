@@ -66,7 +66,7 @@ root@archiso ~ # nmcli connection show myssid |grep 802-11-wireless.powersave
 802-11-wireless.powersave:              2 (disable)
 ```
 
-这个选项默认是3，只需要把他改成2并up一下即可解决这个问题:
+这个选项默认是3(该处有误，默认是多少忘了)，只需要把他改成2并up一下即可解决这个问题:
 
 ```bash
 root@archiso ~ # nmcli connection modify myssid 802-11-wireless.powersave 2

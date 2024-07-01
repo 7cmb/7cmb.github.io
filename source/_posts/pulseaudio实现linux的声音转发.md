@@ -70,5 +70,5 @@ export PULSE_SERVER="tcp:$HOST_IP"
 
 测试通过后就能直接打开服务端的pulseaudio.exe后放在后台，享受声音转发服务了
 
-<video src='https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3YvcyFBckVNT01Ec2ZXcEdlU19tUzBqNnRHODVtdkE_ZT1xZ3RQMWY.mp4' type='video/mp4' controls='controls'  width='100%' height='100%'>
+<video src='https://1drv.ms/v/c/466a7decc0380cb1/UQOxDDjA7H1qIIBGeQAAAAAAAMbNT3HLT7w3Tbw' controls='controls'  width='100%' height='100%'>
 </video>

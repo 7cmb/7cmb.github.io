@@ -169,7 +169,7 @@ Real Server2:192.168.56.57
 
 persistence_timeout设定的时间对应lvs表的条目是`ASSURED`  
 tcp连接建立成功后对应的条目是`ESTABLISHED`:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png" alt="借图一用" >
+<img title="" src="https://telegraph.7cmb.com/file/0f9c6333cffdb37304267.png" alt="借图一用" >
 
 lvs_timeouts默认值是tcp 900 tcpfin 120 udp 300
 
@@ -187,9 +187,9 @@ lvs_timeouts默认值是tcp 900 tcpfin 120 udp 300
 ### 例子
 
 这里有一个超短的`lvs_timeouts`和一个比它更短`persistence_time`:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2hwS0ZHS3NhRG1pODZWP2U9WlNkaDFs.png" alt="" >
+<img title="" src="https://telegraph.7cmb.com/file/8e88289b6fd130ee964c7.png" alt="" >
 建立连接的条目消失后，理应更早一秒消失的`persistence_time`居然带着更长的时间回来了:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnU2Z5NGpJc3prdmZEU1VKP2U9STI0OWhx.png" alt="我在这呢" >
+<img title="" src="https://telegraph.7cmb.com/file/0f9c6333cffdb37304267.png" alt="我在这呢" >
 
 ## 结论
 

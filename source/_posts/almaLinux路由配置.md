@@ -28,7 +28,7 @@ categories:
 
 拓扑:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUk9iU3RSdmRrSUpYWURVP2U9WTVScGw2.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/18ad752c598634a6ce6ac.png" alt="">
 
 目的:
 
@@ -157,6 +157,6 @@ default via 192.168.1.1 dev enp0s3 proto static metric 100
 
 在`AlmaLinux Router`上运行嗅探域名的[scapy脚本(修改版本)](https://7cmb.com/%E5%88%A9%E7%94%A8python%E6%8A%93%E5%8F%96%E5%88%86%E6%9E%90%E6%95%B0%E6%8D%AE%E5%8C%85%E5%B9%B6%E5%AD%98%E5%85%A5mysql/)可以看到访问记录:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUW1KdHd1VFRSVzNvNFN6P2U9eHluVm0y.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/116da2833fa2e0c11c794.png" alt="">
 
  路由正常

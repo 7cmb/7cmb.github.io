@@ -41,7 +41,7 @@ pxe和ipxe使用前必须有一台支持pxe配置选项的dhcp服务器和一台
 操作系统:almalinux9
 dhcp服务:dhcp-server
 tftp服务:tftp-server
-引导程序:syslinux    #pxelinux是syslinux的程序之一
+引导程序:syslinux    #pxelinux是syslinux的程序之一
 符合pxe启动格式的系统文件:放置于httpd(apache)服务器中
 ```
 
@@ -98,7 +98,7 @@ systemctl enable --now tftp
 
  查看当前tftp文件夹内容:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUVg5Z2JzdzlXdk03Y19VP2U9TVBEYjJN.jpg" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/f03fa99f64a482c11428a.png" alt="PXE01">
 
 为防火墙添加规则:
 
@@ -123,13 +123,13 @@ subnet 192.168.56.0 netmask 255.255.255.0 {
   range 192.168.56.100 192.168.56.254;
   class "pxeclients" {
     match if substring (option vendor-class-identifier, 0, 9) = "PXEClient";
-    next-server 192.168.56.50;    # tftp服务器地址
+    next-server 192.168.56.50;    # tftp服务器地址
           if option architecture-type = 00:07 { # x64架构 uefi固件
             filename "EFI/BOOT/grubx64.efi"; # 以tftp服务目录为根的相对路径
-                      # 此路径相当于/var/lib/tftpboot/EFI/BOOT/grubx64.efi
+                      # 此路径相当于/var/lib/tftpboot/EFI/BOOT/grubx64.efi
           }
           else {
-            filename "pxelinux.0";    # 同上
+            filename "pxelinux.0";    # 同上
           }
   }
 ```
@@ -198,9 +198,9 @@ systemctl status httpd
 
 也可直接浏览器访问测试:
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUVN0X055bWNtX05BdmV6P2U9Q2VTbTNM.jpg" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/c1ef0cb0aa86632ee5b12.png" alt="PXE02">
 
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUVlFa0ZEVHBCRkQ3Q0JsP2U9UDFaWDQ4.jpg" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/403df32b133439fc77793.png" alt="PXE03">
 
 > vbox下可能要重启一下虚拟机，某些配置才能生效.....
 > 
@@ -223,7 +223,7 @@ timeout 600
 
 label linux
 menu label ^Install AlmaLinux9(Minimal) 64-bit
-kernel pxeboot/vmlinuz    # 以tftp服务目录为根的相对路径
+kernel pxeboot/vmlinuz    # 以tftp服务目录为根的相对路径
 append initrd=pxeboot/initrd.img inst.repo=http://192.168.56.50/almalinux/cdrom
 
 label local
@@ -279,7 +279,7 @@ menuentry 'Install AlmaLinux 9.3' --class fedora --class gnu-linux --class gnu -
 
 自此，pxe和ipxe配置完成
 
-> grub.cfg还有更简短的写法，比如红帽的例子[Chapter 2. Preparing for your RHEL installation Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/performing_a_standard_rhel_9_installation/assembly_preparing-for-your-installation_installing-rhel#configuring-a-tftp-server-for-uefi-based-clients_preparing-for-a-network-install)，也能用而且没什么区别
+> grub.cfg还有更简短的写法，比如红帽的例子[Chapter 2. Preparing for your RHEL installation Red Hat Enterprise Linux 9 | Red Hat Customer Portal](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9/html/performing_a_standard_rhel_9_installation/assembly_preparing-for-your-installation_installing-rhel#configuring-a-tftp-server-for-uefi-based-clients_preparing-for-a-network-install)，也能用而且没什么区别
 > 
 > inst.repo和inst.stage2选项的区别可以参考:
 > 

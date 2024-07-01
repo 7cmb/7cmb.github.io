@@ -55,7 +55,7 @@ categories:
 
 # 实验
  data1-server:`192.168.56.55/24`部署于vbox子网，在以下拓扑的vbox广播域:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUk9iU3RSdmRrSUpYWURVP2U9WTVScGw2.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/ac697127040788de60865.png" alt="ignore0">
 本次实验将更改AlmaLinuxRouter的arp_ignore参数，并用data1-server对AlmaLinuxRouter发起arping以验证想法
 
 > 对于如何验证arp_announce，暂时想不到直观的办法，此处忽略
@@ -64,6 +64,6 @@ categories:
 <img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUkt2TGppeUZqb0FibkVYP2U9aE85SGNG.png" alt="">
 
 当`/proc/sys/net/ipv4/conf/enp0s8/arp_ignore`为0:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUkh2dF85Wm9hUTBma1Z6P2U9SzNCYjFt.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/a2a80ba09016b18dbcb15.png" alt="">
 
 可以看到当接收网卡的"arp_ignore"为1时，即使arp请求目标地址为本机的其他网卡绑定的ip,也不会进行响应

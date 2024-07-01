@@ -29,7 +29,7 @@ osc52是ansi下的转义序列，可以实现将文本从终端复制到系统�
 1、终端支持osc52<br>
 2、使用neovim<br>
 笔者配置:
-<img src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGNOdGk4QnpVWnFXSU1rP2U9d29SeXBh.png" alt="" >
+<img src="https://telegraph.7cmb.com/file/e585429b7d24db1f334e3.png" alt="fetch" >
 # 实践
 ## 1-配置终端
 笔者使用的终端是suckless的`st`，但是并非默认开启osc52功能，需要修改源码重新编译以开启[功能](https://git.suckless.org/st/commit/a2a704492b9f4d2408d180f7aeeacf4c789a1d67.html)。对于其他终端，vim-oscyank的作者给了一份表以[参考](https://github.com/ojroques/nvim-osc52)
@@ -100,7 +100,7 @@ require("lazy").setup({
 ```
 
 自动安装插件过程:
-<img src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVFp1Z05PMk9TQVAtai1JP2U9VUZlU2R0.png" alt="" >
+<img src="https://telegraph.7cmb.com/file/c695b3d77c890d94236ed.png" alt="auto_install" >
 
 手动安装当然也可以，只要nvim能找到对应位置，并且按照插件手册写好在配置文件中写好该插件的配置；下面演示手动安装
 

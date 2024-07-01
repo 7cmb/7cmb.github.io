@@ -117,7 +117,7 @@ kill -SIGTERM "-$( ps jx | sed -n '/\/home\/baka\/commands\/vnc.sh/p' | awk '{pr
 
 几番搜索后，无果。遂开始控制变量法。因为最开始是由输入法快速输入后稳定触发此问题的，遂从fcitx5换到了ibus <del>ibus好丑</del> ，后失望而归。继续搜索查看文档的时候，在机缘巧合中发现只要是浮动的窗口只要碰到屏幕的边界都会触发这个问题
 机缘巧合beLike:
-<img title="" src="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnUTI1a1BWanVHVHBWZ2Q5P2U9UlloUDV5.png" alt="">
+<img title="" src="https://telegraph.7cmb.com/file/e1d88ff2e5793e82a2fa4.png" alt="beLike">
 这时候想起来x11环境下跑的`picom`是别人fork后打包的aur，遂立刻在配置文件中关闭它的自启动并测试。果然，就是它的问题
 
 # 修改picom
