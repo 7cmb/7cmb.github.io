@@ -58,7 +58,6 @@ archlinux是滚动发行的且版本更新很快，相对的，写好dockerfile�
  这一步很简单，首先需要准备的东西有
   - 一份`dockerfile`
   - 一个打包为tar的windows字体目录，重命名为模式`ms-fonts.tar`
-  - 一份用以下载winetricks无法自动下载的库的`脚本`
   - 将以上工具放在一个空文件夹
  
  首先是写dockerfile,命名为`base.dockerfile`。基本是修改镜像原更新软件并安装软件：
@@ -158,7 +157,7 @@ docker images | grep base
 另外，笔者直接将KVM中的` Win10 LTSC 2016 `中的字体目录打包为tar并解压到容器的字体目录中。这一步将带来不少不需要的字体。如果有一定的追求可以参考连接字体和修改注册表等等方法  <del>我都失败了</del>
 
 ## step-2 操作中间容器并提交中间镜像`base_wine`
-回到刚才的目录中，假设该目录为`/home/baka/Documents/dockerfile/base_wine`。为`winetricks`提前准备好部分需要且无法通过winetricks直接下载的库文件(参考`base.dockerfile`第64行，`winetricks`
+回到刚才的目录中，假设该目录为`/home/baka/Documents/dockerfile/base_wine`。为winetricks提前准备好部分需要且无法通过winetricks直接下载的库文件(参考上步base.dockerfile第64行，`winetricks`
 命令后的参数都是需要的库文件)，这里通过一个脚本`downloads.sh`实现下载这些文件:
 ```bash
 #!/bin/bash
