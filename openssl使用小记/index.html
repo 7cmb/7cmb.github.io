@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="7cmb">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://7cmb.github.io/openssl使用小记/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="本文参考:https:&#x2F;&#x2F;www.cnblogs.com&#x2F;efzju&#x2F;p&#x2F;4976144.html  https:&#x2F;&#x2F;github.com&#x2F;openssl&#x2F;openssl&#x2F;issues&#x2F;10458  https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;33989190&#x2F;subject-alternative-name-is-not-copied-to-signed-certi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openssl使用小记">
+<meta property="og:url" content="https://7cmb.github.io/openssl%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文参考:https:&#x2F;&#x2F;www.cnblogs.com&#x2F;efzju&#x2F;p&#x2F;4976144.html  https:&#x2F;&#x2F;github.com&#x2F;openssl&#x2F;openssl&#x2F;issues&#x2F;10458  https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;33989190&#x2F;subject-alternative-name-is-not-copied-to-signed-certi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-13T13:29:31.000Z">
+<meta property="article:modified_time" content="2024-07-13T13:35:07.257Z">
+<meta property="article:author" content="7cmb">
+<meta property="article:tag" content="network">
+<meta property="article:tag" content="openssl">
+<meta name="twitter:card" content="summary">
+    
+    
+        <!-- Google tag (gtag.js) -->
+        <script src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '');
+        </script>
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/pixel_astolfo.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/pixel_astolfo.ico">
+    <meta name="theme-color" content="#aac2df">
+    <link rel="shortcut icon" href="/images/pixel_astolfo.ico">
+    <!--- Page Info-->
+    
+    <title>
+        
+            openssl使用小记 -
+        
+        7cmb&#39;s blog.
+    </title>
+
+    
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        7cmb&#39;s blog.
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"7cmb.github.io","root":"/","language":"zh-CN"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":["a nobody"]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"ÍÆ¼öÔÄ¶Á","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#aac2df","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":false},"website_counter":{"url":"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":true,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/light_mode.webp","dark":"/images/dark_mode.webp"},"title":"\"7cmb\" AKA Seven-colored Magical Baka","subtitle":{"text":["SEVEN-COLORED MAGICAL BAKA","取自","誰があんたみたいな\"七色魔法莫迦\"と旧友なのよ - 博麗 霊夢"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":20,"backing_speed":20,"starting_delay":600,"backing_delay":6000,"loop":false,"smart_backspace":false},"text_color":{"light":"#333e3e","dark":"#e3e3e3"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/7cmb","instagram":null,"zhihu":null,"twitter":null,"email":"jiezhao.Z@outlook.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":true,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"path":"/about","icon":"fa-regular fa-user"}},"search":{"enable":false,"preload":true},"categories":{"Categories":{"icon":"fa-solid fa-folder","path":"/categories/"}},"tags":{"Tags":{"icon":"fa-solid fa-tags","path":"/tags/"}}},"page_templates":{"friends_column":2,"tags_style":"cloud"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"君子生非异也，善假于物也","show_on_mobile":true,"links":{"About":{"path":"/about","icon":"fa-regular fa-user"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2023/9/27 2:05:14"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
+    
+</div>
+
+
+<main class="page-container" id="swup">
+
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content ">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                7cmb&#39;s blog.
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/about"
+                                        >
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/"
+                        >
+                            <span>
+                                首页
+                            </span>
+                            
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/about"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-regular fa-user fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+
+            
+            
+                
+                    
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+            
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">31</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">41</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">32</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="post-page-container flex relative justify-between box-border w-full h-full">
+    <div class="article-content-container">
+
+        <div class="article-title relative w-full">
+            
+                <div class="w-full flex items-center pt-6 justify-start">
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">openssl使用小记</h1>
+                </div>
+            
+            </div>
+
+        
+            <div class="article-header flex flex-row gap-2 items-center px-2 sm:px-6 md:px-8">
+                <div class="avatar w-[46px] h-[46px] flex-shrink-0 rounded-medium border border-border-color p-[1px]">
+                    <img src="/images/official_alice.webp">
+                </div>
+                <div class="info flex flex-col justify-between">
+                    <div class="author flex items-center">
+                        <span class="name text-default-text-color text-lg font-semibold">7cmb</span>
+                        
+                            <span class="author-label ml-1.5 text-xs px-2 py-0.5 rounded-small text-third-text-color border border-shadow-color-1">a nobody</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2024-07-13 21:29:31</span>
+        <span class="mobile">2024-07-13 21:29:31</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2024-07-13 21:35:07</span>
+            <span class="mobile">2024-07-13 21:35:07</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+        <span class="article-categories article-meta-item">
+            <i class="fa-regular fa-folders"></i>&nbsp;
+            <ul>
+                
+                
+                    
+                        
+                        <li>
+                            <a href="/categories/network/">network</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        
+                            <li>></li>
+                        
+                        <li>
+                            <a href="/categories/network/openssl/">openssl</a>&nbsp;
+                        </li>
+                    
+                    
+                
+                    
+                        <li>
+                            | <a href="/categories/network/tls/">tls</a>&nbsp;
+                        </li>
+                    
+                    
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/network/">network</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/openssl/">openssl</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        
+
+
+        <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
+            <blockquote>
+<p>本文参考:<br><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/efzju/p/4976144.html" >https://www.cnblogs.com/efzju/p/4976144.html <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/openssl/openssl/issues/10458" >https://github.com/openssl/openssl/issues/10458 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://stackoverflow.com/questions/33989190/subject-alternative-name-is-not-copied-to-signed-certificate" >https://stackoverflow.com/questions/33989190/subject-alternative-name-is-not-copied-to-signed-certificate <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/certificates/" >https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/certificates/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-Using_OpenSSL#sec-Creating_a_Self-signed_Certificate" >https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-Using_OpenSSL#sec-Creating_a_Self-signed_Certificate <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/f-ck-need-u/p/6091027.html" >https://www.cnblogs.com/f-ck-need-u/p/6091027.html <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</blockquote>
+<p>本文记录笔者使用<code>openssl</code>命令行遇到的一点小问题。由于本人对安全只有最粗浅的理解，故本文只记录该命令不同<code>command</code>、<code>option</code>和<code>parameters</code>下的行为差异。先放出openssl的manpage:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">OPENSSL(1ssl)                       OpenSSL                      OPENSSL(1ssl)</span><br><span class="line"></span><br><span class="line">NAME</span><br><span class="line">       openssl - OpenSSL command line program</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">       openssl command [ options ... ] [ parameters ... ] </span><br><span class="line"></span><br><span class="line">       openssl no-XXX [ options ]</span><br><span class="line"></span><br><span class="line">       openssl -help | -version</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>近期看k8s相关文档及资料时遇到一系列tls&#x2F;ssl的内容，遇到了正好也复习一下相关理论顺便也稍微使用<code>openssl</code>命令行做实验</p>
+<p>众所周知，生成一张证书大致来说有三个步骤:</p>
+<ul>
+<li>step-1 生成一条 <strong>私钥</strong></li>
+<li>step-2 使用 上述私钥 生成一张包含对应公钥及其他内容的 <strong>csr</strong></li>
+<li>step-3 使用上步 <strong>csr</strong> 及 一条用于签名的私钥 生成一张证书</li>
+</ul>
+<blockquote>
+<p>未验证内容:应该能在step-3加上签名私钥所属机构的证书。如果是这样，那么猜测签名私钥所属机构的证书摘要将对应生成下级证书<code>aki</code>；也对应这张证书本身的<code>ski</code></p>
+</blockquote>
+<p>综上所述，生成一张自签名证书，也有三个步骤:</p>
+<ul>
+<li>step-1 生成一条 <strong>私钥</strong></li>
+<li>step-2 使用 上述私钥 生成一张包含对应公钥及其他内容的 <strong>csr</strong></li>
+<li>step-3 使用上步 <strong>csr</strong> 及 step-1的那条<strong>私钥</strong> 生成一张证书</li>
+</ul>
+<p>大致流程如上，但是使用<code>openssl</code>命令行实践及读文档的时候遇到一点问题</p>
+<h2 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h2><p>读文档的过程中遇到一个概念<code>pseudo-commands(伪命令)</code>。所以第一个问题:什么是<code>pseudo-commands(伪命令)</code></p>
+<p>在使用openssl签署为csr签名颁发证书时，不同<code>command</code>下签署出来的证书字段不同。例如有一个相同的csr，使用<code>openssl req</code>与<code>openssl x509</code>签署出来字段不一样。所以第二个问题为:两条命令在签署自签名证书时的差异在哪？</p>
+<blockquote>
+<p><code>command</code>概念参见上述manpage</p>
+</blockquote>
+<p>本文章将记录本人的答案:</p>
+<ul>
+<li>问题一: 什么是<code>pseudo-commands(伪命令)</code>？</li>
+<li>问题二: <code>openssl req</code>与<code>openssl x509</code>两条命令在签署自签名证书时的差异在哪？</li>
+</ul>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><p>对于<code>pseudo-commands(伪命令)</code>，网上貌似搜索不出什么东西。所以我的理解暂且是只用于openssl的一众命令中只用以显示信息而不做实际操作的命令。例如:<code>openssl list [option]</code> <code>openssl no-XXX</code> 这类命令</p>
+<blockquote>
+<p>对于<code>openssl list [option]</code>，还有一种弃用的用法，网上搜索到的过时资料及手册极具误导性，包括但不限于rhel 7的文档、manpage 等等。这种弃用用法大多属为<code>pseudo-commands list-standard-commands</code>&#x2F;<code>openssl list-standard-commands</code>。而新版本openssl的用法应该为<code>openssl list -standard-commands</code></p>
+</blockquote>
+<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><p>首先分步制作一张自签名证书</p>
+<p><strong>step-1</strong> 生成私钥:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out tls.key</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<p><strong>step-2</strong> 使用上述私钥生成csr:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key ./tls.key -out tls.csr</span><br></pre></td></tr></table></figure></div>
+
+<p>接下来会弹出提示词，这时候除了<code>Common Name</code>填写域名外，其他一律填写<code>.</code>留空,extra属性直接回车</p>
+<p>如果使用非交互式命令行可以添加<code>-sunj</code>实现，一下命令与上述操作等价:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key ./tls.key -subj /CN=test.com -out tls.csr</span><br></pre></td></tr></table></figure></div>
+
+<hr>
+<p><strong>step-3-1</strong> 使用<code>openssl req</code>对csr自签名:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -x509 -<span class="keyword">in</span> ./tls.csr -key ./tls.key -out ./tls.cert</span><br></pre></td></tr></table></figure></div>
+
+<p>执行完毕将跳出两条<code>warning</code>:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Warning: Not placing -key <span class="keyword">in</span> cert or request since request is used</span><br><span class="line">Warning: No -copy_extensions given; ignoring any extensions <span class="keyword">in</span> the request</span><br></pre></td></tr></table></figure></div>
+
+<p>第一条可以忽略，只有没有给定<code>-in</code>下<code>-key</code>输入的私钥才会为新生成的csr或者证书提供对应公钥(用于自签名)。<code>openssl-req</code>手册已经说明了<code>-key</code>在<code>-in</code>给定csr的情况下是用以提供私钥为csr签名的:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-key filename|uri</span><br><span class="line">    This  option provides the private key <span class="keyword">for</span> signing a new certificate</span><br><span class="line">    or certificate request.  Unless -<span class="keyword">in</span>  is  given,  the  corresponding</span><br><span class="line">    public key is placed <span class="keyword">in</span> the new certificate or certificate request,</span><br><span class="line">    resulting <span class="keyword">in</span> a self-signature.</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>第二条应该也能忽略，只要command是<code>req</code>，应该会读取<code>/etc/ssl/openssl.cnf</code>的配置；而csr也是通过<code>req</code>这个command生成的，对应配置应该是一样的</p>
+<p>读取证书:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">➜  1 openssl x509 -text -<span class="keyword">in</span> ./tls.cert| <span class="built_in">nl</span></span><br><span class="line">     1	Certificate:</span><br><span class="line">     2	    Data:</span><br><span class="line">     3	        Version: 3 (0x2)</span><br><span class="line">     4	        Serial Number:</span><br><span class="line">     5	            22:81:bc:7e:13:6a:43:65:63:b8:96:bf:2e:d5:91:db:ea:5b:64:ed</span><br><span class="line">     6	        Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">     7	        Issuer: CN=test.com</span><br><span class="line">     8	        Validity</span><br><span class="line">     9	            Not Before: Jul 13 08:48:16 2024 GMT</span><br><span class="line">    10	            Not After : Aug 12 08:48:16 2024 GMT</span><br><span class="line">    11	        Subject: CN=test.com</span><br><span class="line">    12	        Subject Public Key Info:</span><br><span class="line">    13	            Public Key Algorithm: rsaEncryption</span><br><span class="line">    14	                Public-Key: (2048 bit)</span><br><span class="line">    15	                Modulus:</span><br><span class="line">    16	                    00:8e:ec:98:52:69:4f:80:f5:8f:4f:4b:02:6a:5e:</span><br><span class="line">    17	                    d1:10:e7:74:19:70:95:c5:0f:9d:16:4c:31:a6:12:</span><br><span class="line">    18	                    42:f1:27:b0:bb:f0:a6:6c:c2:0c:f6:28:f7:f2:19:</span><br><span class="line">    19	                    62:78:31:78:84:3d:3d:61:e5:21:3a:f5:6d:ff:e6:</span><br><span class="line">    20	                    b8:ac:20:b1:5c:e9:aa:8f:de:c6:<span class="built_in">fc</span>:7c:50:39:c1:</span><br><span class="line">    21	                    a8:e5:72:e1:f0:48:7b:53:f6:a3:5c:43:1b:e1:3c:</span><br><span class="line">    22	                    96:1d:64:e8:ed:64:db:4e:86:96:c7:2f:c2:af:1f:</span><br><span class="line">    23	                    66:18:72:ca:90:6f:46:6c:08:f0:9d:3a:89:52:56:</span><br><span class="line">    24	                    70:0b:88:f3:49:d3:f3:4b:4f:f5:b3:87:ab:d4:38:</span><br><span class="line">    25	                    39:b0:0f:89:70:88:4b:d7:e5:da:59:8c:2e:06:36:</span><br><span class="line">    26	                    91:10:37:90:10:61:32:f4:d2:83:48:1f:1f:84:b0:</span><br><span class="line">    27	                    f9:40:d6:27:65:e4:95:1f:54:10:6f:c7:8f:2b:e1:</span><br><span class="line">    28	                    0a:70:f2:d4:b7:ad:18:<span class="built_in">cd</span>:6e:2b:ad:31:e6:a6:41:</span><br><span class="line">    29	                    1f:c6:69:0d:c4:<span class="built_in">fc</span>:90:41:01:d6:93:04:18:89:2f:</span><br><span class="line">    30	                    44:e4:a2:8a:86:11:0a:fd:3f:7d:13:55:9f:5b:8e:</span><br><span class="line">    31	                    49:62:fa:18:94:fd:29:49:5e:b1:7a:9a:c8:9b:6f:</span><br><span class="line">    32	                    13:1d:32:b9:5a:46:34:52:02:b9:31:f2:2e:7d:53:</span><br><span class="line">    33	                    f3:19</span><br><span class="line">    34	                Exponent: 65537 (0x10001)</span><br><span class="line">    35	        X509v3 extensions:</span><br><span class="line">    36	            X509v3 Subject Key Identifier: </span><br><span class="line">    37	                02:6C:AA:E7:28:7C:BB:25:71:AE:1A:E4:B1:E4:F7:67:ED:2B:A3:7D</span><br><span class="line">    38	            X509v3 Authority Key Identifier: </span><br><span class="line">    39	                02:6C:AA:E7:28:7C:BB:25:71:AE:1A:E4:B1:E4:F7:67:ED:2B:A3:7D</span><br><span class="line">    40	            X509v3 Basic Constraints: critical</span><br><span class="line">    41	                CA:TRUE</span><br><span class="line">    42	    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">    43	    Signature Value:</span><br><span class="line">    44	        56:ca:74:c3:15:fa:2a:65:aa:<span class="built_in">fc</span>:1d:04:aa:b9:1d:a6:bc:9d:</span><br><span class="line">    45	        e8:60:a0:78:b2:fd:64:7f:5f:ee:14:fe:ea:d0:af:f3:98:99:</span><br><span class="line">    46	        db:3e:0e:10:7d:a3:7c:ea:a1:6c:b5:05:0f:e1:01:7c:66:be:</span><br><span class="line">    47	        1c:be:28:59:a8:1a:01:00:6a:64:22:5f:87:f5:03:1e:17:6f:</span><br><span class="line">    48	        dc:1a:f8:4d:42:60:52:03:90:39:90:75:5d:48:82:5a:f2:58:</span><br><span class="line">    49	        a2:3d:8b:62:89:34:49:c8:0d:35:b8:93:95:37:9b:10:97:ca:</span><br><span class="line">    50	        56:7e:bc:99:09:7e:7e:94:2e:e2:f3:a0:1e:45:94:c2:6d:15:</span><br><span class="line">    51	        21:c0:56:47:03:d9:48:85:72:9d:b8:e4:ae:39:97:d9:1a:92:</span><br><span class="line">    52	        78:ee:7e:c3:95:6d:33:b4:d9:40:72:29:d3:af:eb:ce:8d:77:</span><br><span class="line">    53	        a3:39:6f:00:36:9c:ed:3c:af:cf:de:24:88:f7:91:ff:7b:ef:</span><br><span class="line">    54	        7c:e7:0e:c7:10:bb:44:e7:c6:0a:f8:c5:9f:ae:bd:2e:67:6a:</span><br><span class="line">    55	        c9:9e:fb:be:cc:f4:c0:d1:87:57:12:ce:67:60:cf:ec:e8:ec:</span><br><span class="line">    56	        45:5a:62:3b:81:00:07:<span class="built_in">fc</span>:72:43:c8:b7:db:16:82:ef:<span class="built_in">cd</span>:28:</span><br><span class="line">    57	        46:e2:66:0b:18:56:3e:47:3f:9d:<span class="built_in">cd</span>:b1:50:20:5f:1e:b4:99:</span><br><span class="line">    58	        f0:19:eb:59</span><br><span class="line">    59	-----BEGIN CERTIFICATE-----</span><br><span class="line">    60	MIIDBzCCAe+gAwIBAgIUIoG8fhNqQ2VjuJa/LtWR2+pbZO0wDQYJKoZIhvcNAQEL</span><br><span class="line">    61	BQAwEzERMA8GA1UEAwwIdGVzdC5jb20wHhcNMjQwNzEzMDg0ODE2WhcNMjQwODEy</span><br><span class="line">    62	MDg0ODE2WjATMREwDwYDVQQDDAh0ZXN0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQAD</span><br><span class="line">    63	ggEPADCCAQoCggEBAI7smFJpT4D1j09LAmpe0RDndBlwlcUPnRZMMaYSQvEnsLvw</span><br><span class="line">    64	pmzCDPYo9/IZYngxeIQ9PWHlITr1bf/muKwgsVzpqo/exvx8UDnBqOVy4fBIe1P2</span><br><span class="line">    65	o1xDG+E8lh1k6O1k206Glscvwq8fZhhyypBvRmwI8J06iVJWcAuI80nT80tP9bOH</span><br><span class="line">    66	q9Q4ObAPiXCIS9fl2lmMLgY2kRA3kBBhMvTSg0gfH4Sw+UDWJ2XklR9UEG/Hjyvh</span><br><span class="line">    67	CnDy1LetGM1uK60x5qZBH8ZpDcT8kEEB1pMEGIkvROSiioYRCv0/fRNVn1uOSWL6</span><br><span class="line">    68	GJT9KUlesXqayJtvEx0yuVpGNFICuTHyLn1T8xkCAwEAAaNTMFEwHQYDVR0OBBYE</span><br><span class="line">    69	FAJsqucofLslca4a5LHk92ftK6N9MB8GA1UdIwQYMBaAFAJsqucofLslca4a5LHk</span><br><span class="line">    70	92ftK6N9MA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAFbKdMMV</span><br><span class="line">    71	+iplqvwdBKq5Haa8nehgoHiy/WR/X+4U/urQr/OYmds+DhB9o3zqoWy1BQ/hAXxm</span><br><span class="line">    72	vhy+KFmoGgEAamQiX4f1Ax4Xb9wa+E1CYFIDkDmQdV1IglryWKI9i2KJNEnIDTW4</span><br><span class="line">    73	k5U3mxCXylZ+vJkJfn6ULuLzoB5FlMJtFSHAVkcD2UiFcp245K45l9kaknjufsOV</span><br><span class="line">    74	bTO02UByKdOv686Nd6M5bwA2nO08r8/eJIj3kf9773znDscQu0Tnxgr4xZ+uvS5n</span><br><span class="line">    75	asme+77M9MDRh1cSzmdgz+zo7EVaYjuBAAf8ckPIt9sWgu/NKEbiZgsYVj5HP53N</span><br><span class="line">    76	sVAgXx60mfAZ61k=</span><br><span class="line">    77	-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure></div>
+
+<p>注意这条命令打印到基本输出的第<code>35-41</code>行，稍会会用<code>openssl x509</code>重新为同一份csr签名，这其中的内容将有所不同。这里重新截取35-41行内容:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  1 openssl x509 -text -<span class="keyword">in</span> ./tls.cert | awk <span class="string">&#x27;NR&gt;=35&amp;&amp;NR&lt;=41&#x27;</span></span><br><span class="line">        X509v3 extensions:</span><br><span class="line">            X509v3 Subject Key Identifier:</span><br><span class="line">                02:6C:AA:E7:28:7C:BB:25:71:AE:1A:E4:B1:E4:F7:67:ED:2B:A3:7D</span><br><span class="line">            X509v3 Authority Key Identifier:</span><br><span class="line">                02:6C:AA:E7:28:7C:BB:25:71:AE:1A:E4:B1:E4:F7:67:ED:2B:A3:7D</span><br><span class="line">            X509v3 Basic Constraints: critical</span><br><span class="line">                CA:TRUE</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>step-3-2</strong> 使用<code>openssl x509</code>对csr自签名:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> ./tls.csr -key ./tls.key -out tls-x509.cert</span><br></pre></td></tr></table></figure></div>
+
+<p>提取证书信息，同样筛选<code>35-41</code>行:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  1 openssl x509 -text -<span class="keyword">in</span> ./tls-x509.cert | awk <span class="string">&#x27;NR&gt;=35&amp;&amp;NR&lt;41&#x27;</span></span><br><span class="line">        X509v3 extensions:</span><br><span class="line">            X509v3 Subject Key Identifier:</span><br><span class="line">                02:6C:AA:E7:28:7C:BB:25:71:AE:1A:E4:B1:E4:F7:67:ED:2B:A3:7D</span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">    Signature Value:</span><br><span class="line">        0e:2c:28:c7:4c:4e:4a:58:a4:95:93:39:4b:<span class="built_in">cd</span>:8a:7a:3b:82:</span><br></pre></td></tr></table></figure></div>
+
+<p>同样的csr，使用<code>openssl req</code>和<code>openssl x509</code>签署出来的证书字段明显不一样。说明它们的行为可能不同</p>
+<p>根据<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/f-ck-need-u/p/6091027.html" >骏马金龙的这篇文章 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和<code>/etc/ssl/openssl.cnf</code>的注释段:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># To use this configuration file with the &quot;-extfile&quot; option of the</span><br><span class="line"># &quot;openssl x509&quot; utility, name here the section containing the</span><br><span class="line"># X.509v3 extensions to use:</span><br><span class="line"># extensions		=</span><br><span class="line"># (Alternatively, use a configuration file that has only</span><br><span class="line"># X.509v3 extensions in its main [= default] section.)</span><br></pre></td></tr></table></figure></div>
+
+<p>可以推测的结论是<code>openssl x509</code>工具可能根本没有默认配置，所以需要达成<code>openssl req</code>签署出的效果需要手动指明所有需要的参数</p>
+<h3 id="尝试使用上述命令生成拥有相同字段的证书"><a href="#尝试使用上述命令生成拥有相同字段的证书" class="headerlink" title="尝试使用上述命令生成拥有相同字段的证书"></a>尝试使用上述命令生成拥有相同字段的证书</h3><p>从上述输出中的不同之初可以推测问题大致出在extensions上，从<code>openssl-x509</code>的手册中可以查到:</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">       -copy_extensions arg</span><br><span class="line">           Determines how to handle X.509 extensions when  converting  from  a</span><br><span class="line">           certificate  to a request using the -x509toreq option or converting</span><br><span class="line">           from a request to a certificate using the -req option.  If  arg  is</span><br><span class="line">           none or this option is not present then extensions are ignored.  If</span><br><span class="line">           arg  is copy or copyall then all extensions are copied, except that</span><br><span class="line">           subject identifier and authority key identifier extensions are  not</span><br><span class="line">           taken over when producing a certificate request.</span><br><span class="line"></span><br><span class="line">           The -ext option can be used to further restrict which extensions to</span><br><span class="line">           copy.</span><br><span class="line">           </span><br><span class="line">----------分隔符----------</span><br><span class="line"></span><br><span class="line">       -ext extensions</span><br><span class="line">           Prints out the certificate extensions in text form.   Can  also  be</span><br><span class="line">           used   to  restrict  which  extensions  to  copy.   Extensions  are</span><br><span class="line">           specified with a comma  separated  string,  e.g.,  &quot;subjectAltName,</span><br><span class="line">           subjectKeyIdentifier&quot;.   See  the  x509v3_config(5) manual page for</span><br><span class="line">           the extension names.</span><br><span class="line"></span><br><span class="line">----------分隔符----------</span><br><span class="line"></span><br><span class="line">       -extfile filename</span><br><span class="line">           Configuration   file   containing  certificate  and  request  X.509</span><br><span class="line">           extensions to add.</span><br><span class="line">         </span><br><span class="line">----------分隔符----------</span><br><span class="line">           </span><br><span class="line">       -extensions section</span><br><span class="line">           The section in the extfile to add X.509 extensions from.   If  this</span><br><span class="line">           option  is  not  specified  then  the  extensions  should either be</span><br><span class="line">           contained in the unnamed (default) section or the  default  section</span><br><span class="line">           should  contain  a  variable called &quot;extensions&quot; which contains the</span><br><span class="line">           section to use.</span><br><span class="line"></span><br><span class="line">           See the x509v3_config(5) manual page for details of  the  extension</span><br><span class="line">           section format.</span><br><span class="line"></span><br><span class="line">           Unless  specified otherwise, key identifier extensions are included</span><br><span class="line">           as described in x509v3_config(5).</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>从第一个参数<code>-copy_extensions</code>的说明可以得知如果使用<code>openssl x509 -req</code>时如果没有指明该参数或者该参数为<code>none</code>那么就会忽略所有csr中的extensions；另外，对于SKI与AKI插件(AKI就是缺少的字段之一)，即使该参数为copy或者copyall，那么也不会复制到证书中。且即便加了此参数，也能在后续的<code>-ext</code>参数中严格限制复制的extensions</p>
+<blockquote>
+<p>这里似乎有详细说明原因，但是看不懂<a class="link"   target="_blank" rel="noopener" href="https://github.com/openssl/openssl/issues/10458" >https://github.com/openssl/openssl/issues/10458 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</blockquote>
+<p>第二个参数<code>-ext</code>严格限制复制的extensions，多个extensions用逗号分隔</p>
+<p>第三个参数<code>-extfile</code>指定配置文件如<code>/etc/ssl/openssl.cnf</code></p>
+<p>第四个参数<code>-extensions</code>在指定配置文件(如openssl.cnf)中的某个section指定命令行为，具体参见<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/f-ck-need-u/p/6091027.html" >骏马金龙的这篇文章 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>这时候可以判断如果需要用<code>openssl x509</code>签署csr并与<code>openssl req</code>达成相同的行为，要么手动添加所有参数；要么在配置文件中指定默认行为；或者使用<code>-extensions</code>在特定配置文件中指定特定行为</p>
+<p>因为笔者缺乏相关知识，没办法一一验证猜测，所以选择使用现有的配置文件并指定特定行为:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> ./tls.csr -key ./tls.key -copy_extensions copyall -extensions v3_ca -extfile /etc/ssl/openssl.cnf -out ./tls-x509-cnf.cert</span><br></pre></td></tr></table></figure></div>
+
+<p>同样检查<code>35-41</code>行并使用diff对比<code>openssl req</code>签署的证书:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  1 openssl x509 -<span class="keyword">in</span> ./tls-x509-cnf.cert -text | awk <span class="string">&#x27;NR&gt;=35&amp;&amp;NR&lt;=41&#x27;</span> &gt; ./2</span><br><span class="line">➜  1 openssl x509 -<span class="keyword">in</span> ./tls.cert -text | awk <span class="string">&#x27;NR&gt;=35&amp;&amp;NR&lt;=41&#x27;</span> &gt; ./1</span><br><span class="line">➜  1 diff ./1 ./2</span><br></pre></td></tr></table></figure></div>
+
+<p>diff发现并无差异</p>
+<p>自此，对于<code>openssl req</code>和<code>openssl x509</code>的签署自签名证书的默认行为也算有初步的了解了…</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> openssl使用小记</li>
+        <li><strong>作者:</strong> 7cmb</li>
+        <li><strong>创建于
+                :</strong> 2024-07-13 21:29:31</li>
+        
+            <li>
+                <strong>更新于
+                    :</strong> 2024-07-13 21:35:07
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://7cmb.com/openssl使用小记/
+        </li>
+        <li>
+            <strong>
+                版权声明:
+            </strong>
+            
+
+            
+                本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0">CC BY-NC-SA 4.0</a> 进行许可。
+            
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/network/">#network</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item mx-0.5">
+                        <a href="/tags/openssl/">#openssl</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+
+        
+            <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
+                
+                
+                    <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
+                        <a class="next"
+                        rel="next"
+                        href="/wine-wechat-in-docker-%E5%AE%9E%E8%B7%B5/"
+                        >
+                            <span class="title flex justify-center items-center">
+                                <span class="post-nav-title-item">wine wechat in docker 实践</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex justify-center items-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+
+        
+    </div>
+
+    
+        <div class="toc-content-container">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">openssl使用小记</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%96%91%E9%97%AE"><span class="nav-text">疑问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80"><span class="nav-text">问题一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C"><span class="nav-text">问题二</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95%E4%BD%BF%E7%94%A8%E4%B8%8A%E8%BF%B0%E5%91%BD%E4%BB%A4%E7%94%9F%E6%88%90%E6%8B%A5%E6%9C%89%E7%9B%B8%E5%90%8C%E5%AD%97%E6%AE%B5%E7%9A%84%E8%AF%81%E4%B9%A6"><span class="nav-text">尝试使用上述命令生成拥有相同字段的证书</span></a></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+        </div>
+    
+</div>
+
+
+
+                
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2023</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-bell fa-shake"></i>&nbsp;&nbsp;<a href="/">7cmb</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 32 篇文章
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+            <script data-swup-reload-script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="relative text-center lg:absolute lg:right-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-right">
+                
+                    <span id="busuanzi_container_site_uv" class="lg:!block">
+                        <span class="text-sm">访问人数</span>
+                        <span id="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="lg:!block">
+                        <span class="text-sm">总访问量</span>
+                        <span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+    
+<script src="/js/libs/Swup.min.js"></script>
+
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
+
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
+
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
+        ],
+        containers: ["#swup"],
+    });
+</script>
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
+</body>
+</html>
