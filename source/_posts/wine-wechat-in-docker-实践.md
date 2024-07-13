@@ -263,7 +263,7 @@ RUN sudo sed -i '$a cd $HOME\nalias cd_doc="cd \\"$wx_doc\\""' /etc/bash.bashrc 
 ENTRYPOINT /root/init.sh
 ```
 
-这一切只是为容器内添加`/root/init.sh`并设置为ENTRYPOINT，当然也能提前在宿主机写好并`ADD`进去...着一大坨printf着实看着眼花缭乱。`/root/init.sh`内容:
+31行只是为容器内添加`/root/init.sh`并设置为ENTRYPOINT，当然也能提前在宿主机写好并`ADD`进去...着一大坨printf着实看着眼花缭乱。`/root/init.sh`内容:
 ```bash
 #!/bin/bash
 . /etc/bash.bashrc
@@ -362,6 +362,10 @@ docker run \
 # 无需构建，一键脚本
 无需构建，放弃思考脚本，啥也不用干，装了docker能科学上网就能用
 
+单命令部署:
+`curl -sL https://gist.githubusercontent.com/7cmb/04e6fc961f77d899cbed64c197547e76/raw/33b71919528a5b7721d3bf6a2a8c97d8ce0ae008/toyChat.sh | bash`
+
+
 作者已经将镜像上传至公共仓库，该脚本可以自动拉取，自动部署容器:
 ```bash
 #!/bin/bash
@@ -415,7 +419,7 @@ EOF
 }
 
 function pulseaudio_init () {
-	if [ "$(pactl info | grep "Server Name" | awk '{print $NF}')"=="pulseaudio" ];then
+	if [ "$(pactl info | grep "Server Name" | awk '{print $NF}')" == "pulseaudio" ];then
 		if [ -z "$(find /tmp -type s -regex '\/tmp\/pulseaudio.*' 2>/dev/null; find /tmp -type f -regex '\/tmp\/pulseaudio.*' 2>/dev/null)" ];then	
 		  if [ -n "$(find /tmp -type d -regex '\/tmp\/pulseaudio.*' 2>/dev/null)" ];then
         echo -e "${CYAN}[PROCESSING]${NORMAL}THIS STEP IS TO CLEAN LAST STARTUP CACHE FOR CONTAINER,PLEASE ENTER YOUR PASSWORD"
@@ -436,7 +440,7 @@ EOF
 }
 
 function install_pulseaudio_edition () {
-	if [ "$(pactl info | grep "Server Name" | awk '{print $NF}')"=="pulseaudio" ];then
+	if [ "$(pactl info | grep "Server Name" | awk '{print $NF}')" == "pulseaudio" ];then
 		if [ -z "$(find /tmp -type s -regex '\/tmp\/pulseaudio.*' 2>/dev/null; find /tmp -type f -regex '\/tmp\/pulseaudio.*' 2>/dev/null)" ];then	
 		  if [ -n "$(find /tmp -type d -regex '\/tmp\/pulseaudio.*' 2>/dev/null)" ];then
 			  rm -rf '/tmp/pulseaudio.socket' '/tmp/pulseaudio.client.conf'
