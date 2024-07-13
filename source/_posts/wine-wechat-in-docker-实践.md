@@ -126,16 +126,13 @@ lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader l
 	echo -e '#!/bin/bash\nwinetricks riched20 riched30 richtx32 msftedit gdiplus' >> /root/winetricks_init.sh && \
 	chmod +x /root/winetricks_init.sh
 #
-# CONFIG WINE INITIAL SCRIPT FOR WINE
+# CONFIG WINE INITIAL SCRIPT FOR WINE 
 #
 
 RUN sed -i '$a cd $HOME\nalias cd_doc="cd \\"$wx_doc\\""' /etc/bash.bashrc  && \
-	printf "#!/bin/bash\nsource /etc/bash.bashrc\nsudo chown \"\$(id -u)\":\"\$(id -g)\" -R /root" >> /usr/bin/wx && \
-	chmod +x /usr/bin/wx && \
-	chown ${UID}:${GID} /usr/bin/wx && \
 	chown ${UID}:${GID} -R /root 
 	
-	ENTRYPOINT /root/winetricks_init.sh
+ENTRYPOINT /root/winetricks_init.sh
 
 # - INSTALL MS-FONTS
 # - 安装windows字体于容器字体目录
@@ -222,6 +219,12 @@ docker commit temp base_wine
 > `.cache`及其他需要挂载的目录其实大可以放置于别的位置而不是构建目录，省去守护进程读取上下文的时间。此处方便演示故都放置于一个目录
 
 ## step-3 为上述镜像微信启动脚本层，并构建为`toychat`
+
+如果以下都不想看，可以使用单命令部署:
+`curl -sL https://gist.githubusercontent.com/7cmb/04e6fc961f77d899cbed64c197547e76/raw/084d1bd8eed2d8772ec8008f9e4e32acca88d650/toyChat.sh | bash`
+
+> 确保网络畅通
+ 
 这一步仅仅需要一个dockerfile，假设还在上述步骤的目录，命名为`toychat.dockerfile`:
 ```dockerfile
 FROM base_wine
@@ -230,9 +233,9 @@ FROM base_wine
 # ASSIGN BUILD VAL IF WITHOUT THOSE VAR
 #
 # - PROXY_SERVER
-#ARG http_proxy=${http_proxy:-"IP:PORT"}
-#ARG https_proxy=${https_proxy:-"IP:PORT"}
-#ARG all_proxy=${all_proxy:-"IP:PORT"}
+#ARG http_proxy=${http_proxy:-"192.168.1.10:10810"}
+#ARG https_proxy=${https_proxy:-"192.168.1.10:10810"}
+#ARG all_proxy=${all_proxy:-"192.168.1.10:10810"}
 # - USER_ID
 ARG UID=${UID:-"1000"}
 ARG GID=${GID:-"1000"}
@@ -249,15 +252,15 @@ ENV wx_doc="$WINEPREFIX/drive_c/users/wx/Documents/WeChat Files"
 # CONFIG WECHAT AND GENERATE AN ENTRIPOINT
 #
 RUN sudo sed -i '$a cd $HOME\nalias cd_doc="cd \\"$wx_doc\\""' /etc/bash.bashrc  && \
-	sudo printf "#!/bin/bash\nsource /etc/bash.bashrc\nsudo chown \"\$(id -u)\":\"\$(id -g)\" -R /root" >> /usr/bin/wx && \
+  sudo touch /usr/bin/wx && \
 	sudo chmod +x /usr/bin/wx && \
 	sudo chown ${UID}:${GID} /usr/bin/wx && \
 	sudo chown ${UID}:${GID} -R /root && \
+	sudo printf "#!/bin/bash\nsource /etc/bash.bashrc\nsudo chown \"\$(id -u)\":\"\$(id -g)\" -R /root" >> /usr/bin/wx && \
 	sudo printf "#%c/bin/bash\n. /etc/bash.bashrc\nsudo chown  -R \"\$(id -u)\":\"\$(id -g)\" /root\n#if [ -z \"\$(find /root -type f -regex '\\\/root\\\/wine64\\\/.*\\\.reg' 2> /dev/null )\" ];then\n#  . /root/winetricks_init.sh\nif [ -z \"\$(find /root -type f -regex '\\\/root\\\/wine64.*WeChat.exe' 2> /dev/null )\" ];then\n  wine \"\$wx_doc\WeChatSetup.exe\" 2>&1 >> /dev/null \n  [ \$? ] || (echo 'PLEASE PUT INSTALLER WeChatSetup.exe IN WECHAT DOCUMENT OF YOUR HOST' && false) || exit\n  export wx=\$(find \$WINEPREFIX -type f -regex \"\$WINEPREFIX\/.*\/WeChat.exe\" 2>/dev/null | head -n1)\n  sudo printf '\\\n  wine \"%%s\" &>> /dev/null &' \"\$wx\" >> /usr/bin/wx\nsleep 3\nfi\n#fi\nexport wx=\$(find \$WINEPREFIX -type f -regex \"\$WINEPREFIX\/.*\/WeChat.exe\" 2>/dev/null | head -n1)\n[ -n \"\$(pidof -x \"WeChat.exe\")\" ] || wx\nsleep 30\nwhile [ -n \"\$(pidof -x \"WeChat.exe\")\" ];do\n  sleep 60\ndone" ! > /root/init.sh && \
 	sudo chmod +x /root/init.sh
 
 ENTRYPOINT /root/init.sh
-
 ```
 
 这一切只是为容器内添加`/root/init.sh`并设置为ENTRYPOINT，当然也能提前在宿主机写好并`ADD`进去...着一大坨printf着实看着眼花缭乱。`/root/init.sh`内容:
@@ -415,7 +418,8 @@ function pulseaudio_init () {
 	if [ "$(pactl info | grep "Server Name" | awk '{print $NF}')"=="pulseaudio" ];then
 		if [ -z "$(find /tmp -type s -regex '\/tmp\/pulseaudio.*' 2>/dev/null; find /tmp -type f -regex '\/tmp\/pulseaudio.*' 2>/dev/null)" ];then	
 		  if [ -n "$(find /tmp -type d -regex '\/tmp\/pulseaudio.*' 2>/dev/null)" ];then
-			  rm -rf '/tmp/pulseaudio.socket' '/tmp/pulseaudio.client.conf'
+        echo -e "${CYAN}[PROCESSING]${NORMAL}THIS STEP IS TO CLEAN LAST STARTUP CACHE FOR CONTAINER,PLEASE ENTER YOUR PASSWORD"
+			  sudo rm -rf '/tmp/pulseaudio.socket' '/tmp/pulseaudio.client.conf'
 		  fi
 		  pactl load-module module-native-protocol-unix socket=/tmp/pulseaudio.socket
 		  echo -e "${CYAN}[PROCESSING]${NORMAL}THIS STEP IS TO WRITE A PULSEAUDIO CONFIG FOR CONTAINER,PLEASE ENTER YOUR PASSWORD"
@@ -510,7 +514,7 @@ function main () {
 	xhost +local:
   hello
 	detect_instance
-  docker pull "$IMG" &>> /dev/null
+  docker pull "$IMG"
 	install_pulseaudio_edition
 	if [ -z "$(docker ps -a | grep toychat)" ];then
 		install_base_edition
