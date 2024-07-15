@@ -251,7 +251,7 @@ openssl x509 -req -in ./tls.csr -key ./tls.key -out tls-x509.cert
 # X.509v3 extensions in its main [= default] section.)
 ```
 
-可以推测的结论是`openssl x509`工具可能根本没有默认配置，所以需要达成`openssl req`签署出的效果需要手动指明所有需要的参数
+可以推测的结论是`openssl x509`工具不但需要手动使用`-extfile`参数指定配置文件，还需要在配置文件中指定需要的section(否则为default)。所以需要达成`openssl req`签署出的效果最少需要一份配置得当的配置文件，且在其中配置`default`这个section中的extensions
 
 ### 尝试使用上述命令生成拥有相同字段的证书
 
@@ -312,9 +312,13 @@ openssl x509 -req -in ./tls.csr -key ./tls.key -out tls-x509.cert
 
 第四个参数`-extensions`在指定配置文件(如openssl.cnf)中的某个section指定命令行为，具体参见[骏马金龙的这篇文章](https://www.cnblogs.com/f-ck-need-u/p/6091027.html)
 
-这时候可以判断如果需要用`openssl x509`签署csr并与`openssl req`达成相同的行为，要么手动添加所有参数；要么在配置文件中指定默认行为；或者使用`-extensions`在特定配置文件中指定特定行为
+综合上述所有的资料，如果需要用`openssl x509`签署csr并与`openssl req`达成相同的行为不但需要使用`-extfile`显式指定一份配置文件，还需要在section中定义需要的extensions。如果含有extensions的section不为default，还需要用`-extensions`指定需要的section
 
-因为笔者缺乏相关知识，没办法一一验证猜测，所以选择使用现有的配置文件并指定特定行为:
+> 一些问题:在默认配置文件中按照注释提示配置了default这条section并且其中定义了相关sections,不知道为什么会报错；将default改为其他字段并使用`-extension`指定  或者  将含有default这条section及对应extensions放在一份新的文件中并使用`-extfile`指定却能正确执行
+>
+> 我猜这个问题和默认的其他参数有关
+
+例如这里指定默认配置文件`/etc/ssl/openssl.cnf`，并且指定section为`v3_ca`:
 ```bash
 openssl x509 -req -in ./tls.csr -key ./tls.key -copy_extensions copyall -extensions v3_ca -extfile /etc/ssl/openssl.cnf -out ./tls-x509-cnf.cert
 ```

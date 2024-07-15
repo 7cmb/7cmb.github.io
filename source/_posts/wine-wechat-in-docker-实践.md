@@ -14,7 +14,7 @@ categories:
 date: 2024-07-02 13:16:42
 ---
 
-> 本文参考：
+> 本文参考:
 >
 >[DoChat](https://github.com/huan/docker-wechat)
 >
