@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://telegraph.7cmb.com/file/18ad752c598634a6ce6ac.png">
 <meta property="og:image" content="https://telegraph.7cmb.com/file/116da2833fa2e0c11c794.png">
 <meta property="article:published_time" content="2023-12-30T20:21:31.000Z">
-<meta property="article:modified_time" content="2024-07-01T01:53:05.743Z">
+<meta property="article:modified_time" content="2024-07-27T07:55:48.917Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="network">
@@ -527,8 +527,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-07-01 09:53:05</span>
-            <span class="mobile">2024-07-01 09:53:05</span>
+            <span class="desktop">2024-07-27 15:55:48</span>
+            <span class="mobile">2024-07-27 15:55:48</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -637,7 +637,7 @@
 <h2 id="Step2-将指定接口配置到firewalld预设的区域"><a href="#Step2-将指定接口配置到firewalld预设的区域" class="headerlink" title="Step2-将指定接口配置到firewalld预设的区域"></a>Step2-将指定接口配置到firewalld预设的区域</h2><p>执行此步骤前确保控制内核网络框架<code>netfilter</code> 的工具只有<code>firewalld</code></p>
 <p> <code>iptables</code>、<code>firewalld</code>、<code>nftables</code>都是内核网络框架<code>netfilter</code>用户空间的工具。<br>在rhel9中<code>iptables</code>工具使用 <code>nf_tables</code> 内核 API 而不是 <code>legacy</code> 后端。<code>nf_tables</code> API 提供了向后兼容性，以便使用 <code>iptables</code> 命令的脚本仍可在 Red Hat Enterprise Linux 上工作。对于新的防火墙脚本，红帽建议使用 <code>nftables</code>。</p>
 <blockquote>
-<p>碎碎念:firewalld可比四表五链简单多了<br>另外，对于iptables和nftables，之前一直疑惑为什么SNAT一定要放在postrouting链，明明放在prerouting链貌似可行。直到参考了<a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/280114/why-does-snat-happen-in-postrouting-chain-and-dnat-in-prerouting-chain" >iptables - Why does SNAT happen in POSTROUTING chain and DNAT in PREROUTING chain? - Unix &amp; Linux Stack Exchange <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>之后，发现自己忽视了插在本地属于nat网段的那张网卡</p>
+<p>碎碎念:firewalld可比四表五链简单多了<br>另外，对于iptables和nftables，之前一直疑惑为什么SNAT一定要放在postrouting链，明明放在prerouting链貌似可行。直到参考了<a class="link"   target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/280114/why-does-snat-happen-in-postrouting-chain-and-dnat-in-prerouting-chain" >iptables - Why does SNAT happen in POSTROUTING chain and DNAT in PREROUTING chain? - Unix &amp; Linux Stack Exchange <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。对于SNAT,只有路由后才能知道从哪个接口转发数据包，从而修改源地址为响应接口地址；而对于DNAT,需要先把目标地址及端口转为内网目标机器的地址端口再路由，否则目标地址为本机直接路由的话就会判断路由完成</p>
 </blockquote>
 <p>此步骤能使用的工具有<code>nmcli</code>和<code>firewall-cmd</code>，根据<a class="link"   target="_blank" rel="noopener" href="https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/configuring_firewalls_and_packet_filters/manually-assigning-a-zone-to-a-network-connection-in-a-connection-profile-file_working-with-firewalld-zones" >2.5. 在连接配置文件文件中手动将区分配给网络连接 Red Hat Enterprise Linux 9 | Red Hat Customer Portal <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，使用<code>nmcli</code>效率更高</p>
 <h3 id="nmcli修改接口区域到trusted"><a href="#nmcli修改接口区域到trusted" class="headerlink" title="nmcli修改接口区域到trusted"></a>nmcli修改接口区域到trusted</h3><p>首先查看接口信息:</p>
@@ -682,7 +682,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-07-01 09:53:05
+                    :</strong> 2024-07-27 15:55:48
             </li>
         
         <li>
