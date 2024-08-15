@@ -59,6 +59,12 @@ modprobe iwlmvm
 
 # 解决手段
 
+> UPDATE:2024.8.15
+> 
+> NetworkManager的无线后端需要为wpa_supplicant, iwd以下不生效，建议cron或者systemd执行以上iw命令
+> 
+> 检查powersaver状态可以用这条命令`iwconfig wlan0 | grep Power Management`
+
 nmcli的connection配置中有一段:
 
 ```bash
