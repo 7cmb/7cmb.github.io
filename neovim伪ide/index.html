@@ -13,26 +13,25 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://7cmb.github.io/初见sip/"/>
+    <link rel="canonical" href="https://7cmb.github.io/neovim伪ide/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="本文跳过注册保活等基本操作，默认通话双方已注册且能呼叫 本文复制粘贴参考: 技术解码 | GB28181&#x2F;SIP&#x2F;SDP 协议  SIP 中的Dialog，call，session 和 transaction - 简书  SIP Tutorial  Difference between session, dialog and transaction in SIP? - Sta">
+        <meta name="description" content="最近计划用python写一些工具，刚好近几个月以来常用的电脑没装ide和某个有重量级且有无可估量潜力的editor。但是经过平铺窗口管理器和vim的调教后双手已经无法脱离键盘了…故打算重整一下nvim,令其能够在尽可能简单的配置下实现ide的常规功能 效果: 1-需求&amp;对应插件算上以前装的插件，总结下来需求有以下几点:  tab键自动补全，并适配python3，并配备语法检查  缩进空白竖">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初识sip">
-<meta property="og:url" content="https://7cmb.github.io/%E5%88%9D%E8%A7%81sip/index.html">
+<meta property="og:title" content="neovim伪ide改造">
+<meta property="og:url" content="https://7cmb.github.io/neovim%E4%BC%AAide/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本文跳过注册保活等基本操作，默认通话双方已注册且能呼叫 本文复制粘贴参考: 技术解码 | GB28181&#x2F;SIP&#x2F;SDP 协议  SIP 中的Dialog，call，session 和 transaction - 简书  SIP Tutorial  Difference between session, dialog and transaction in SIP? - Sta">
+<meta property="og:description" content="最近计划用python写一些工具，刚好近几个月以来常用的电脑没装ide和某个有重量级且有无可估量潜力的editor。但是经过平铺窗口管理器和vim的调教后双手已经无法脱离键盘了…故打算重整一下nvim,令其能够在尽可能简单的配置下实现ide的常规功能 效果: 1-需求&amp;对应插件算上以前装的插件，总结下来需求有以下几点:  tab键自动补全，并适配python3，并配备语法检查  缩进空白竖">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.tutorialspoint.com/session_initiation_protocol/images/sip_call_flow.jpg">
-<meta property="article:published_time" content="2024-04-19T07:23:39.000Z">
-<meta property="article:modified_time" content="2024-05-15T07:29:42.534Z">
+<meta property="og:image" content="https://telegraph.7cmb.com/file/3c531b5595f845d8062a4.png">
+<meta property="article:published_time" content="2024-08-24T19:40:46.000Z">
+<meta property="article:modified_time" content="2024-08-24T20:00:38.116Z">
 <meta property="article:author" content="7cmb">
-<meta property="article:tag" content="network">
-<meta property="article:tag" content="sip">
+<meta property="article:tag" content="nvim">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.tutorialspoint.com/session_initiation_protocol/images/sip_call_flow.jpg">
+<meta name="twitter:image" content="https://telegraph.7cmb.com/file/3c531b5595f845d8062a4.png">
     
     
         <!-- Google tag (gtag.js) -->
@@ -54,7 +53,7 @@
     
     <title>
         
-            初识sip -
+            neovim伪ide改造 -
         
         7cmb&#39;s blog.
     </title>
@@ -498,7 +497,7 @@
         <div class="article-title relative w-full">
             
                 <div class="w-full flex items-center pt-6 justify-start">
-                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">初识sip</h1>
+                    <h1 class="article-title-regular text-second-text-color text-4xl md:text-6xl font-bold px-2 sm:px-6 md:px-8 py-3">neovim伪ide改造</h1>
                 </div>
             
             </div>
@@ -519,15 +518,15 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2024-04-19 15:23:39</span>
-        <span class="mobile">2024-04-19 15:23:39</span>
+        <span class="desktop">2024-08-25 03:40:46</span>
+        <span class="mobile">2024-08-25 03:40:46</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-05-15 15:29:42</span>
-            <span class="mobile">2024-05-15 15:29:42</span>
+            <span class="desktop">2024-08-25 04:38</span>
+            <span class="mobile">2024-08-25 04:38</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -541,7 +540,7 @@
                     
                         
                         <li>
-                            <a href="/categories/network/">network</a>&nbsp;
+                            <a href="/categories/linux/">linux</a>&nbsp;
                         </li>
                     
                     
@@ -551,7 +550,7 @@
                             <li>></li>
                         
                         <li>
-                            <a href="/categories/network/sip/">sip</a>&nbsp;
+                            <a href="/categories/linux/nvim/">nvim</a>&nbsp;
                         </li>
                     
                     
@@ -565,11 +564,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/network/">network</a>&nbsp;
-                    </li>
-                
-                    <li>
-                        | <a href="/tags/sip/">sip</a>&nbsp;
+                        <a href="/tags/nvim/">nvim</a>&nbsp;
                     </li>
                 
             </ul>
@@ -595,100 +590,58 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <blockquote>
-<p>本文跳过注册保活等基本操作，默认通话双方已注册且能呼叫</p>
-<p>本文<del>复制粘贴</del>参考:</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/545703291" >技术解码 | GB28181&#x2F;SIP&#x2F;SDP 协议 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.jianshu.com/p/84d7289a4d3b" >SIP 中的Dialog，call，session 和 transaction - 简书 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.tutorialspoint.com/session_initiation_protocol/index.htm" >SIP Tutorial <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://stackoverflow.com/questions/35133331/difference-between-session-dialog-and-transaction-in-sip" >Difference between session, dialog and transaction in SIP? - Stack Overflow <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://stackoverflow.com/questions/10610194/call-id-and-branch-tags-in-sip-protocol" >Call-ID and Branch tags in SIP protocol - Stack Overflow <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1828603" >一次完整的通话过程SIP报文分析-腾讯云开发者社区-腾讯云 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-</blockquote>
-<h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1 - 概述"></a>1 - 概述</h1><p>SIP（Session initialization Protocol，<strong>会话初始协议</strong>）是由IETF（Internet Engineering Task Force，因特网工程任务组）制定的多媒体通信协议。</p>
-<p>它是一个基于文本的应用层控制协议，用于创建、修改和释放一个或多个参与者的会话。SIP<br> 是一种源于互联网的IP 语音会话控制协议，具有灵活、易于实现、便于扩展等特点。SIP（Session Initiation<br>Protocol）是一种类似于http协议的纯文本应用层协议。SIP可以用来控制会话的建立、取消、关闭等操作。主要可以实现以下功能：</p>
-<ul>
-<li><strong>用户定位：</strong> 检查终端用户的位置，用于通信；</li>
-<li><strong>用户有效性：</strong> 检查用户参与会话的意愿程度；</li>
-<li><strong>用户能力：</strong> 检查媒体和媒体参数；</li>
-<li><strong>建立会话：</strong> “振铃”，在呼叫和被叫方同时建立会话的参数；</li>
-<li><strong>会话管理：</strong> 包括会话的传输和终止，修改会话参数以及请求服务</li>
-</ul>
-<h1 id="2-request-method"><a href="#2-request-method" class="headerlink" title="2 - request method"></a>2 - request method</h1><p>SIP REQUEST用以建立一段communication。为了补全这个communication的过程，无论成功或者失败，总会生成SIP RESPONSE以对应SIP REQUEST</p>
-<p>在SIP的REQUEST中，核心的方法（CORE METHOD）定义了6种：INVITE、ACK、BYE、CANCEL、OPTIONS和REGISTER。</p>
-<ul>
-<li>INVITE消息用于发起一个新的会话；</li>
-<li>ACK消息用于完成会话的建立；</li>
-<li>BYE消息用于结束一个会话；</li>
-<li>CANCEL消息用于取消一个请求（一般是针对INVITE）；</li>
-<li>OPTIONS消息用于查询服务器的能力；</li>
-<li>REGISTER消息用于发送注册请求消息。</li>
-</ul>
-<p>SIP请求的类型，也称作SIP方法。RFC3261 中定义了六种方法(CORE METHOD)。另外八种方法(EXTEND METHOD)有独立的RFC扩展描述。如INFO、NOTIFY等等</p>
-<blockquote>
-<p>METHOD也能被认为是REQUEST，它指明了对其他USER AGENT或者SERVER的具体行动</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.tutorialspoint.com/session_initiation_protocol/session_initiation_protocol_messaging.htm" >关于更多METHOD参阅 SIP - Messaging <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-</blockquote>
-<h1 id="3-SIP-CALL-基本工作流"><a href="#3-SIP-CALL-基本工作流" class="headerlink" title="3 - SIP CALL 基本工作流"></a>3 - SIP CALL 基本工作流</h1><p>下面的图片描述了一段SIP call的基本工作流，目的是建立一段SIP session</p>
-<img  title="" 
+            <p>最近计划用python写一些工具，刚好近几个月以来常用的电脑没装ide和某个有重量级且有无可估量潜力的editor。但是经过平铺窗口管理器和vim的调教后双手已经无法脱离键盘了…故打算重整一下nvim,令其能够在尽可能简单的配置下实现ide的常规功能</p>
+<p>效果:<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://www.tutorialspoint.com/session_initiation_protocol/images/sip_call_flow.jpg"
-                      alt=""
-                >
-
-<blockquote>
-<p>下文REQUEST直接称作请求，RESPONSE直接称作回复</p>
-</blockquote>
-<p>流程描述:</p>
+                     data-src="https://telegraph.7cmb.com/file/3c531b5595f845d8062a4.png"
+                      alt="" 
+                ></p>
+<h1 id="1-需求-对应插件"><a href="#1-需求-对应插件" class="headerlink" title="1-需求&amp;对应插件"></a>1-需求&amp;对应插件</h1><p>算上以前装的插件，总结下来需求有以下几点:</p>
 <ul>
-<li><p>一个INVITE请求发出以初始化这段session (注意，session还未开始，后文详述)</p>
-</li>
-<li><p>Proxy立即回复一个100 Tring给caller(Alice)，防止Alice重复发送INVITE请求</p>
-</li>
-<li><p>接着proxy寻找Bob的地址所在的服务器，之后在转发一次INVITE请求</p>
-</li>
-<li><p>接着callee(Bob)生成180 Ringing(临时回复)回复给caller(Alice)</p>
-</li>
-<li><p>在Bob接电话后其生成正式回复200 OK给Alice</p>
-</li>
-<li><p>Alice发送ACK报文给Bob以通知Bob她已接收到200 OK</p>
-</li>
-<li><p>就在这时session正式建立，session从这里开始</p>
-</li>
-<li><p>在这段session中，任意一个人都能主动挂断电话直接发送bye到对端结束session</p>
-</li>
-<li><p>Alice挂断电话，绕过proxy，直接发送bye给Bob</p>
-</li>
-<li><p>最后Bob发送200 OK确认by和终结session，此时session结束</p>
-</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/neoclide/coc.nvim" >tab键自动补全，并适配python3，并配备语法检查 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/lukas-reineke/indent-blankline.nvim" >缩进空白竖线 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/nvim-tree/nvim-tree.lua" >有一个边栏给我切换文件(在笔者这里buffer最场景的一集) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/ojroques/nvim-osc52" >osc52yank <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>(我认为目前插件比起官方方法更稳定)</li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://github.com/nvim-lualine/lualine.nvim" >lualine美化底边 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
 </ul>
-<p>上述流程完整的call也被称作dialog，一共有三个transaction(在图中1、2、3处)</p>
-<p>transaction、dialog和session的区别下文揭示</p>
+<p>我使用的neovim包管理为<a class="link"   target="_blank" rel="noopener" href="https://github.com/folke/lazy.nvim" >lazy.nvim <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>,所以以下内容只对lazy.nvim负责</p>
 <blockquote>
-<p>bye相关:</p>
-<p>下面链接描述了不能使用bye来结束未确立的invite；也说了bye是不通过proxy server，直接p2p联系。但是不要忘了这个过程只是不经过proxy server没说绕开register server</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.tutorialspoint.com/session_initiation_protocol/session_initiation_protocol_messaging.htm" >SIP - Messaging <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>例如下面过程:</p>
-<p>在这个过程中可以明显观察到无论是invite和bye都要通过register服务器转发一次，对应的转发过程开了条call-id，可以看到虽然是p2p但是并非完全透明，register server明显参与了这次完整的call。在caller与register server之间call-id为<code>1808150176@192.168.7.101</code>；而callee与register server之间call-id为<code>5fcdc4bf-3662-123a-9a87-1158c9642285</code>。这两个call-id决定了一个session的建立和结束</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1828603" >一次完整的通话过程SIP报文分析-腾讯云开发者社区-腾讯云 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>其实nvim已经内置lsp client了，管理lsp可以all in mason。笔者选择coc的原因纯粹是因为coc是先找到的工具，以后再去考虑mason</p>
+<p>编译完成的coc体积高达300m,太悲伤了</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/neoclide/coc.nvim/discussions/4866" >关于mason和coco <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 </blockquote>
-<h1 id="4-关于transaction、dialog和session"><a href="#4-关于transaction、dialog和session" class="headerlink" title="4 - 关于transaction、dialog和session"></a>4 - 关于transaction、dialog和session</h1><ul>
-<li><p>Transaction(事务):一个Transaction包含一个Rrequest和可能的多个Response。在一个Transaction在接收到特定的Final Response(2xx, 3xx, 4xx, 5xx, or 6xx)和这些Response的ACK报文后结束。结束前也可以接受多个非Final Response(1xx)。注意，在Final Responese(200)后面的ACK报文并非Transaction的一部分</p>
-</li>
-<li><p>Dialog(对话):一对SIP peers对话中间有多个Transaction。Dialog被设立的目的是建立、修改、拆卸(teardown，英文直译，应该是指发送bye结束session的动作)。在一对peer中可能无论何时都有可能产生多个Dialog，一般可以通过SIP头的from tag、to tag、call-id以确认相应的Dialog。例如一个peer同时收到了两个bye请求，可以检查上述SIP头的字段以确认到底是哪个Dialog</p>
-</li>
-<li><p>Session(会话):Session的概念相对简单，它仅仅用于描述流媒体传输之间的过程，没有流媒体传输就没有Session</p>
-</li>
+<h1 id="2-管理Lazy-nvim"><a href="#2-管理Lazy-nvim" class="headerlink" title="2-管理Lazy.nvim"></a>2-管理Lazy.nvim</h1><p>对于Lazy.nvim<a class="link"   target="_blank" rel="noopener" href="https://lazy.folke.io/usage/structuring" >官方推荐的做法 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，我并不是很感冒，原因有三个:</p>
+<ul>
+<li>我想在只一个文件里管理我需要开启的插件及插件对应的配置，即使需要人工干预得更多</li>
+<li>一个一个管理来更加直观</li>
+<li>因为网络原因，我更喜欢将仓库手动clone下来，再手动指定插件目录，以体积换取配置迁移的便利(所以下面有个插件仓库)</li>
 </ul>
-<h1 id="5-关于tag、call-id和branch"><a href="#5-关于tag、call-id和branch" class="headerlink" title="5 - 关于tag、call-id和branch"></a>5 - 关于tag、call-id和branch</h1><ul>
-<li><p>tag:标识同一个dialog(同一call-id)中caller和callee的身份</p>
-</li>
-<li><p>call-id:决定一段session，<code>caller和rigister server的call-id</code>和<code>callee和register server的call-id</code>共同决定了一段session(似乎跳脱出session和dialog，call-id也能当branch用，例如一对message的Request和200 OK)</p>
-</li>
-<li><p>branch:决定了transaction，相对应的transaction有一样的branch值</p>
-</li>
-</ul>
+<p>所以这是我的配置结构:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">➜  nvim tree -L 2 .</span><br><span class="line">.</span><br><span class="line">├── init.lua ‘<span class="comment"># 头文件’</span></span><br><span class="line">├── init.vim.bak</span><br><span class="line">├── lazy-lock.json</span><br><span class="line">├── lua</span><br><span class="line">│   ├── lazy_conf.lua ‘<span class="comment"># Lazy.nvim配置文件’</span></span><br><span class="line">│   ├── opt_conf.lua  ‘<span class="comment"># nvim 配置文件’</span></span><br><span class="line">│   └── plugins_conf  ‘<span class="comment"># 插件配置文件夹’</span></span><br><span class="line">└── plugins ‘<span class="comment"># 插件仓库’</span></span><br><span class="line">    ├── coc.nvim</span><br><span class="line">    ├── indent-blankline.nvim</span><br><span class="line">    ├── nvim-tree.lua</span><br><span class="line">    ├── nvim.osc52</span><br><span class="line">    └── sidebar.nvim</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><code>init.lua</code>的唯一的作用就是用<code>require</code>call真正的配置文件:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---@NVIM PLUGINS AND PLUGINS CONF HEAD</span></span><br><span class="line"><span class="comment">---@PATH TO nvim/lua/lazy_conf.lua</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;lazy_conf&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">---@NVIM OPTIONS</span></span><br><span class="line"><span class="comment">---@PATH TO nvim/lua/opt_conf.lua</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;opt_conf&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><code>nvim/lua/opt_conf.lua</code>使用lua重写我的vim配置文件:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vim.opt.number = <span class="literal">true</span></span><br><span class="line">vim.opt.relativenumber = <span class="literal">true</span></span><br><span class="line">vim.opt.cursorline = <span class="literal">true</span></span><br><span class="line">vim.highlight.priorities.syntax = <span class="number">50</span> </span><br><span class="line">vim.opt.clipboard:append &#123;<span class="string">&#x27;unnamedplus&#x27;</span>&#125;</span><br><span class="line"><span class="comment">-- vim.opt.hidden = true</span></span><br><span class="line">vim.opt.tabstop = <span class="number">2</span></span><br><span class="line">vim.opt.shiftwidth = <span class="number">2</span></span><br><span class="line">vim.opt.softtabstop = <span class="number">2</span></span><br><span class="line">vim.opt.expandtab = <span class="literal">true</span></span><br><span class="line">vim.opt.smartindent = <span class="literal">true</span></span><br><span class="line">vim.cmd.colorscheme(<span class="string">&#x27;desert&#x27;</span>)</span><br><span class="line">vim.cmd.colorscheme(<span class="string">&#x27;habamax&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">---@ OFFICAL OSC52</span></span><br><span class="line"><span class="comment">---@ 内置OSC52</span></span><br><span class="line"><span class="comment">--vim.g.clipboard = &#123;</span></span><br><span class="line"><span class="comment">--	name = &#x27;OSC 52&#x27;,</span></span><br><span class="line"><span class="comment">--	copy = &#123;</span></span><br><span class="line"><span class="comment">--		[&#x27;+&#x27;] = require(&#x27;vim.ui.clipboard.osc52&#x27;).copy(&#x27;+&#x27;),</span></span><br><span class="line"><span class="comment">--		[&#x27;*&#x27;] = require(&#x27;vim.ui.clipboard.osc52&#x27;).copy(&#x27;*&#x27;),</span></span><br><span class="line"><span class="comment">--	&#125;,</span></span><br><span class="line"><span class="comment">--	paste = &#123;</span></span><br><span class="line"><span class="comment">--		[&#x27;+&#x27;] = require(&#x27;vim.ui.clipboard.osc52&#x27;).paste(&#x27;+&#x27;),</span></span><br><span class="line"><span class="comment">--		[&#x27;*&#x27;] = require(&#x27;vim.ui.clipboard.osc52&#x27;).paste(&#x27;*&#x27;),</span></span><br><span class="line"><span class="comment">--	&#125;,</span></span><br><span class="line"><span class="comment">--&#125;</span></span><br><span class="line"><span class="comment">---END</span></span><br></pre></td></tr></table></figure></div>
+
+<p><code>nvim/lua/lazy_conf.lua</code>用于配置lazy.nvim:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">local</span> lazypath = vim.fn.stdpath(<span class="string">&quot;data&quot;</span>) .. <span class="string">&quot;/lazy/lazy.nvim&quot;</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> (vim.uv <span class="keyword">or</span> vim.loop).fs_stat(lazypath) <span class="keyword">then</span></span><br><span class="line">  vim.fn.system(&#123;</span><br><span class="line">    <span class="string">&quot;git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;clone&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--filter=blob:none&quot;</span>,</span><br><span class="line">    <span class="string">&quot;https://github.com/folke/lazy.nvim.git&quot;</span>,</span><br><span class="line">    <span class="string">&quot;--branch=stable&quot;</span>, <span class="comment">-- latest stable release</span></span><br><span class="line">    lazypath,</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">vim.opt.rtp:prepend(lazypath)</span><br><span class="line"></span><br><span class="line"><span class="comment">---@ MANAGE PLUGINS</span></span><br><span class="line"><span class="comment">---@ 管理插件</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;lazy&quot;</span>).setup(&#123;</span><br><span class="line">&#123;<span class="string">&quot;nvim-lualine/lualine.nvim&quot;</span>,dependencies = &#123; <span class="string">&#x27;nvim-tree/nvim-web-devicons&#x27;</span> &#125;&#125;,</span><br><span class="line">&#123;name=<span class="string">&quot;osc52&quot;</span>,dir=<span class="string">&quot;/home/baka/.config/nvim/plugins/nvim.osc52&quot;</span>&#125;,</span><br><span class="line">&#123;name=<span class="string">&quot;coc-install&quot;</span>,dir=<span class="string">&quot;/home/baka/.config/nvim/plugins/coc.nvim&quot;</span>&#125;,</span><br><span class="line">&#123;name=<span class="string">&quot;indent-blankline&quot;</span>,dir=<span class="string">&quot;/home/baka/.config/nvim/plugins/indent-blankline.nvim&quot;</span>,main=<span class="string">&quot;ibl&quot;</span>, <span class="comment">--[[@module &quot;ibl&quot; @type ibl.config--]]</span> opts=&#123;&#125;,&#125;,</span><br><span class="line">&#123;name=<span class="string">&quot;nvim-tree&quot;</span>,dir=<span class="string">&quot;/home/baka/.config/nvim/plugins/nvim-tree.lua&quot;</span>,dependencies=&#123;<span class="string">&quot;nvim-tree/nvim-web-devicons&quot;</span>,&#125;,opt=&#123;&#125;&#125;,</span><br><span class="line"><span class="comment">-- &#123;name=&quot;sidebar&quot;,dir=&quot;/home/baka/.config/nvim/plugins/sidebar.nvim&quot;&#125;,</span></span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">---@ IMPORT PLUGINS CONFIG</span></span><br><span class="line"><span class="comment">---@ 导入插件配置文件</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;plugins_conf.nvim-osc52_conf&#x27;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;plugins_conf.lualine_conf&#x27;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;plugins_conf.coc-nvim_conf&#x27;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;plugins_conf.nvim-tree_conf&#x27;</span>)</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;plugins_conf.nvim-tree-keysmapping_conf&#x27;</span>)</span><br><span class="line"><span class="comment">-- require(&#x27;plugins_conf.sidebar_conf&#x27;)</span></span><br><span class="line"><span class="comment">-- require(&#x27;plugins_conf.lualine-evil_conf&#x27;)</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="nvim-tree文档可能的一点typo"><a href="#nvim-tree文档可能的一点typo" class="headerlink" title="nvim-tree文档可能的一点typo"></a>nvim-tree文档可能的一点typo</h2><p>根据该项目的<a class="link"   target="_blank" rel="noopener" href="https://github.com/nvim-tree/nvim-tree.lua/wiki/Installation" >按装文档 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>没法成功安装:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">  <span class="string">&quot;nvim-tree/nvim-tree.lua&quot;</span>,</span><br><span class="line">  version = <span class="string">&quot;*&quot;</span>,</span><br><span class="line">  lazy = <span class="literal">false</span>,</span><br><span class="line">  dependencies = &#123;</span><br><span class="line">    <span class="string">&quot;nvim-tree/nvim-web-devicons&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">config</span> = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">&quot;nvim-tree&quot;</span>).setup &#123;&#125; <span class="comment">---@ 疑似这里少了括号</span></span><br><span class="line">  <span class="keyword">end</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>参考<a class="link"   target="_blank" rel="noopener" href="https://lazy.folke.io/developers" >lazy.nvim的这个章节 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，应该能得出两种改法:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---@ 改法1:</span></span><br><span class="line">&#123;</span><br><span class="line">  name=<span class="string">&quot;nvim-tree/nvim-tree.lua&quot;</span>,</span><br><span class="line">  dir=<span class="string">&quot;/home/baka/.config/nvim/plugins/nvim-tree.lua&quot;</span>,</span><br><span class="line">  version = <span class="string">&quot;*&quot;</span>,</span><br><span class="line">  lazy = <span class="literal">false</span>,</span><br><span class="line">  dependencies = &#123;</span><br><span class="line">    <span class="string">&quot;nvim-tree/nvim-web-devicons&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">config</span> = <span class="function"><span class="keyword">function</span><span class="params">()</span></span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">&quot;nvim-tree&quot;</span>).setup (&#123;&#125;) <span class="comment">---@ 把括号加上</span></span><br><span class="line">  <span class="keyword">end</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">--- END</span></span><br><span class="line"></span><br><span class="line"><span class="comment">---@ 改法2:</span></span><br><span class="line">&#123;name=<span class="string">&quot;nvim-tree&quot;</span>,dir=<span class="string">&quot;/home/baka/.config/nvim/plugins/nvim-tree.lua&quot;</span>,dependencies=&#123;<span class="string">&quot;nvim-tree/nvim-web-devicons&quot;</span>,&#125;,opt=&#123;&#125;&#125;</span><br><span class="line"><span class="comment">---</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h1 id="3-绑定快捷键"><a href="#3-绑定快捷键" class="headerlink" title="3-绑定快捷键"></a>3-绑定快捷键</h1><blockquote>
+<p>本节参考:</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://neovim.io/doc/user/api.html#nvim_exec2()" >https://neovim.io/doc/user/api.html#nvim_exec2() <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://neovim.io/doc/user/lua.html#vim.keymap.set()" >https://neovim.io/doc/user/lua.html#vim.keymap.set() <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</blockquote>
+<p>上述nvim-tree插件的边栏呼出的话需要执行<code>:NvimTreeToggle</code>。尝试了该仓库doc的快捷键绑定方法，发现只能边栏在已经呼出的情况下使用。但是我需用<code>control+l</code>随时呼出关闭，那么在该插件的配置文件中添加此行:</p>
+<div class="highlight-container" data-rel="Lua"><figure class="iseeu highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">---@ GLOBAL SELF MAPPING</span></span><br><span class="line"><span class="comment">-- vim.keymap.set(&#x27;n&#x27;, &#x27;&lt;C-l&gt;&#x27;,function() vim.api.nvim_exec2(&quot;NvimTreeToggle&quot;,&#123;output&#125;) end)</span></span><br><span class="line">vim.keymap.set(<span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;&lt;C-l&gt;&#x27;</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span> vim.api.nvim_cmd(&#123;cmd=<span class="string">&quot;NvimTreeToggle&quot;</span>&#125;,&#123;<span class="built_in">output</span>&#125;) <span class="keyword">end</span>)</span><br></pre></td></tr></table></figure></div>
 
         </div>
 
@@ -696,18 +649,18 @@
             <div class="post-copyright-info w-full my-8 px-2 sm:px-6 md:px-8">
                 <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> 初识sip</li>
+        <li><strong>标题:</strong> neovim伪ide改造</li>
         <li><strong>作者:</strong> 7cmb</li>
         <li><strong>创建于
-                :</strong> 2024-04-19 15:23:39</li>
+                :</strong> 2024-08-25 03:40:46</li>
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-05-15 15:29:42
+                    :</strong> 2024-08-25 04:00:38
             </li>
         
         <li>
-            <strong>链接:</strong> https://7cmb.com/初见sip/
+            <strong>链接:</strong> https://7cmb.com/neovim伪ide/
         </li>
         <li>
             <strong>
@@ -729,11 +682,7 @@
             <ul class="post-tags-box text-lg mt-1.5 flex-wrap justify-center flex md:hidden">
                 
                     <li class="tag-item mx-0.5">
-                        <a href="/tags/network/">#network</a>&nbsp;
-                    </li>
-                
-                    <li class="tag-item mx-0.5">
-                        <a href="/tags/sip/">#sip</a>&nbsp;
+                        <a href="/tags/nvim/">#nvim</a>&nbsp;
                     </li>
                 
             </ul>
@@ -744,29 +693,14 @@
         
             <div class="article-nav my-8 flex justify-between items-center px-2 sm:px-6 md:px-8">
                 
-                    <div class="article-prev border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
-                        <a class="prev"
-                        rel="prev"
-                        href="/x220%E8%A7%A3%E5%86%B3wlan%E6%97%B6%E5%BB%B6%E9%97%AE%E9%A2%98/"
-                        >
-                            <span class="left arrow-icon flex justify-center items-center">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">x220解决wlan时延问题</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next border-border-color shadow-redefine-flat shadow-shadow-color-2 rounded-medium px-4 py-2 hover:shadow-redefine-flat-hover hover:shadow-shadow-color-2">
                         <a class="next"
                         rel="next"
-                        href="/lvm%E5%AE%9E%E6%93%8D/"
+                        href="/kubernetes%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95/"
                         >
                             <span class="title flex justify-center items-center">
-                                <span class="post-nav-title-item">lvm实操</span>
+                                <span class="post-nav-title-item">kubernetes部署记录</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex justify-center items-center">
@@ -787,8 +721,8 @@
             <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">初识sip</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%A6%82%E8%BF%B0"><span class="nav-text">1 - 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-request-method"><span class="nav-text">2 - request method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-SIP-CALL-%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-text">3 - SIP CALL 基本工作流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%85%B3%E4%BA%8Etransaction%E3%80%81dialog%E5%92%8Csession"><span class="nav-text">4 - 关于transaction、dialog和session</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E5%85%B3%E4%BA%8Etag%E3%80%81call-id%E5%92%8Cbranch"><span class="nav-text">5 - 关于tag、call-id和branch</span></a></li></ol>
+        <div class="page-title">neovim伪ide改造</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E9%9C%80%E6%B1%82-%E5%AF%B9%E5%BA%94%E6%8F%92%E4%BB%B6"><span class="nav-text">1-需求&amp;对应插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%AE%A1%E7%90%86Lazy-nvim"><span class="nav-text">2-管理Lazy.nvim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nvim-tree%E6%96%87%E6%A1%A3%E5%8F%AF%E8%83%BD%E7%9A%84%E4%B8%80%E7%82%B9typo"><span class="nav-text">nvim-tree文档可能的一点typo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E7%BB%91%E5%AE%9A%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-text">3-绑定快捷键</span></a></li></ol>
 
     </div>
 </div>
