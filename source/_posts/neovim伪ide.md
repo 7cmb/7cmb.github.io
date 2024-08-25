@@ -139,7 +139,7 @@ require('plugins_conf.nvim-tree-keysmapping_conf')
 -- require('plugins_conf.lualine-evil_conf')
 ```
 
-# 2-绑定快捷键
+# 3-绑定快捷键
 
 > 本节参考:
 >
