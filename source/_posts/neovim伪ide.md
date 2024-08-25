@@ -8,7 +8,7 @@ categories:
 date: 2024-08-25 03:40:46
 ---
 
-最近计划用python写一些工具，刚好近几个月以来常用的电脑没装ide和某个有重量级且有无可估量潜力的editor。但是经过平铺窗口管理器和vim的调教后双手已经无法脱离键盘了...故打算重整一下nvim,令其能够在尽可能简单的配置下实现ide的常规功能
+最近计划用python写一些工具，刚好近几个月以来常用的电脑没装ide和某个有重量级且有无可估量潜力的editor。然而经过平铺窗口管理器和vim的调教后双手已经无法脱离键盘了...故打算重整一下nvim,令其能够在尽可能简单的配置下实现ide的常规功能
 
 效果:
 <img src="https://telegraph.7cmb.com/file/3c531b5595f845d8062a4.png" alt="" >
@@ -34,7 +34,7 @@ date: 2024-08-25 03:40:46
 
 对于Lazy.nvim[官方推荐的做法](https://lazy.folke.io/usage/structuring)，我并不是很感冒，原因有三个:
 - 我想在只一个文件里管理我需要开启的插件及插件对应的配置，即使需要人工干预得更多
-- 一个一个管理来更加直观
+- 一个一个管理更加直观
 - 因为网络原因，我更喜欢将仓库手动clone下来，再手动指定插件目录，以体积换取配置迁移的便利(所以下面有个插件仓库)
 
 
@@ -42,7 +42,7 @@ date: 2024-08-25 03:40:46
 ```bash
 ➜  nvim tree -L 2 .
 .
-├── init.lua ‘# 头文件’
+├── init.lua ‘# 默认配置文件’
 ├── init.vim.bak
 ├── lazy-lock.json
 ├── lua
@@ -58,7 +58,7 @@ date: 2024-08-25 03:40:46
 
 ```
 
-`init.lua`的唯一的作用就是用`require`call真正的配置文件:
+`init.lua`的唯一的作用就是用`require`调用真正的配置文件:
 ```lua
 ---@NVIM PLUGINS AND PLUGINS CONF HEAD
 ---@PATH TO nvim/lua/lazy_conf.lua
@@ -141,7 +141,7 @@ require('plugins_conf.nvim-tree-keysmapping_conf')
 
 ## nvim-tree文档可能的一点typo
 
-根据该项目的[按装文档](https://github.com/nvim-tree/nvim-tree.lua/wiki/Installation)没法成功安装:
+根据该项目的[安装文档](https://github.com/nvim-tree/nvim-tree.lua/wiki/Installation)没法成功安装:
 ```lua
 return {
   "nvim-tree/nvim-tree.lua",
@@ -160,8 +160,7 @@ return {
 ```lua
 ---@ 改法1:
 {
-  name="nvim-tree/nvim-tree.lua",
-  dir="/home/baka/.config/nvim/plugins/nvim-tree.lua",
+  "nvim-tree/nvim-tree.lua",
   version = "*",
   lazy = false,
   dependencies = {
@@ -174,7 +173,7 @@ return {
 --- END
 
 ---@ 改法2:
-{name="nvim-tree",dir="/home/baka/.config/nvim/plugins/nvim-tree.lua",dependencies={"nvim-tree/nvim-web-devicons",},opt={}}
+{"nvim-tree/nvim-tree.lua",dependencies={"nvim-tree/nvim-web-devicons",},opt={}}
 ---
 
 ```
@@ -187,9 +186,10 @@ return {
 >
 > https://neovim.io/doc/user/lua.html#vim.keymap.set()
 
-上述nvim-tree插件的边栏呼出的话需要执行`:NvimTreeToggle`。尝试了该仓库doc的快捷键绑定方法，发现只能边栏在已经呼出的情况下使用。但是我需用`control+l`随时呼出关闭，那么在该插件的配置文件中添加此行:
+上述nvim-tree插件的边栏呼出的话需要执行`:NvimTreeToggle`。尝试了该仓库doc的快捷键绑定方法，发现只能边栏在已经呼出的情况下使用。但是我需用`control+l`随时呼出关闭，那么在该插件的配置文件中添加下面行:
 ```lua
----@ GLOBAL SELF MAPPING
+---@ GLOBAL SELF MAPPING 
+---@ 两种方法
 -- vim.keymap.set('n', '<C-l>',function() vim.api.nvim_exec2("NvimTreeToggle",{output}) end)
 vim.keymap.set('n', '<C-l>',function() vim.api.nvim_cmd({cmd="NvimTreeToggle"},{output}) end)
 ```
