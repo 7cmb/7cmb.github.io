@@ -124,7 +124,7 @@ require("lazy").setup({
 {name="osc52",dir="/home/baka/.config/nvim/plugins/nvim.osc52"},
 {name="coc-install",dir="/home/baka/.config/nvim/plugins/coc.nvim"},
 {name="indent-blankline",dir="/home/baka/.config/nvim/plugins/indent-blankline.nvim",main="ibl", --[[@module "ibl" @type ibl.config--]] opts={},},
-{name="nvim-tree",dir="/home/baka/.config/nvim/plugins/nvim-tree.lua",dependencies={"nvim-tree/nvim-web-devicons",},opt={}},
+{name="nvim-tree",dir="/home/baka/.config/nvim/plugins/nvim-tree.lua",version = "*",lazy = false,dependencies = {"nvim-tree/nvim-web-devicons",},config = function()  require("nvim-tree").setup {}  end,},
 -- {name="sidebar",dir="/home/baka/.config/nvim/plugins/sidebar.nvim"},
 	})
 
@@ -139,46 +139,7 @@ require('plugins_conf.nvim-tree-keysmapping_conf')
 -- require('plugins_conf.lualine-evil_conf')
 ```
 
-## nvim-tree文档可能的一点typo
-
-根据该项目的[安装文档](https://github.com/nvim-tree/nvim-tree.lua/wiki/Installation)没法成功安装:
-```lua
-return {
-  "nvim-tree/nvim-tree.lua",
-  version = "*",
-  lazy = false,
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-  config = function()
-    require("nvim-tree").setup {} ---@ 疑似这里少了括号
-  end,
-}
-```
-
-参考[lazy.nvim的这个章节](https://lazy.folke.io/developers)，应该能得出两种改法:
-```lua
----@ 改法1:
-{
-  "nvim-tree/nvim-tree.lua",
-  version = "*",
-  lazy = false,
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-  config = function()
-    require("nvim-tree").setup ({}) ---@ 把括号加上
-  end,
-}
---- END
-
----@ 改法2:
-{"nvim-tree/nvim-tree.lua",dependencies={"nvim-tree/nvim-web-devicons",},opt={}}
----
-
-```
-
-# 3-绑定快捷键
+# 2-绑定快捷键
 
 > 本节参考:
 >
