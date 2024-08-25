@@ -26,7 +26,7 @@
 <meta property="og:description" content="之前x220跑windows还算勉强能用，除了需要耐心和屏幕瞎眼以外好像也没有太大的缺点。在debian11-xfce上不跑服务仅仅当作浏览器启动器也算体验良好 然而最近重新整备的时候，却发现本机在运行debian12的情况下，使用内网中其他机器访问他的无线网卡时延时居然游离在1~300ms不等，这在内网算是天文数字了……换第二张无线网卡，换网络服务后端问题依旧，详情在:关于x220掌托排线更换提">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-21T16:36:49.000Z">
-<meta property="article:modified_time" content="2024-07-01T02:32:23.267Z">
+<meta property="article:modified_time" content="2024-08-24T20:09:21.015Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="network">
 <meta property="article:tag" content="nmcli">
@@ -524,8 +524,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-07-01 10:32:23</span>
-            <span class="mobile">2024-07-01 10:32:23</span>
+            <span class="desktop">2024-08-25 04:09:21</span>
+            <span class="mobile">2024-08-25 04:09:21</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -614,7 +614,12 @@
 <h2 id="3-问题源头"><a href="#3-问题源头" class="headerlink" title="3 - 问题源头"></a>3 - 问题源头</h2><p>继续查阅资料发现了一点端倪<a class="link"   target="_blank" rel="noopener" href="https://z-issue.com/wp/fixing-intel-wi-fi-6-ax200-latency-and-ping-spikes-in-linux/" >Fixing Intel Wi-Fi 6 AX200 latency and ping spikes in Linux &#8211; The Z-Issue <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>。这篇博文描述的情况跟我几乎一模一样，尝试了同样的解决方法<code>iw wlan0 set power_save off</code>问题解决</p>
 <p>关于这个配置的持久化可以参考这里<a class="link"   target="_blank" rel="noopener" href="https://raspberrypi.stackexchange.com/questions/96606/make-iw-wlan0-set-power-save-off-permanent" >wifi - Make “iw wlan0 set power_save off” permanent - Raspberry Pi Stack Exchange <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 <p>显然配置一个systemd unit作为脚本开机自启的方法有点笨重，并且我也懒得配置iwlwifi的模块参数。因此我决定用NetworkManager自带的nmcli工具来实现这个配置的持久化</p>
-<h1 id="解决手段"><a href="#解决手段" class="headerlink" title="解决手段"></a>解决手段</h1><p>nmcli的connection配置中有一段:</p>
+<h1 id="解决手段"><a href="#解决手段" class="headerlink" title="解决手段"></a>解决手段</h1><blockquote>
+<p>UPDATE:2024.8.15</p>
+<p>NetworkManager的无线后端需要为wpa_supplicant, iwd以下不生效，建议cron或者systemd执行以上iw命令</p>
+<p>检查powersaver状态可以用这条命令<code>iwconfig wlan0 | grep Power Management</code></p>
+</blockquote>
+<p>nmcli的connection配置中有一段:</p>
 <div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@archiso ~ <span class="comment"># nmcli connection show myssid |grep 802-11-wireless.powersave</span></span><br><span class="line">802-11-wireless.powersave:              2 (<span class="built_in">disable</span>)</span><br></pre></td></tr></table></figure></div>
 
 <p>这个选项默认是3(该处有误，默认是多少忘了)，只需要把他改成2并up一下即可解决这个问题:</p>
@@ -640,7 +645,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-07-01 10:32:23
+                    :</strong> 2024-08-25 04:09:21
             </li>
         
         <li>
