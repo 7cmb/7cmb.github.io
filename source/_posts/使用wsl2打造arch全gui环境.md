@@ -14,6 +14,9 @@ categories:
 
 此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 **[nullpo-head / wsl-distrod](https://github.com/nullpo-head/wsl-distrod)** 上所支持的发行版。
 
+> UPDATE: 2024.12.8
+> 注意：本文章绝大部分内容已过时，请以该[博文](http://7cmb.com/w11%E5%88%A9%E7%94%A8lxc_lxd%E7%9A%84rootfs%E5%AF%BC%E5%85%A5%E5%8F%91%E8%A1%8C%E7%89%88%E5%88%B0wsl2/)为引玉之砖，移步到微软的官方文档
+
 # 1、先决条件
 
 系统已开启hyper-v虚拟机
