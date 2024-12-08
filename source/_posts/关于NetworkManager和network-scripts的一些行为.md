@@ -13,7 +13,6 @@ categories:
 date: 2024-12-09 02:04:18
 ---
 
-
 已测试发行版 `CentOS 7.9` 、 `RHEL 8.8` 、 `RockyLinux 9.4`
 
 本文推荐在了解三个概念下阅读:
