@@ -15,15 +15,16 @@ date: 2024-12-09 02:04:18
 
 已测试发行版 `CentOS 7.9` 、 `RHEL 8.8` 、 `RockyLinux 9.4`
 
-本文推荐在了解三个概念下阅读:
- - 各种 linux 网络管理器
- - NetworkManager.conf 配置文件中 `[main]` section 下的 `plugins` 键 (`man NetworkManager.conf` 搜索 "PLUGINS")
- - NetworkManager `ifcfg-rh` 和 `keyfile` 配置接口下的配置选项 (`man nm-settings-ifcfg-rh` `man nm-settings-keyfile`)
-本文简称:
+本文名词简称声明:
 ```bash
 NetworkManager="nm"
 connection="con"
 ```
+
+本文推荐在了解三个概念下阅读:
+ - 各种 linux 网络管理器
+ - NetworkManager.conf 配置文件中 `[main]` section 下的 `plugins` 键 (`man NetworkManager.conf` 搜索 "PLUGINS")
+ - NetworkManager `ifcfg-rh` 和 `keyfile` 配置接口下的配置选项 (`man nm-settings-ifcfg-rh` `man nm-settings-keyfile`)
 
 # NetworkManager 下遇到的奇怪问题
 
@@ -31,9 +32,9 @@ connection="con"
 
 最近碰到个场景，涉及到多个 con 而不是维护单个 con 。具体是这样的: 需要 ***在 RHEL 系发行版下使用脚本先 clone 原 connection 作为备份文件后，再修改原 connection 修改配置，最后重新激活原 connection 。***
 
-这个行为在一些动作后引发一个奇怪的现象：在这个行为执行了若干次以后，产生了多个备份文件时， ***当手动使用 nmcli 激活另一份绑定同一张网口的 con 时*** ，随着机器 reboot 后，nm 激活的 con 重视不会是最后一次激活的 con ，而是激活到了的旧的 con 。且重启后再使用 nmcli 手动执行一次这个动作再重启，也依旧是稳定激活旧 con ，而不是我们的目标 con 。很明显，这个不是预期行为
+这个行为在一些动作后引发一个奇怪的现象：在这个行为执行了若干次以后，产生了多个备份文件时， ***当手动使用 nmcli 激活另一份绑定同一张网口的 con 时*** ，随着机器 reboot 后，nm 激活的 con 重视不会是最后一次激活的 con ，而是激活到了的旧的 con 。且重启后再使用 nmcli 手动执行一次这个动作再重启，也依旧是稳定激活旧 con ，而不是我们的目标 con 。很明显，这个不是预期的结果，简单来说：
 
- - 简单来说，当在这个场景下，无论是 `keyfile` 还是 `ifcfg-rh` 作为 nm 配置文件的接口，当存在若干份 con 且它们的配置的网络接口相同时，激活目标 con 后无法保证下一次重启后激活的 con 是目标 con 而不是旧 con
+ - 当在这个场景下，无论是 `keyfile` 还是 `ifcfg-rh` 作为 nm 配置文件的接口，当存在若干份 con 且它们的配置的网络接口相同时，激活目标 con 后无法保证下一次重启后激活的 con 是目标 con 而不是旧 con
 
 ## 尝试 reproduce 
 
@@ -41,10 +42,10 @@ connection="con"
 ```bash
 # 旧的 connection `ifcfg-b` 指定 IP 为 22.22.22.22/32
 # 新的 connection `ifcfg-a` 指定 IP 为 33.33.33.33/32
-# 下面将 22.22.22.22 这个配置文件激活后，再将 33.33.33.33 
-# 激活，观察重启后所得到的 IP 地址
+# 下面首先将 22.22.22.22 这个配置文件激活后，再将 
+# 33.33.33.33 激活，观察重启后所得到的 IP 地址
 
-# 首先检查配置文件
+# 首先检查配置文件是否正确
 [root@rhel-88-noSVT network-scripts]# grep 'IPADDR\|PREFIX\|NAME' ./ifcfg-*
 ./ifcfg-a:NAME=a
 ./ifcfg-a:IPADDR=33.33.33.33
@@ -99,7 +100,7 @@ c       a2983dd9-d631-4225-9a32-0365b0f2c756  ethernet  --
 ```
 居然是旧配置文件被激活了，不是最近激活的配置文件，WHY ?
 
-此处省略翻文档的过程，总之，从 manpage 可以知道当配置文件优先级相同时，将使用 `connection.timestamp` 这个 property 作为最近激活配置文件的指标，根据这个线索，我们可以回到上一步，逐步检查 `connection.timestamp` 这个属性(下文简称 timestamp ):
+从 manpage 可以知道当配置文件优先级相同时，将使用 `connection.timestamp` 这个 property 作为最近激活配置文件的指标，根据这个线索，我们可以回到上一步，逐步检查 `connection.timestamp` 这个属性(下文简称 timestamp ):
 ```bash
 [root@rhel-88-noSVT network-scripts]# nmcli con up b
 Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/3)
@@ -132,7 +133,7 @@ connection.timestamp:                   1733679276
 | :--- | :--- | :--- | :--- |
 | timestamp | uint64 | 0 | The time, in seconds since the Unix Epoch, that the connection was last _successfully_ fully activated. NetworkManager updates the connection timestamp periodically when the connection is active to ensure that an active connection has the latest timestamp. The property is only meant for reading (changes to this property will not be preserved).|
 
-俺寻思根本不存在 up 的 con 会定时刷新 `timestamp` 就算了，这个 down 掉怎么也会刷新一次......上当受骗了
+俺寻思根本不存在保持 up 的 con 会定时刷新 `timestamp` 就算了，这个 down 掉怎么也会刷新一次......上当受骗了
 
 考虑到我用的 `ifcfg-rh` 现在已经被弃用了，换了 `RockyLinux 9.4` 做测试，问题依旧，过程略
 
@@ -147,13 +148,13 @@ connection.timestamp:                   1733679276
 
 第三点是高人指点下，试了一下只能说说的道理。回到 `ifcfg-b` 和 `ifcfg-c` 这个例子，可以看看它们的 uuid 首字母，确实是符合预期的
 
-> 当然这个排序决定优先级并不严谨，谁知道 nm 的 uuid 排序到底是 sort by 什么的呢，但是通过实验能确定 a-z 之间，a 开头优先级会比较高
+> 当然这个排序决定优先级并不严谨，谁知道 nm 的 uuid 排序 sort by what ？但是通过实验能确定 a-z 之间，a 开头优先级会比较高
 
-## 网络后端为 nm ，且 plugins 为 `ifcfg-rh` 和 `keyfile` 下如何解决这个问题
+## 网络后端为 nm ，且 plugins 为 `ifcfg-rh` 和 `keyfile` 下解决手段
 
 现在看这个问题就很直观了，分为三个思路:
 - 添加 priority 相关属性，这个相对正路
-- 将配置文件 up 两次，保持它的 timestamp 为最新，奇怪的做法
+- 将配置文件 up 两次，保持目标的 timestamp 为最新而不是与被顶掉的旧配置相同，奇怪的做法，但啥也不用改且有用
 - 修改 uuid 首字母/数字以手动排序，这个如果需要严谨推出来排序依据好麻烦...总感觉很邪门
 
 # network-scripts 的问题
