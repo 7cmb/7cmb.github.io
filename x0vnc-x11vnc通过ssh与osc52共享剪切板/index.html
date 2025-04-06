@@ -18,16 +18,16 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="前言没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。archwiki 没有写解决方案，在该项目的issue 中，这位老哥@mathewng表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板x11vnc -nofb -clip 4x4+0+0 这意味着将开启两个本地x11的vnc会话，一个是一切正">
+        <meta name="description" content="UPDATE-2025-04-06:现在看起来有自带的剪切板了，喜大普奔。版本 tigervnc 1.15.0-1  前言没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。archwiki 没有写解决方案，在该项目的issue 中，这位老哥@mathewng表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓">
 <meta property="og:type" content="article">
 <meta property="og:title" content="x0vnc&#x2F;x11vnc通过ssh与osc52共享剪切板">
 <meta property="og:url" content="https://7cmb.github.io/x0vnc-x11vnc%E9%80%9A%E8%BF%87ssh%E4%B8%8Eosc52%E5%85%B1%E4%BA%AB%E5%89%AA%E5%88%87%E6%9D%BF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前言没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。archwiki 没有写解决方案，在该项目的issue 中，这位老哥@mathewng表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板x11vnc -nofb -clip 4x4+0+0 这意味着将开启两个本地x11的vnc会话，一个是一切正">
+<meta property="og:description" content="UPDATE-2025-04-06:现在看起来有自带的剪切板了，喜大普奔。版本 tigervnc 1.15.0-1  前言没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。archwiki 没有写解决方案，在该项目的issue 中，这位老哥@mathewng表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dlink.host/1drv/aHR0cHM6Ly8xZHJ2Lm1zL2kvcyFBckVNT01Ec2ZXcEdnVGtuQmdqcnZDZVFsUzBEP2U9U3dQanBI.png">
 <meta property="article:published_time" content="2024-05-28T14:46:13.000Z">
-<meta property="article:modified_time" content="2024-06-19T02:57:19.994Z">
+<meta property="article:modified_time" content="2025-04-06T11:55:00.878Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="ssh">
@@ -465,15 +465,15 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">43</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">47</div>
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">35</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">38</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -527,8 +527,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-06-19 10:57:19</span>
-            <span class="mobile">2024-06-19 10:57:19</span>
+            <span class="desktop">2025-04-06 19:55</span>
+            <span class="mobile">2025-04-06 19:55</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -607,7 +607,10 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。<a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/TigerVNC#Running_x0vncserver_to_directly_control_the_local_display" >archwiki <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>没有写解决方案，在该项目的<a class="link"   target="_blank" rel="noopener" href="https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-1358864856" >issue <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，这位老哥<code>@mathewng</code>表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板<code>x11vnc -nofb -clip 4x4+0+0</code></p>
+            <blockquote>
+<p>UPDATE-2025-04-06:<br>现在看起来有自带的剪切板了，喜大普奔。版本 <code>tigervnc 1.15.0-1</code></p>
+</blockquote>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。<a class="link"   target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/TigerVNC#Running_x0vncserver_to_directly_control_the_local_display" >archwiki <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>没有写解决方案，在该项目的<a class="link"   target="_blank" rel="noopener" href="https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-1358864856" >issue <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>中，这位老哥<code>@mathewng</code>表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板<code>x11vnc -nofb -clip 4x4+0+0</code></p>
 <p>这意味着将开启两个本地x11的vnc会话，一个是一切正常除了不能把服务端主机剪贴板发送给客户端主机的<code>x0vncserver -rfbauth ~/.vnc/passwd</code>；另一个是啥都没有仅剩下捕抓键盘和剪贴板<code>x11vnc -nofb -clip 4x4+0+0</code>(BTW，这里为了前者的正常体验可以加上-repeat参数，就是有亿点点小问题)</p>
 <p>两个残疾人取长补短看起来很滑稽，但是确实很好地解决了两者的不足。但是最大的缺点是无法将中文复制出来</p>
 <blockquote>
@@ -667,7 +670,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-06-19 10:57:19
+                    :</strong> 2025-04-06 19:55:00
             </li>
         
         <li>
@@ -784,12 +787,12 @@
               <span>2023</span>
               -
             
-            2024&nbsp;&nbsp;<i class="fa-solid fa-bell fa-shake"></i>&nbsp;&nbsp;<a href="/">7cmb</a>
+            2025&nbsp;&nbsp;<i class="fa-solid fa-bell fa-shake"></i>&nbsp;&nbsp;<a href="/">7cmb</a>
             
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共 35 篇文章
+                        共 38 篇文章
                     </span>
                     
                 </p>

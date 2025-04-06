@@ -18,12 +18,12 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
+        <meta name="description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。  UPDATE: 2024.12.8注意：本文章绝大部分内容已过时，请以该博文 为引玉之砖，移步到微软的官方文档  1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用WSL2打造Arch全GUI环境">
 <meta property="og:url" content="https://7cmb.github.io/%E4%BD%BF%E7%94%A8wsl2%E6%89%93%E9%80%A0arch%E5%85%A8gui%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。 1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](旧版 WSL 的手动安装步骤 | Microsoft">
+<meta property="og:description" content="此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 nullpo-head &#x2F; wsl-distrod  上所支持的发行版。  UPDATE: 2024.12.8注意：本文章绝大部分内容已过时，请以该博文 为引玉之砖，移步到微软的官方文档  1、先决条件系统已开启hyper-v虚拟机 Windows 10 版本 2004 及更高版本（内部版本 19041 及更">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://telegraph.7cmb.com/file/f0c1263ee41ecc2890553.png">
 <meta property="og:image" content="https://telegraph.7cmb.com/file/eee2409005dd4100ff6f6.png">
@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://telegraph.7cmb.com/file/f15bc4bd22a9befbaea0c.png">
 <meta property="og:image" content="https://telegraph.7cmb.com/file/05e2cd5bb5c9d47e28b9e.png">
 <meta property="article:published_time" content="2023-09-28T14:50:12.000Z">
-<meta property="article:modified_time" content="2024-07-01T02:36:55.243Z">
+<meta property="article:modified_time" content="2025-04-06T11:46:12.078Z">
 <meta property="article:author" content="7cmb">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="折腾">
@@ -471,15 +471,15 @@
 
         <div class="statistics flex justify-around my-2.5">
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">33</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">34</div>
         <div class="label text-third-text-color text-sm">标签</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">43</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">47</div>
         <div class="label text-third-text-color text-sm">分类</div>
     </a>
     <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
-        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">35</div>
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">38</div>
         <div class="label text-third-text-color text-sm">文章</div>
     </a>
 </div>
@@ -533,8 +533,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-07-01 10:36:55</span>
-            <span class="mobile">2024-07-01 10:36:55</span>
+            <span class="desktop">2025-04-06 19:46:12</span>
+            <span class="mobile">2025-04-06 19:46:12</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -625,6 +625,9 @@
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
             <p>此文记录了本人利用微软wsl2搭建linux工作环境的过程，此过程理论上可用于 <strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/nullpo-head/wsl-distrod" >nullpo-head &#x2F; wsl-distrod <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></strong> 上所支持的发行版。</p>
+<blockquote>
+<p>UPDATE: 2024.12.8<br>注意：本文章绝大部分内容已过时，请以该<a class="link"   target="_blank" rel="noopener" href="http://7cmb.com/w11%E5%88%A9%E7%94%A8lxc_lxd%E7%9A%84rootfs%E5%AF%BC%E5%85%A5%E5%8F%91%E8%A1%8C%E7%89%88%E5%88%B0wsl2/" >博文 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>为引玉之砖，移步到微软的官方文档</p>
+</blockquote>
 <h1 id="1、先决条件"><a href="#1、先决条件" class="headerlink" title="1、先决条件"></a>1、先决条件</h1><p>系统已开启hyper-v虚拟机</p>
 <p>Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 。具体请参阅微软[官方手册](<a class="link"   target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual#step-3---enable-virtual-machine-feature" >旧版 WSL 的手动安装步骤 | Microsoft Learn <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>)。</p>
 <blockquote>
@@ -802,7 +805,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-07-01 10:36:55
+                    :</strong> 2025-04-06 19:46:12
             </li>
         
         <li>
@@ -923,12 +926,12 @@
               <span>2023</span>
               -
             
-            2024&nbsp;&nbsp;<i class="fa-solid fa-bell fa-shake"></i>&nbsp;&nbsp;<a href="/">7cmb</a>
+            2025&nbsp;&nbsp;<i class="fa-solid fa-bell fa-shake"></i>&nbsp;&nbsp;<a href="/">7cmb</a>
             
                 
                 <p class="post-count space-x-0.5">
                     <span>
-                        共 35 篇文章
+                        共 38 篇文章
                     </span>
                     
                 </p>
