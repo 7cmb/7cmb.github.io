@@ -9,6 +9,10 @@ categories:
  - [linux, ssh]
  - [linux, vnc]
 ---
+
+> UPDATE-2025-04-06:
+> 现在看起来有自带的剪切板了，喜大普奔。版本 `tigervnc 1.15.0-1`
+
 # 前言
 没想到这次写文又又又又是因为剪贴板的事情。这次的场景是在x0vncserver下共享服务端剪贴板给客户端主机。[archwiki](https://wiki.archlinux.org/title/TigerVNC#Running_x0vncserver_to_directly_control_the_local_display)没有写解决方案，在该项目的[issue](https://github.com/TigerVNC/tigervnc/issues/529#issuecomment-1358864856)中，这位老哥`@mathewng`表示有一种workaround。具体是多开一个带参数的无画面x11vnc会话捕抓键盘和剪贴板`x11vnc -nofb -clip 4x4+0+0`
 
